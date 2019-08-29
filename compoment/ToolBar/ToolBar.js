@@ -1,0 +1,186 @@
+import React, {Component} from 'react';
+import {Image, Text, TouchableOpacity, View} from 'react-native';
+import Utils from "../../utils";
+import SplitLine from "../SplitLine/SplitLine";
+
+type Props = {
+    //是否有返回键
+    isBack?: Boolean,
+    //标题 可不传
+    title?:String;
+    //右标题
+    menuTitle?: String;
+    //右标题图片
+    menuIcon?: any,
+    //图片按钮的style
+    menuIconStyle?: any;
+    //导航
+    navigation: any;
+    //重写返回
+    overrideBack?: Function,
+    //按钮事件
+    menuAction?: Function,
+    //是否中间元素强制居中
+    isCenter: Boolean,
+    //标题的样式
+    titleStyle?: {},
+    //返回键的按钮
+    backIcon?: any,
+    //图标的颜色
+    iconTintColor?: string,
+    //菜单的样式
+    menuTitleStyle?: {},
+    //背景
+    backgroundColor?: string,
+    //root一级的style
+    style?: {}
+};
+type State = {
+    //标题的左边距
+    tittleMarginLeft: Number,
+    //标题的右边距
+    tittleMarginRight: Number,
+}
+/**
+ * 通用的标题栏
+ */
+export default class ToolBar extends Component<Props, State> {
+
+    static defaultProps = {
+        isBack: true,
+        navigation: null,
+        title: null,
+        menuTitle: null,
+        menuIcon: null,
+        menuIconStyle: null,
+        isCenter: true,
+        iconTintColor: '#000',
+    };
+
+
+    constructor(props: Object) {
+        super(props);
+        this.state = {
+            tittleMarginLeft: 0,
+            tittleMarginRight: 16
+        }
+    }
+
+    /**
+     * 动态计算中间元素的margin，使其绝对居中
+     * @param e
+     */
+    onTitleLayout = (e) => {
+        if (this.props.isCenter) {
+            let x = e.layout.x;
+            let width = e.layout.width;
+            let rightX = Utils.screenWidth - width - x;
+            let diff = rightX - x;
+            if (Math.abs(diff) > 16) {
+                if (diff > 0) {
+                    this.setState({
+                        tittleMarginLeft: diff,
+                    })
+                } else {
+                    this.setState({
+                        tittleMarginRight: -diff,
+                    })
+                }
+            }
+
+        }
+    };
+
+    render() {
+        let {isBack, iconTintColor, navigation, overrideBack, children, title, menuTitle, menuIcon, menuIconStyle, backgroundColor, titleStyle, backIcon, menuTitleStyle, menuAction, style} = this.props;
+        return (
+            <View>
+                <View style={[{
+                    flexDirection: 'row',
+                    alignItems: 'center',
+                    height: Utils.headerBodyHeight,
+                    backgroundColor: backgroundColor ? backgroundColor : "#fff"
+                }, style]}>
+                    {
+                        isBack
+                            ? <TouchableOpacity
+                                onPress={() => {
+                                    if (overrideBack) {
+                                        overrideBack()
+                                    } else {
+                                        navigation && navigation.goBack(null);
+                                    }
+                                }}
+                                style={{width: 44, height: 44, justifyContent: 'center', alignItems: 'center'}}>
+                                <Image
+                                    style={{
+                                        width: 20,
+                                        height: 20,
+                                        tintColor: iconTintColor,
+                                    }}
+                                    resizeMode='contain'
+                                    source={backIcon ? backIcon : require('../../icons/back.png')}/>
+                            </TouchableOpacity>
+                            : null
+                    }
+                    {title ?
+                        <View style={{
+                            flex: 1,
+                            justifyContent: 'center',
+                            alignItems: 'center',
+                            marginLeft: this.state.tittleMarginLeft,
+                            marginRight: this.state.tittleMarginRight
+                        }}
+                              onLayout={({nativeEvent: e}) => this.onTitleLayout(e)}>
+                            <Text style={[{color: "#333333", fontSize: 18}, titleStyle]}>
+                                {title}
+                            </Text>
+                        </View> : null
+                    }
+                    {children ?
+                        <View style={{
+                            flex: 1,
+                            marginLeft: this.state.tittleMarginLeft,
+                            marginRight: 16
+                        }}
+                              onLayout={({nativeEvent: e}) => this.onTitleLayout(e)}>
+                            {children}
+                        </View> :
+                        null
+                    }
+                    {menuIcon ? <TouchableOpacity
+                            onPress={() => {
+                                menuAction && menuAction();
+                            }}
+                            style={{width: 44, height: 44, justifyContent: 'center', alignItems: 'center',}}>
+                            <Image
+                                style={[{
+                                    tintColor: iconTintColor,
+                                }, menuIconStyle]}
+                                resizeMode='contain'
+                                source={menuIcon}/>
+                        </TouchableOpacity>
+                        : null}
+                    {menuTitle ? <TouchableOpacity
+                            onPress={() => {
+                                menuAction && menuAction();
+                            }}
+                            style={{
+                                height: 44,
+                                justifyContent: 'center',
+                                alignItems: 'center',
+                                paddingLeft: 10,
+                                paddingRight: 10
+                            }}>
+                            <Text style={[{color: "#333333", fontSize: 16}, menuTitleStyle]}>
+                                {menuTitle}
+                            </Text>
+                        </TouchableOpacity>
+                        : null}
+                </View>
+                <SplitLine enableMarginLeft={false}/>
+            </View>
+        );
+    }
+
+}

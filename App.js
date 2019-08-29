@@ -1,0 +1,409 @@
+/**
+ * Sample React Native App
+ * https://github.com/facebook/react-native
+ *
+ * @format
+ */
+
+import React from 'react';
+import {StyleSheet, ScrollView, Text, View} from 'react-native';
+import {Colors} from "./config/Colors";
+import SplitLine from "./compoment/SplitLine/SplitLine";
+import Space from "./compoment/Space/Space";
+import Label from "./compoment/Label/Label";
+import Button from "./compoment/Button/Button";
+import GridLayout from "./compoment/GridLyout/GridLayout";
+import utils from "./utils";
+import Toast from "./compoment/Toast/Toast";
+import SinglePicker from "./compoment/Picker/single/SinglePicker";
+import DatePicker from "./compoment/Picker/date/DatePicker";
+import CityPicker from "./compoment/Picker/city/CityPicker";
+import HoursPicker from "./compoment/Picker/hours/HoursPicker";
+import BasePage from "./compoment/Page/BasePage";
+import ToolBar from "./compoment/ToolBar/ToolBar";
+import PopMenu from "./compoment/PopMenu/PopMenu";
+import Dialog from "./compoment/Dialog/Dialog";
+import DialogList from "./compoment/Dialog/DialogList";
+import SearchBar from "./compoment/SearchBar/SearchBar";
+import CheckBox from "./compoment/CheckBox/CheckBox";
+
+const dismissKeyboard = require('dismissKeyboard');
+
+type Props = {};
+type State = {
+    placeHolderTextValue?: string | null,
+    singlePickerData?: string | null,
+    date?: string | null,
+    city?: string | null,
+    hourStart?: string | null,
+    hourEnd?: string | null,
+};
+let list = [
+    {name: 'php', value: 0},
+    {name: 'java', value: 1},
+    {name: 'js', value: 2},
+    {name: 'android', value: 3},
+    {name: 'ios', value: 4},
+    {name: 'python', value: 5},
+    {name: 'swift', value: 5},
+];
+export default class App extends BasePage<Props, State> {
+
+    constructor(props: any) {
+        super(props);
+        this.state = {
+            placeHolderTextValue: null,
+            singlePickerData: null,
+            date: '20200608',
+            city: null,
+            hourStart: '08:00',
+            hourEnd: '17:00',
+            check: false,
+        }
+    }
+
+    componentDidMount(): void {
+        dismissKeyboard();
+    }
+
+    renderGridCell() {
+        let colors = utils.getRGBArray(10);
+        return utils.range(11).map((_, i,) => {
+            return <View
+                key={i}
+                style={{
+                    height: 50,
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    backgroundColor: colors[i],
+                }}>
+                <Text>cell</Text>
+            </View>
+        })
+    }
+
+    render() {
+        let a = 0;
+        return (
+            <View style={{flex: 1}}>
+                <Space height={utils.statusHeight} spaceColor='#fff'/>
+                <ToolBar title='RNBase演示' isBack={false}/>
+                <ScrollView style={{flex: 1}}>
+                    <View style={styles.container}>
+                        {/*splitLine*/}
+                        <Text style={styles.title}>SplitLine演示:</Text>
+                        <Text style={styles.desc}>ios风格的分割线</Text>
+                        <SplitLine backgroundColor={Colors.backgroundColor}/>
+                        <Space height={16}/>
+                        <Text style={styles.desc}>android风格的分割线</Text>
+                        <SplitLine enableMarginLeft={false}/>
+                        {/*space*/}
+                        <Space height={40}/>
+                        <Text style={styles.title}>Space演示:</Text>
+                        <Text style={styles.desc}>宽度铺满的空间，高度,颜色可控</Text>
+                        <Space height={30} spaceColor={Colors.red}/>
+                        <Space height={40}/>
+                        {/*button*/}
+                        <Text style={styles.title}>Button演示:</Text>
+                        <Text style={styles.desc}>按钮控件，此按钮为容器，需要包括具体内容</Text>
+                        <Button text='我是按钮'/>
+                        <Space height={40}/>
+                        {/*PlaceHolderText*/}
+                        <Text style={styles.title}>PlaceHolderText演示:</Text>
+                        <Text style={styles.desc}>没有值显示提示，有值则显示值</Text>
+                        <Button
+                            text='试一试'
+                            onPress={() => {
+                                if (this.state.placeHolderTextValue === null) {
+                                    this.setState({
+                                        placeHolderTextValue: '我是有值得的Text',
+                                    })
+                                } else {
+                                    this.setState({
+                                        placeHolderTextValue: null,
+                                    })
+                                }
+                            }}/>
+                        <Space height={40}/>
+                        <Label
+                            style={{
+                                width: 200,
+                                backgroundColor: Colors.white,
+                                alignSelf: 'center',
+                                textAlign: 'center',
+
+                            }}
+                            placeHolder='我是placeholder text'
+                            value={this.state.placeHolderTextValue}/>
+                        {/*GridLayout*/}
+                        <Text style={styles.title}>GridLayout演示:</Text>
+                        <Text style={styles.desc}>网格布局组件</Text>
+                        <GridLayout colNum={4}>
+                            {this.renderGridCell()}
+                        </GridLayout>
+                        {/*Toast*/}
+                        <Text style={styles.title}>Toast演示:</Text>
+                        <Text style={styles.desc}>显示一个toast</Text>
+                        <Button
+                            text='试一试'
+                            onPress={() => {
+                                a++;
+                                Toast.message(`我是个牛逼的toast${a}`, {duration: 5000});
+                            }}/>
+                        {/*SinglePicker*/}
+                        <Text style={styles.title}>演示:SinglePicker</Text>
+                        <Text style={styles.desc}>单列选择器演示</Text>
+                        <Label
+                            placeHolder='现在什么都没选'
+                            value={this.state.singlePickerData ? `已选择:${this.state.singlePickerData.name}` : null}
+                        />
+                        <Space height={8}/>
+                        <Button
+                            text='试一试'
+                            onPress={() => {
+                                SinglePicker.show(list, this.state.singlePickerData ? this.state.singlePickerData.value : null, (index, data) => {
+                                    this.setState({
+                                        singlePickerData: data
+                                    })
+                                })
+                            }}/>
+                        {/*DatePicker*/}
+                        <Text style={styles.title}>演示:DatePicker</Text>
+                        <Text style={styles.desc}>时间选择器</Text>
+                        <Label
+                            placeHolder='现在时间没有选'
+                            value={this.state.date ? `已选择:${this.state.date}` : null}
+                        />
+                        <Space height={8}/>
+                        <Button
+                            text='试一试'
+                            onPress={() => {
+                                DatePicker.show(this.state.date, (date) => {
+                                    this.setState({
+                                        date: date
+                                    })
+                                })
+                            }}/>
+
+                        {/*城市选择器*/}
+                        <Text style={styles.title}>演示:CityPicker</Text>
+                        <Text style={styles.desc}>城市选择器</Text>
+                        <Label
+                            placeHolder='现在城市没有选'
+                            value={this.state.city ? `已选择:${this.state.city}` : null}
+                        />
+                        <Space height={8}/>
+                        <Button
+                            text='试一试'
+                            onPress={() => {
+                                CityPicker.show(this.state.city, (city) => {
+                                    this.setState({
+                                        city: city
+                                    })
+                                })
+                            }}/>
+                        {/*时间区间选择器*/}
+                        <Text style={styles.title}>演示:HoursPicker</Text>
+                        <Text style={styles.desc}>时间区间选择器</Text>
+                        <Label
+                            placeHolder='现在时间区间没有选'
+                            value={this.state.hourStart ? `已选择:${this.state.hourStart} 到 ${this.state.hourEnd}` : null}
+                        />
+                        <Space height={8}/>
+                        <Button
+                            text='试一试'
+                            onPress={() => {
+                                HoursPicker.show(this.state.hourStart, this.state.hourEnd, (start, end) => {
+                                    this.setState({
+                                        hourStart: start,
+                                        hourEnd: end
+                                    })
+                                })
+                            }}/>
+                        {/*StatusView*/}
+                        <Text style={styles.title}>演示:StatusView</Text>
+                        <Text style={styles.desc}>加载状态容器</Text>
+
+                        <Space height={8}/>
+                        <Button
+                            text='试一试'
+                            onPress={() => {
+                                this.navigate('StatusViewPage');
+                            }}/>
+                        <Space height={40}/>
+                        {/*StackLayout*/}
+                        <Text style={styles.title}>演示:StackLayout</Text>
+                        <Text style={styles.desc}>堆叠容器组件</Text>
+
+                        <Space height={8}/>
+                        <Button
+                            text='试一试'
+                            onPress={() => {
+                                this.navigate('StackLayoutPage');
+                            }}/>
+                        <Space height={40}/>
+                        {/*PopMenu*/}
+                        <Text style={styles.title}>演示:PopMenu</Text>
+                        <Text style={styles.desc}>弹出按钮</Text>
+
+                        <Space height={8}/>
+                        <Button
+                            bRef={btn => {
+                                this.btn = btn
+                            }}
+                            text='试一试'
+                            onPress={() => {
+                                PopMenu.show(this.btn, {
+                                    list: ['python', 'ruby', 'java', 'c++', 'php', 'kotlin', 'dart'],
+                                    onClick: (index, value) => Toast.message(value),
+                                    yOffset: -20,
+                                })
+                            }}/>
+                        <Space height={40}/>
+                        {/*Dialog*/}
+                        <Text style={styles.title}>演示:Dialog</Text>
+                        <Text style={styles.desc}>Dialog</Text>
+
+                        <Space height={8}/>
+                        <Button
+                            text='试一试'
+                            onPress={() => {
+                                Dialog.show('我是弹窗', '我时一个弹窗,使用的是时候只需Dialog.show(),show方法需要标题,内容,任意个按钮,试试看吧',
+                                    [
+                                        {
+                                            text: '不懂', onClick: () => {
+                                                Toast.message('你真笨')
+                                            }
+                                        },
+                                        {
+                                            text: '有点懂',
+                                            onClick: () => {
+                                                Toast.message('你靠谱')
+                                            }
+                                        },
+                                        {
+                                            text: '明白了',
+                                            onClick: () => {
+                                                Toast.message('你很棒')
+                                            }
+                                        }],
+                                );
+                            }}/>
+                        <Space height={40}/>
+                        {/*DialogList*/}
+                        <Text style={styles.title}>演示:DialogList</Text>
+                        <Text style={styles.desc}>列表形式的dialog</Text>
+                        <Space height={8}/>
+                        <Button
+                            text='试一试'
+                            onPress={() => {
+                                DialogList.show(
+                                    ['python', 'ruby', 'java', 'c++', 'php', 'kotlin', 'dart'],
+                                    (index, value) => Toast.message(value),
+                                )
+                            }}/>
+                        <Space height={40}/>
+                        {/*SearchBar*/}
+                        <Text style={styles.title}>演示:SearchBar</Text>
+                        <Text style={styles.desc}>SearchBar</Text>
+                        <Space height={8}/>
+                        <View style={{alignItems: 'center', width: 300, height: 35}}>
+                            <SearchBar placeholder='请输入商品'/>
+                        </View>
+                        <Space height={8}/>
+                        <View style={{alignItems: 'center', width: 300, height: 35}}>
+                            <SearchBar placeholder='请输入商品' tintColor='red' placeholderColor='red'/>
+                        </View>
+                        <Space height={8}/>
+                        <View style={{alignItems: 'center', width: 300, height: 35}}>
+                            <SearchBar style={{borderRadius: 18}} placeholder='请输入商品' tintColor='green'
+                                       placeholderColor='green'/>
+                        </View>
+                        <Space height={8}/>
+                        <View style={{alignItems: 'center', width: 300, height: 35}}>
+                            <SearchBar style={{borderRadius: 18, backgroundColor: '#00ffe8'}} placeholder='请输入商品'
+                                       tintColor='#FF0DE3'
+                                       placeholderColor='#FF0DE3'/>
+                        </View>
+                        <Space height={40}/>
+                        {/*ToolBar*/}
+                        <Text style={styles.title}>演示:ToolBar</Text>
+                        <Text style={styles.desc}>通用的标题栏组件</Text>
+                        <Button
+                            text='试一试'
+                            onPress={() => {
+                                this.navigate('ToolBarPage');
+                            }}/>
+                        <Space height={40}/>
+                        {/*CheckBox*/}
+                        <Text style={styles.title}>演示:CheckBox</Text>
+                        <Text style={styles.desc}>CheckBox组件演示</Text>
+                        <Space height={8}/>
+                        <Text style={styles.desc}>普通的CheckBox</Text>
+                        <CheckBox
+                            label='去吃饭吗,小伙'
+                            check={this.state.check}
+                            onCheckChange={(check) => {
+                                this.setState({check: !this.state.check});
+                                Toast.message(check ? '选中了' : '没选中')
+                            }}/>
+                        <Space height={8}/>
+                        <Text style={styles.desc}>不可用的CheckBox</Text>
+                        <CheckBox
+                            label='去吃饭吗,小伙'
+                            check={this.state.check}
+                            enable={false}
+                            onCheckChange={(check) => {
+                                this.setState({check: !this.state.check});
+                                Toast.message(check ? '选中了' : '没选中')
+                            }}/>
+                        <Space height={40}/>
+                        {/*LoadingLayer*/}
+                        <Text style={styles.title}>演示:Loading</Text>
+                        <Text style={styles.desc}>Loading形式的弹窗</Text>
+                        <Button
+                            text='试一试'
+                            onPress={() => {
+                                this.navigate('LoadingPage');
+                            }}/>
+                        <Space height={40}/>
+                        {/*Swiper*/}
+                        <Text style={styles.title}>演示:Swiper</Text>
+                        <Text style={styles.desc}>Swiper</Text>
+                        <Button
+                            text='试一试'
+                            onPress={() => {
+                                this.navigate('SwiperPage');
+                            }}/>
+                        <Space height={300}/>
+                    </View>
+
+                </ScrollView>
+            </View>
+        );
+    }
+}
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        alignItems: 'center',
+        backgroundColor: Colors.backgroundColor,
+    },
+    title: {
+        width: '100%',
+        marginLeft: 36,
+        paddingTop: 16,
+        paddingBottom: 16,
+        fontSize: 20,
+        color: '#000',
+    },
+
+    desc: {
+        width: '100%',
+        marginLeft: 66,
+        paddingTop: 0,
+        paddingBottom: 16,
+        fontSize: 14,
+    }
+});
