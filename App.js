@@ -26,6 +26,8 @@ import Dialog from "./compoment/Dialog/Dialog";
 import DialogList from "./compoment/Dialog/DialogList";
 import SearchBar from "./compoment/SearchBar/SearchBar";
 import CheckBox from "./compoment/CheckBox/CheckBox";
+import MoneyTextInput from "./compoment/MoneyTextInput/MoneyTextInput";
+import {StatusImage} from "./compoment/StatusImage/StatusImage";
 
 const dismissKeyboard = require('dismissKeyboard');
 
@@ -108,6 +110,24 @@ export default class App extends BasePage<Props, State> {
                         <Text style={styles.desc}>按钮控件，此按钮为容器，需要包括具体内容</Text>
                         <Button text='我是按钮'/>
                         <Space height={40}/>
+                        {/*StatusImage.js*/}
+                        <Text style={styles.title}>演示:StatusImage</Text>
+                        <Text style={styles.desc}>StatusImage</Text>
+                        <StatusImage
+                            loadingImage={require('./icons/image_loading.png')}
+                            errorImage={require('./icons/image_load_error.png')}
+                            source={{uri: this.state.image}}
+                            resizeMode='contain'
+                            style={{
+                                width: 200,
+                                height: 200,
+                            }}
+                        />
+                        <Button text='填充图片地址' onPress={() => {
+                            this.setState({
+                                image: 'http://d-pic-image.yesky.com/281x141/uploadImages/2016/126/00/1M22511TTG3M_W.jpg'
+                            })
+                        }}/>
                         {/*PlaceHolderText*/}
                         <Text style={styles.title}>PlaceHolderText演示:</Text>
                         <Text style={styles.desc}>没有值显示提示，有值则显示值</Text>
@@ -375,6 +395,16 @@ export default class App extends BasePage<Props, State> {
                             onPress={() => {
                                 this.navigate('SwiperPage');
                             }}/>
+                        {/*MoneyTextInput*/}
+                        <Text style={styles.title}>演示:MoneyTextInput</Text>
+                        <Text style={styles.desc}>MoneyTextInput</Text>
+                        <MoneyTextInput
+                            style={{
+                                width: 200, borderColor: '#000', borderWidth: 1, borderRadius: 6,
+                                paddingLeft: 16, paddingRight: 16
+                            }}
+                            placeholder='请输入金额'/>
+
                         <Space height={300}/>
                     </View>
 
