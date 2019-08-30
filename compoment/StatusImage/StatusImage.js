@@ -47,7 +47,7 @@ export class StatusImage extends PureComponent<Props, State> {
         }
     }
 
-    onError(e) {
+    onError() {
         let {source} = this.props;
         //只有网络图片才会更新状态
         if (source && source.uri && this.state.state !== -1) {
