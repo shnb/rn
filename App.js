@@ -28,6 +28,7 @@ import SearchBar from "./compoment/SearchBar/SearchBar";
 import CheckBox from "./compoment/CheckBox/CheckBox";
 import MoneyTextInput from "./compoment/MoneyTextInput/MoneyTextInput";
 import {StatusImage} from "./compoment/StatusImage/StatusImage";
+import UpdateDialog from "./compoment/Dialog/UpdateDialog";
 
 const dismissKeyboard = require('dismissKeyboard');
 
@@ -404,7 +405,34 @@ export default class App extends BasePage<Props, State> {
                                 paddingLeft: 16, paddingRight: 16
                             }}
                             placeholder='请输入金额'/>
-
+                        <Space height={40}/>
+                        <Text style={styles.title}>演示:UpdateDialog</Text>
+                        <Text style={styles.desc}>更新弹窗</Text>
+                        <Button
+                            text='试一试'
+                            onPress={() => {
+                                UpdateDialog.show('v1.1.2',
+                                    true, ['功能优化1功能优化1功能优化1功能优化1功能优化1功能优化1功能优化1功能优化1', '功能优化2', '功能优化3', '功能优化4', '功能优化4', '功能优化4'],
+                                    () => {
+                                        Toast.message('开始更新拉');
+                                    });
+                            }}/>
+                        <Space height={20}/>
+                        <Button
+                            text='试一试蓝色'
+                            onPress={() => {
+                                UpdateDialog.show('v1.1.2',
+                                    true,
+                                    ['功能优化1功能优化1功能优化1功能优化1功能优化1功能优化1功能优化1功能优化1', '功能优化2', '功能优化3', '功能优化4', '功能优化4', '功能优化4'],
+                                    () => {
+                                        Toast.message('开始更新拉');
+                                    },
+                                    {
+                                        primaryColor: '#0c91ff',
+                                        headerImage: {uri: 'http://d-pic-image.yesky.com/220x165/uploadImages/2018/180/36/F569WN59VEL9.jpg'}
+                                    });
+                            }}/>
+                        <Space height={40}/>
                         <Space height={300}/>
                     </View>
 
