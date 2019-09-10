@@ -77,7 +77,7 @@ class UpdateDialogView extends LayerView<Props> {
 
     renderClose() {
         let {force} = this.props;
-        return force &&
+        return !force &&
             <TouchableOpacity style={styles.closeRoot}
                               onPress={this.close.bind(this)}>
                 <Image style={{width: 30, height: 30}} source={require('../../icons/icon_close.png')}

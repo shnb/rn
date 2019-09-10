@@ -64,8 +64,8 @@ export class StatusImage extends PureComponent<Props, State> {
     renderMask() {
         let {loadingImage, errorImage, style} = this.props;
         let {state} = this.state;
-        let source = state === 0 ? loadingImage : errorImage;
         if (state !== 1) {
+            let source = state === 0 ? loadingImage : errorImage;
             return <Image style={[style, {position: 'absolute', left: 0, right: 0}]} source={source}/>
         } else {
             return null;
