@@ -74,7 +74,7 @@ export default class LayerView extends Component<Props> {
     render() {
         let {pointerEvents} = this.props;
         return (
-            <View style={{...styles.root}} pointerEvents={pointerEvents}>
+            <View style={styles.root} pointerEvents={pointerEvents}>
                 <View style={this.buildStyle()} pointerEvents='box-none'>
                     {this.renderContent()}
                 </View>

@@ -59,13 +59,13 @@ export default class LayerManager extends Component<any, State> {
         this.managers = [];
     }
 
-    //react 高级api,用于父子间组件通信
+    //react 用于父子间组件通信
     static contextTypes = {
         registerLayerManager: PropTypes.oneOfType(PropTypes.fun, undefined),
         unregisterLayerManager: PropTypes.oneOfType(PropTypes.fun, undefined),
     };
 
-    //react 高级api,用于父子间组件通信
+    //react 用于父子间组件通信
     static childContextTypes = {
         registerLayerManager: PropTypes.oneOfType(PropTypes.fun, undefined),
         unregisterLayerManager: PropTypes.oneOfType(PropTypes.fun, undefined),
