@@ -49,7 +49,10 @@ class UpdateDialogView extends LayerView<Props> {
     };
 
     onClick = (index, value) => {
-        this.close();
+        let {force} = this.props;
+        if (!force) {
+            this.close();
+        }
         this.props.onUpdateClick && this.props.onUpdateClick(index, value);
     };
 
