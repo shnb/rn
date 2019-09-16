@@ -24,11 +24,11 @@ git地址:git@172.31.13.131:mobile_rn/Collie.git
 
 - <a href="#Loading">Loading</a>
 
-- MoneyTextInput
+- <a href="#MoneyTextInput">MoneyTextInput</a>
 
-- BasePage
+- <a href="#BasePage">BasePage</a>
 
-- BaseListPage
+- <a href="#BaseListPage">BaseListPage</a>
 
 - CityPicker
 
@@ -398,3 +398,89 @@ Loading形式的弹窗
 | ------------------- | ------ | -------------------- |
 | show(title?:string) | static | 显示Loading,可选是否显示加载文本 |
 | hide()              | static | 去除Loading            |
+
+### <a name="MoneyTextInput">MoneyTextInput</a>
+
+输入金额的TextInput,只保留两位小数,如果用户输入的不合法,则无法输入,
+
+注意:此控件由于rn的bug,所以不兼容rn 0.59以下版本
+
+使用方式
+    使用方式与TextInput基本相同
+
+```jsx
+<MoneyTextInput
+    style={{
+        width: 200, borderColor: '#000', borderWidth: 1, borderRadius: 6,
+        paddingLeft: 16, paddingRight: 16
+    }}
+    placeholder='请输入金额'/>
+```
+
+相关属性
+
+| 属性     | 类型     | 介绍               |
+| ------ | ------ | ---------------- |
+| style  | Object | 同TextInput的style |
+| value? | string | textInput默认显示的文本 |
+
+### <a name="BasePage">BasePage</a>
+
+所有页面的基类
+
+注意:不含有标题栏的实现,如需请使用ToolBar实现标题栏
+
+    1.实现了返回键的相关处理
+    2.更快捷的访问路由参数
+    3.更加方便的跳转和返回
+    4.支持链式注册事件监听,具备自动取消监听功能
+
+使用方式
+
+        直接继承此类即可
+
+相关方法
+
+| 方法                                                                         | 类型   | 介绍                       |
+| -------------------------------------------------------------------------- | ---- | ------------------------ |
+| enableBack:boolean                                                         | 成员方法 | 是否允许注册返回键监听,默认注册         |
+| addEvent(eventType: string, listener: Function, context: ?Object):BasePage | 成员方法 | 注册DeviceEventEmitter监听事件 |
+| onBackClicked:void                                                         | 成员方法 | 默认的返回键的处理(返回上一级页面)       |
+| navigate(page, params = {}):void                                           | 成员方法 | 跳转到某个路由                  |
+| goBack():void                                                              | 成员方法 | 返回上一级页面                  |
+
+### <a name="BaseListPage">BaseListPage</a>
+
+列表页的基类
+
+        1.实现了上拉加载和下拉加载的处理逻辑
+        2.实现了请求到数据源之后的处理逻辑
+        3.实现了上拉加载下拉加载错误的处理和显示
+        4.处理了空页面和没有更多数据的处理逻辑
+        5.处理了上拉加载和下拉加载出错重试逻辑和交互
+        6.支持自定义空页面和错误页面
+        7.支持安全的渲染cell
+        8.支持其他加载的自定义
+
+使用方式
+
+如果非常贴合该类的默认实现,则只需实现getApiCall方法和render方法(调用renderList方法)
+
+    1.继承此类
+    2.覆写renderItem方法,返回需要渲染的item
+    3.覆写getApiCall方法,返回含有http response的Promise
+    4.覆写getPageSize方法,默认返回20,如也是20,可不实现此方法
+    5.覆写getResponseList方法,默认返回response.dataList,如也是dataList,,可不覆写
+    6.覆写renderEmpty方法,默认返回一个空页面的view,如需要更改,则覆写
+    7.实现render方法,在此方法中调用renderList方法渲染出列表
+
+相关方法
+
+| 方法                                               | 介绍                                                                            |
+| ------------------------------------------------ | ----------------------------------------------------------------------------- |
+| renderItem(info)                                 | 渲染item,需要覆写,返回需要渲染的item                                                       |
+| getPageSize():number                             | 默认20,可不覆写                                                                     |
+| getResponseList(response: { dataList: Array }) { | 返回response的列表,默认为dataList,如同,可不覆写                                             |
+| getApiCall(): Promise                            | 返回含有http response的的Promise对象,必须覆写                                             |
+| renderEmpty                                      | 渲染空页面,默认返回一个空页面,如需自定义则覆写                                                      |
+| renderList                                       | 渲染实际的列表,此方法需要使用者手动调用,返回要渲染的列表,如需对其他列表加载的属性进行更改,请覆写此方法,内部的参数请参考RefreshListView |
