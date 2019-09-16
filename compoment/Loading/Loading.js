@@ -20,7 +20,6 @@ export default class Loading extends Layer {
             this.key = super.show(<LoadingView title={title}/>);
         }
     }
-
     /**
      * 隐藏加载窗
      */
@@ -38,7 +37,7 @@ type Props = {
 };
 
 /**
- * toast的实际view,此view不可单独使用
+ * Loading的实际view,此view不可单独使用
  */
 class LoadingView extends LayerView<Props> {
     static defaultProps = {
