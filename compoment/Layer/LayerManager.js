@@ -244,22 +244,22 @@ class RealDom extends PureComponent {
     }
 }
 
-if (!AppRegistry.registerComponentOld) {
-    AppRegistry.registerComponentOld = AppRegistry.registerComponent;
-}
-
-AppRegistry.registerComponent = function (appKey, componentProvider) {
-
-    class RootElement extends Component {
-        render() {
-            let Component = componentProvider();
-            return (
-                <LayerManager>
-                    <Component {...this.props} />
-                </LayerManager>
-            );
-        }
-    }
-
-    return AppRegistry.registerComponentOld(appKey, () => RootElement);
-};
+// if (!AppRegistry.registerComponentOld) {
+//     AppRegistry.registerComponentOld = AppRegistry.registerComponent;
+// }
+//
+// AppRegistry.registerComponent = function (appKey, componentProvider) {
+//
+//     class RootElement extends Component {
+//         render() {
+//             let Component = componentProvider();
+//             return (
+//                 <LayerManager>
+//                     <Component {...this.props} />
+//                 </LayerManager>
+//             );
+//         }
+//     }
+//
+//     return AppRegistry.registerComponentOld(appKey, () => RootElement);
+// };
