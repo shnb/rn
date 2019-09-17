@@ -30,19 +30,19 @@ git地址:git@172.31.13.131:mobile_rn/Collie.git
 
 - <a href="#BaseListPage">BaseListPage</a>
 
-- CityPicker
+- <a href="#CityPicker">CityPicker</a>
 
-- DatePicker
+- <a href="#DatePicker">DatePicker</a>
 
-- HoursPicker
+- <a href="#HoursPicker">HoursPicker</a>
 
-- SinglePicker
+- <a href="#SinglePicker">SinglePicker</a>
 
-- PopLayer
+- <a href="#PopLayer">PopLayer</a>
 
-- PopMenu
+- <a href="#PopMenu">PopMenu</a>
 
-- RefreshListView
+- <a href="#RefreshListView">RefreshListView</a>
 
 - SearchBar
 
@@ -64,13 +64,13 @@ git地址:git@172.31.13.131:mobile_rn/Collie.git
 
 ### <a name="Button">Button</a>
 
-使用方法
+**使用方法**
 
 ```jsx
 <Button text='我是按钮'/>
 ```
 
-属性列表
+**属性列表**
 
 | 属性名              | 类型              | 介绍                   |
 |:---------------- | --------------- | -------------------- |
@@ -83,7 +83,7 @@ git地址:git@172.31.13.131:mobile_rn/Collie.git
 
 ### <a name="CheckBox">CheckBox</a>
 
-使用方法
+**使用方法**
 
 ```jsx
 <CheckBox
@@ -95,7 +95,7 @@ onCheckChange={(check) => {
 }}/>  
 ```
 
-属性列表
+**属性列表**
 
 | 属性名            | 类型       | 介绍                          |
 |:-------------- | -------- | --------------------------- |
@@ -117,7 +117,7 @@ onCheckChange={(check) => {
 支持标题,内容,任意数量的按钮,风格统一的dialog组件,
 此组件依赖Layer组件
 
-使用方法
+**使用方法**
 
 ```jsx
 Dialog.show('我是弹窗', 
@@ -128,7 +128,7 @@ Dialog.show('我是弹窗',
 );
 ```
 
-属性列表
+**属性列表**
 
 | 属性名类型介绍  |                                                                            |             |
 | -------- | -------------------------------------------------------------------------- | ----------- |
@@ -143,14 +143,14 @@ Dialog.show('我是弹窗',
 
 此组件依赖于Layer组件
 
-使用方法
+**使用方法**
 
 ```jsx
 DialogList.show(['python', 'ruby', 'java', 'c++', 'php', 'kotlin', 'dart'],
                  (index, value) => Toast.message(value));
 ```
 
-属性列表
+**属性列表**
 
 | 属性名             | 类型                                    | 介绍       |
 | --------------- | ------------------------------------- | -------- |
@@ -164,7 +164,7 @@ DialogList.show(['python', 'ruby', 'java', 'c++', 'php', 'kotlin', 'dart'],
 检查更新组件,具体UI样式请运行项目查看
 此组件依赖Layer组件
 
-使用方法
+**使用方法**
 
 ```jsx
 UpdateDialog.show('v1.1.2',
@@ -175,7 +175,7 @@ UpdateDialog.show('v1.1.2',
                   });
 ```
 
-属性列表
+**属性列表**
 
 | 属性                  | 类型                                         | 介绍                              |
 | ------------------- | ------------------------------------------ | ------------------------------- |
@@ -191,7 +191,7 @@ UpdateDialog.show('v1.1.2',
 
 网格容器布局组件,渲染任意列的网格
 
-使用方法
+**使用方法**
 
 ```jsx
 renderGridCell(){
@@ -216,7 +216,7 @@ render(){
 }
 ```
 
-属性列表
+**属性列表**
 
 | 属性     | 类型     | 介绍                |
 | ------ | ------ | ----------------- |
@@ -228,7 +228,7 @@ render(){
 
 显示一个标签,具备placeHolder功能的TextView
 
-使用方式
+**使用方式**
 
 ```jsx
 <Label
@@ -243,7 +243,7 @@ render(){
     value={this.state.placeHolderTextValue}/>
 ```
 
-属性列表
+**属性列表**
 
 | 属性                  | 类型     | 介绍                   |
 | ------------------- | ------ | -------------------- |
@@ -376,7 +376,7 @@ Loading形式的弹窗
     2.此弹框弹出后会显示一个加载框,并且屏蔽返回键,且点击无法关闭,使用时http请求方法必须要有超时方法,否则会导致弹窗无法关闭
     3.如需在页面级弹出,请在对应页面的根节点上包裹LayerManger
 
-使用方式
+**使用方式**
 
 ```jsx
 <Button
@@ -392,7 +392,7 @@ Loading形式的弹窗
     }}/>
 ```
 
- 相关方法
+** 相关方法**
 
 | 方法                  | 类型     | 介绍                   |
 | ------------------- | ------ | -------------------- |
@@ -405,7 +405,7 @@ Loading形式的弹窗
 
 注意:此控件由于rn的bug,所以不兼容rn 0.59以下版本
 
-使用方式
+**使用方式**
     使用方式与TextInput基本相同
 
 ```jsx
@@ -417,7 +417,7 @@ Loading形式的弹窗
     placeholder='请输入金额'/>
 ```
 
-相关属性
+**相关属性**
 
 | 属性     | 类型     | 介绍               |
 | ------ | ------ | ---------------- |
@@ -435,11 +435,11 @@ Loading形式的弹窗
     3.更加方便的跳转和返回
     4.支持链式注册事件监听,具备自动取消监听功能
 
-使用方式
+**使用方式**
 
         直接继承此类即可
 
-相关方法
+**相关方法**
 
 | 方法                                                                         | 类型   | 介绍                       |
 | -------------------------------------------------------------------------- | ---- | ------------------------ |
@@ -462,7 +462,7 @@ Loading形式的弹窗
         7.支持安全的渲染cell
         8.支持其他加载的自定义
 
-使用方式
+**使用方式**
 
 如果非常贴合该类的默认实现,则只需实现getApiCall方法和render方法(调用renderList方法)
 
@@ -474,7 +474,7 @@ Loading形式的弹窗
     6.覆写renderEmpty方法,默认返回一个空页面的view,如需要更改,则覆写
     7.实现render方法,在此方法中调用renderList方法渲染出列表
 
-相关方法
+**相关方法**
 
 | 方法                                               | 介绍                                                                            |
 | ------------------------------------------------ | ----------------------------------------------------------------------------- |
@@ -484,3 +484,163 @@ Loading形式的弹窗
 | getApiCall(): Promise                            | 返回含有http response的的Promise对象,必须覆写                                             |
 | renderEmpty                                      | 渲染空页面,默认返回一个空页面,如需自定义则覆写                                                      |
 | renderList                                       | 渲染实际的列表,此方法需要使用者手动调用,返回要渲染的列表,如需对其他列表加载的属性进行更改,请覆写此方法,内部的参数请参考RefreshListView |
+
+### <a name="CityPicker">CityPicker</a>
+
+省市县的选择器,内置了默认的城市编码,如需特殊编码,请自行更换,目前只支持省市县,如需要省县,或者是单独省的选择,请自行实现
+
+此组件基于ScrollPicker和Layer组件
+
+**使用方式**
+
+使用时需要传入一个默认的已选中的省市县,或者是null or "";
+
+```jsx
+CityPicker.show(this.state.city, 
+                (city) => {
+                            this.setState({
+                                city: city
+                            })
+                });
+```
+
+### <a name="DatePicker">DatePicker</a>
+
+日期选择器,支持年月日的选择器,所有的选择器的UI风格均是一致的
+
+此组件基于ScrollPicker和Layer组件
+
+**使用方式**
+
+使用时需要传入一个默认的已选中的年月日,或者是null or "";
+
+```jsx
+DatePicker.show(this.state.date, (date) => {
+    this.setState({
+        date: date
+    })
+})
+```
+
+### <a name="HoursPicker">HoursPicker</a>
+
+小时区间选择器,例如08:00-20:00
+
+此组件基于ScrollPicker和Layer组件
+
+**使用方式**
+
+使用时需要传入默认的已选中的开始时间和结束时间,或者是null or "";
+
+```jsx
+HoursPicker.show(this.state.hourStart, this.state.hourEnd, (start, end) => {
+    this.setState({
+        hourStart: start,
+        hourEnd: end
+    })
+})
+```
+
+### <a name="SinglePicker">SinglePicker</a>
+
+单一条件的选择器
+
+此组件基于ScrollPicker和Layer组件
+
+**使用方式**
+
+使用时需要传入默认一选中的值,或者是null or "";
+
+list为数组,数组内对象需要name和value键值对,显示用name显示,取值或赋值均用value
+
+```jsx
+let list = [
+    {name: 'php', value: 0},
+    {name: 'java', value: 1},
+    {name: 'js', value: 2},
+    {name: 'android', value: 3},
+    {name: 'ios', value: 4},
+    {name: 'python', value: 5},
+    {name: 'swift', value: 5},
+];
+SinglePicker.show(list, this.state.value ? this.state.value.value : null, (index, data) => {
+    this.setState({
+        value: data
+    })
+})
+```
+
+### <a name="PopLayer">PopLayer</a>
+
+此组件以某个锚点view为基准,在此锚点view附近显示,并且根据当前锚点view的位置,和自身的位置,动态的计算出自已应该显示在什么位置.
+
+此组件为Pop类型的基础组件,需要具体的去实现,如需使用请参考PopMenu相关代码
+
+此组件依赖Layer组件
+
+### <a name="PopMenu">PopMenu</a>
+
+此组件为弹出按钮,类似于微信右上角的PopMenu
+
+此组件可计算屏幕的控件是否足够显示来调整自身显示的位置,
+
+此组件依赖PopLayer组件
+
+**使用方式**
+
+第一个参数为锚点view ,list为按钮数组,onClick是点击回调,yOffset是y轴的偏移量,
+
+更多属性请查阅代码
+
+```jsx
+PopMenu.show(this.btn, {
+            list: ['python', 'ruby', 'java', 'c++', 'php', 'kotlin', 'dart'],
+            onClick: (index, value) => Toast.message(value),
+            yOffset: -20,
+        })
+```
+
+### <a name="RefreshListView">RefreshListView</a>
+
+具备各种状态的flatList
+
+        1.具备下拉刷新功能
+        2.具备上拉加载功能
+        3.具备空页面功能
+        4.具备各种加载失败的重试功能
+        5.具备没有更多数据功能
+        6.具备UI自定义功能
+
+**使用说明**
+
+大体上与FlatList用法相同
+
+```jsx
+ <RefreshListView
+    data={this.state.listData}
+    ListHeaderComponent={this.renderHeader.bind(this)}
+    renderEmpty={this.renderEmpty.bind(this)}
+    renderItem={this.renderCell.bind(this)}
+    keyExtractor={this.keyExtractor}
+    refreshState={this.state.refreshState}
+    onLoadMore={this.onFooterRefresh.bind(this)}
+    onRefresh={this.onHeaderRefresh.bind(this)}/>
+```
+
+**属性列表**
+
+| 属性名                          | 类型       | 介绍           |
+| ---------------------------- | -------- | ------------ |
+| onRefresh                    | Function | 下拉刷新回调       |
+| onLoadMore?                  | Function | 上拉加载更多回调     |
+| refreshState                 | number   | 刷新的状态        |
+| listRef                      | any      | flatList的ref |
+| loadMoreRefreshingComponent? | any      | 上拉加载更多的自定义组件 |
+| loadMoreRefreshingText?      | string   | 上拉加载更多的文字    |
+| noMoreDataComponent?         | any      | 没有更多数据的自定义组件 |
+| noMoreDataText?              | string   | 没有更多数据的文字    |
+| loadMoreErrorText?           | string   | 加载失败文字       |
+| renderLoading?               | Function | 渲染loading页面  |
+| renderEmpty?                 | Function | 渲染空数据页面      |
+| renderError?                 | Function | 渲染错误页面       |
+| data                         | Array    | 列表的数据源       |
