@@ -44,23 +44,23 @@ git地址:git@172.31.13.131:mobile_rn/Collie.git
 
 - <a href="#RefreshListView">RefreshListView</a>
 
-- SearchBar
+- <a href="#SearchBar">SearchBar</a>
 
-- Space
+- <a href="#Space">Space</a>
 
-- SplitLine
+- <a href="#SplitLine">SplitLine</a>
 
-- StackLayout
+- <a href="#StackLayout">StackLayout</a>
 
-- StatusImage
+- <a href="#StatusImage">StatusImage</a>
 
-- StatusView
+- <a href="#StatusView">StatusView</a>
 
-- Toast
+- <a href="#Toast">Toast</a>
 
-- ToolBar
+- <a href="#ToolBar">ToolBar</a>
 
-- Timer
+- <a href="#Timer">Timer</a>
 
 ### <a name="Button">Button</a>
 
@@ -644,3 +644,268 @@ PopMenu.show(this.btn, {
 | renderEmpty?                 | Function | 渲染空数据页面      |
 | renderError?                 | Function | 渲染错误页面       |
 | data                         | Array    | 列表的数据源       |
+
+### <a name="SearchBar">SearchBar</a>
+
+搜索条组件
+注意:由于rn0.59以下bug,故此组件不兼容低于0.59版本以下
+
+**使用方式**
+
+具体UI效果请看demo工程
+
+```jsx
+<View style={{alignItems: 'center', width: 300, height: 35}}>
+    <SearchBar style={{borderRadius: 18, backgroundColor: '#00ffe8'}} 
+               placeholder='请输入商品'
+               tintColor='#FF0DE3'
+               placeholderColor='#FF0DE3'/>
+</View>
+```
+
+**相关属性**
+
+| 属性                | 类型       | 说明          |
+| ----------------- | -------- | ----------- |
+| onInputChange?    | Function | 当输入文字变化时的回调 |
+| textColor?        | string   | 搜索栏文字的颜色    |
+| placeholder?      | string   | 没有输入显示的替换字  |
+| placeholderColor? | string   | 替换字的文字的颜色   |
+| tintColor?        | string   | 图标的颜色       |
+| style?            | Object   | 同view的style |
+
+### <a name="Space">Space</a>
+
+显示一部分空白区域
+
+**使用方式**
+
+```jsx
+ <Space height={8}/>
+```
+
+**相关属性**
+
+| 属性          | 类型     | 说明    |
+| ----------- | ------ | ----- |
+| height?     | number | 控件的高度 |
+| spaceColor? | string | 控件的颜色 |
+
+### <a name="SplitLine">SplitLine</a>
+
+分隔线组件
+
+**使用方式**
+
+```jsx
+<SplitLine backgroundColor={Colors.backgroundColor}/>
+```
+
+**相关属性**
+
+| 属性                | 类型      | 说明        |
+| ----------------- | ------- | --------- |
+| enableMarginLeft? | Boolean | 是否允许左边有距离 |
+| lineColor?        | string  | 线的颜色      |
+| backgroundColor?  | string  | 容器的颜色     |
+| marginLeft?       | number  | 左边距离的具体数字 |
+| height?           | number  | 分隔线的高度    |
+
+### <a name="StackLayout">StackLayout</a>
+
+可让子view叠加显示的容器组件
+
+**使用方式**
+支持子组件 hide属性,设置hide=true,则该子组件不显示
+
+```jsx
+<StackLayout style={{flex: 1}}>
+    <TouchableOpacity onPress={() => {
+        Toast.message('我是300x300');
+    }} hide style={{width: 300, height: 300, left: 0, top: 0, backgroundColor: '#e921e4'}}/>
+    <TouchableOpacity onPress={() => {
+        Toast.message('我是250x250');
+    }} style={{width: 250, height: 250, left: 0, top: 0, backgroundColor: '#10e91f'}}/>
+    <TouchableOpacity onPress={() => {
+        Toast.message('我是200x200');
+    }} style={{width: 200, height: 200, left: 0, top: 0, backgroundColor: '#0fd2e9'}}/>
+    <TouchableOpacity hide onPress={() => {
+        Toast.message('我是150x150');
+    }} style={{width: 150, height: 150, left: 0, top: 0, backgroundColor: '#b4e912'}}/>
+    <TouchableOpacity onPress={() => {
+        Toast.message('我是100x100');
+    }} style={{width: 100, height: 100, left: 0, top: 0, backgroundColor: '#e98a87'}}/>
+    <TouchableOpacity onPress={() => {
+        Toast.message('我是50x50');
+    }} style={{width: 50, height: 50, left: 0, top: 0, backgroundColor: '#e7afe9'}}/>
+</StackLayout>
+```
+
+### <a name="StatusImage">StatusImage</a>
+
+具备加载中,加载失败状态的图片组件
+
+使用方式
+
+```jsx
+<StatusImage
+    loadingImage={require('./icons/image_loading.png')}
+    errorImage={require('./icons/image_load_error.png')}
+    source={{uri: this.state.image}}
+    resizeMode='contain'
+    style={{
+        width: 200,
+        height: 200,
+    }}
+/>
+<Button text='填充图片地址' onPress={() => {
+    this.setState({
+        image: 'http://d-pic-image.yesky.com/281x141/uploadImages/2016/126/00/1M22511TTG3M_W.jpg'
+    })
+}}/>
+```
+
+### <a name="StatusView">StatusView</a>
+
+拥有四种状态的状态页,可用于有网络请求的页面,作为根view
+
+             1.正常状态
+             2.loading状态
+             3.出错页面状态
+             4.空页面状态
+
+使用方式
+
+```jsx
+ <StatusView status={this.props.refreshState} enableLoading={isFirstLoad} onRetry={this.onRetry} {...rest}>
+    <FlatList
+        ref={this.props.listRef}
+        data={this.props.data}
+        onEndReached={this.onEndReached}
+        onRefresh={this.props.onRefresh}
+        refreshing={this.props.refreshState === RefreshState.REFRESHING}
+        ListFooterComponent={this.renderFooter}
+        onEndReachedThreshold={0.1}
+        renderItem={renderItem}
+        {...rest}
+    />
+</StatusView>
+```
+
+相关属性
+
+| 属性             | 类型       | 说明                      |
+| -------------- | -------- | ----------------------- |
+| status         | number   | 1 正常 ，0加载中，-1加载失败,-2无数据 |
+| onRetry        | Function | 点击重新加载的回调               |
+| style?         | Object   | 同view的style             |
+| enableLoading  | boolean  | 是否允许有loading            |
+| renderLoading? | Function | 自定义渲染Loading            |
+| renderEmpty?   | Function | 自定义渲染空数据                |
+| renderError?   | Function | 自定义渲染错误页面               |
+
+### <a name="Toast">Toast</a>
+
+Toast组件,可控制弹出的位置,此组件不会影响用户的输入,包括返回键
+
+该组件基于Layer组件
+
+**使用方式**
+更多使用方式请查看Toast源码
+
+```jsx
+Toast.message('我是个Toast');
+Toast.message("我是个特殊的Toast", {duration: 5000});
+```
+
+**相关属性**
+
+| 属性            | 类型     | 说明                       |
+| ------------- | ------ | ------------------------ |
+| message       | string | 消息文本                     |
+| position?     | string | 提示的位置 top                |
+| marginTop?    | number | position top时 距离顶部的位置    |
+| marginBottom? | number | position bottom时 距离底部的位置 |
+| marginLeft?   | number | 一行放不下时左边距                |
+| marginRight?  | number | 一行放不下时右边距                |
+
+### <a name="ToolBar">ToolBar</a>
+
+标题栏组件,此组件不处理状态栏高度问题,这个只是一个纯粹的标题栏
+请自行处理状态栏高度问题
+
+**使用方式**
+
+```jsx
+<View style={{flex: 1}}>
+    <Space height={utils.statusHeight} spaceColor='#fff'/>
+    <ToolBar
+        title='ToolBar演示'
+        isBack={true}
+        navigation={this.props.navigation}
+    />
+    <Text style={styles.desc}>有返回键的标题栏</Text>
+    <Space height={8}/>
+    <ToolBar
+        title='我有返回键'
+        navigation={this.props.navigation}
+    />
+    <Space height={40}/>
+
+
+    <Text style={styles.desc}>带搜索功能的标题栏</Text>
+    <Space height={8}/>
+    <ToolBar
+        isCenter={false}
+        navigation={this.props.navigation}>
+        <SearchBar placeholder='请输入商品'/>
+    </ToolBar>
+    <Space height={40}/>
+</View>
+```
+
+**相关属性**
+
+| 属性               | 类型       | 说明                          |
+| ---------------- | -------- | --------------------------- |
+| isBack?          | boolean  | 是否有返回键,默认为true              |
+| title?           | string   | 标题                          |
+| menuTitle?       | string   | 右标题                         |
+| menuIcon?        | any      | 右标题图片,同ImageView source     |
+| menuIconStyle?   | Object   | 右标题图片样式,同ImageVIew的style    |
+| navigation       | any      | 路由导航                        |
+| overrideBack?    | Function | 重写返回键处理函数                   |
+| menuAction?      | Function | 按钮事件                        |
+| isCenter         | boolean  | 是否中间元素强制居中,默认为true          |
+| titleStyle?      | Object   | 标题的样式,同TextView的style       |
+| backIcon?        | any      | 返回按钮的icon,同ImageView source |
+| iconTintColor?   | string   | 图标的颜色                       |
+| menuTitleStyle?  | Object   | 菜单的样式,同TextView的style       |
+| backgroundColor? | string   | 背景颜色                        |
+| style?           | Object   | 组件跟节点的样式,同view的style        |
+
+### <a name="Timer">Timer</a>
+
+计时器 每隔一段时间执行某种操作
+
+使用方式
+
+```jsx
+let timer=new Timer(1*1000,()=>{
+    Toast.show("good");
+});
+ *
+timer.start();
+ *
+setTimeout(()=>{
+    timer.stop();
+},1000*10)
+```
+
+相关函数
+
+| 方法                                        | 说明                        |
+| ----------------------------------------- | ------------------------- |
+| constructor(interval, callBack: Function) | interval 循环间隔,callBack 回调 |
+| start()                                   | 开始计时器                     |
+| stop()                                    | 结束计时器                     |
