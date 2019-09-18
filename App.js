@@ -5,8 +5,8 @@
  * @format
  */
 
-import React from 'react';
-import {StyleSheet, ScrollView, Text, View} from 'react-native';
+import React,{Component} from 'react';
+import {StyleSheet, ScrollView, Text, View,AppRegistry,} from 'react-native';
 import {Colors} from "./config/Colors";
 import SplitLine from "./compoment/SplitLine/SplitLine";
 import Space from "./compoment/Space/Space";
@@ -29,6 +29,7 @@ import CheckBox from "./compoment/CheckBox/CheckBox";
 import MoneyTextInput from "./compoment/MoneyTextInput/MoneyTextInput";
 import {StatusImage} from "./compoment/StatusImage/StatusImage";
 import UpdateDialog from "./compoment/Dialog/UpdateDialog";
+import LayerManager from "./compoment/Layer/LayerManager";
 
 const dismissKeyboard = require('dismissKeyboard');
 
@@ -50,6 +51,27 @@ let list = [
     {name: 'python', value: 5},
     {name: 'swift', value: 5},
 ];
+
+if (!AppRegistry.registerComponentOld) {
+    AppRegistry.registerComponentOld = AppRegistry.registerComponent;
+}
+
+AppRegistry.registerComponent = function (appKey, componentProvider) {
+
+    class RootElement extends Component {
+        render() {
+            let Component = componentProvider();
+            return (
+                <LayerManager>
+                    <Component {...this.props} />
+                </LayerManager>
+            );
+        }
+    }
+
+    return AppRegistry.registerComponentOld(appKey, () => RootElement);
+};
+
 export default class App extends BasePage<Props, State> {
 
     constructor(props: any) {
