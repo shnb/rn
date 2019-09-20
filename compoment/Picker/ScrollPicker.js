@@ -36,8 +36,10 @@ export default class ScrollPicker extends Component<Props> {
     };
     //可滚动的对象数组
     scrollerList: Array = [];
+    //当前滚动的位置
     currentY: number = 0;
-    flingY: number = 0;
+    //上一次惯性滚动的位置
+    lastFlingY: number = 0;
 
     /**
      * 渲染指示器，指示器的位置应该是容器的上下居中位置
@@ -233,13 +235,13 @@ export default class ScrollPicker extends Component<Props> {
             } else {
                 //有加速度
                 //当前滚动回调的次数不再增加,则可以认为加速度滚动停止了
-                if (thiz.flingY === thiz.currentY) {
+                if (thiz.lastFlingY === thiz.currentY) {
                     //当加速度运动停止时
                     thiz.onScrollEnd(scrollIndex, thiz.currentY);
                     thiz.timer.stop();
                 } else {
                     //当还在运动中,记录当前滚动回调的次数
-                    thiz.flingY = thiz.currentY;
+                    thiz.lastFlingY = thiz.currentY;
                 }
             }
         });
