@@ -181,7 +181,7 @@ export default class App extends BasePage<Props, State> {
                         {/*GridLayout*/}
                         <Text style={styles.title}>GridLayout演示:</Text>
                         <Text style={styles.desc}>网格布局组件</Text>
-                        <GridLayout colNum={4}>
+                        <GridLayout colNum={7}>
                             {this.renderGridCell()}
                         </GridLayout>
                         {/*Toast*/}

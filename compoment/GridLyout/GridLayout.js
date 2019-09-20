@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {View, StyleSheet} from 'react-native';
+import {View, StyleSheet, PixelRatio} from 'react-native';
 import utils from '../../utils'
 
 type Props = {
@@ -30,7 +30,11 @@ export default class GridLayout extends Component<Props> {
 
     render() {
         let {style, colNum, width} = this.props;
-
+        let scale = PixelRatio.get();
+        let physical_width = scale * width;
+        let remainder = physical_width % colNum;//多出的物理像素 需要区分是否有余数
+        let averageWidth_physicalPx = Math.ceil(physical_width / colNum) - (remainder ? 1 : 0);//得到物理像素的宽度（得到一个不大于宽度平均值的最大整数）
+        let averageWidth_logicPx = averageWidth_physicalPx / scale;
         let children = this.props.children.map((element, index) => {
             let childProps = element.props;
 
@@ -41,7 +45,9 @@ export default class GridLayout extends Component<Props> {
                 childProps.style = {};
             }
             //replace child style
-            childProps.style.width = width / colNum;
+            // childProps.style.width = width / colNum;
+            let should_average_index = ((index % colNum) <= (remainder - 1));
+            childProps.style.width = averageWidth_logicPx + (should_average_index ? (1 / scale) : 0);
 
             return React.cloneElement(element, {...childProps, key: index});
         });
