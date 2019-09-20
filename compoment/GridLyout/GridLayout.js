@@ -44,11 +44,8 @@ export default class GridLayout extends Component<Props> {
             if (childProps.style == null) {
                 childProps.style = {};
             }
-            //replace child style
-            // childProps.style.width = width / colNum;
             let should_average_index = ((index % colNum) <= (remainder - 1));
             childProps.style.width = averageWidth_logicPx + (should_average_index ? (1 / scale) : 0);
-
             return React.cloneElement(element, {...childProps, key: index});
         });
         return (
