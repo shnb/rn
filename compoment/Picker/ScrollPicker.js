@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {FlatList, StyleSheet, Text, View,} from 'react-native';
+import Timer from "../../function/Timer";
 
 type Props = {
     //数据源
@@ -33,13 +34,10 @@ export default class ScrollPicker extends Component<Props> {
         containerHeight: 210,
         targetItemHeight: 40,
     };
-
-
-    constructor(props) {
-        super(props);
-        this.scrollers = [];
-        this.scrollCount = 0;
-    }
+    //可滚动的对象数组
+    scrollerList: Array = [];
+    currentY: number = 0;
+    flingY: number = 0;
 
     /**
      * 渲染指示器，指示器的位置应该是容器的上下居中位置
@@ -118,10 +116,10 @@ export default class ScrollPicker extends Component<Props> {
     /**
      * 当列需要滚动时
      * @param scrollIndex
-     * @param scrollHeight
+     * @param currentY
      */
-    onScroll(scrollIndex, scrollHeight) {
-        let targetItemIndex = this.scrollProper(scrollIndex, scrollHeight, false);
+    onScrollEnd(scrollIndex, currentY) {
+        let targetItemIndex = this.scrollProper(scrollIndex, currentY);
         this.props.onChange && this.props.onChange(scrollIndex, targetItemIndex);
     }
 
@@ -129,11 +127,9 @@ export default class ScrollPicker extends Component<Props> {
      * 适当的滚动
      * @param scrollIndex 当前列
      * @param scrollHeight 滚动的高度
-     * @param animated 是否要有动画
      * @returns 滚动到的index
      */
-    scrollProper(scrollIndex, scrollHeight, animated = false) {
-
+    scrollProper(scrollIndex, scrollHeight) {
         let {list, containerHeight, targetItemHeight} = this.props;
         //列所在数据的长度
         let scrollListLength = list[scrollIndex].length;
@@ -165,11 +161,10 @@ export default class ScrollPicker extends Component<Props> {
         }
 
         //滚动到对应的位置
-        this.scrollers[scrollIndex].scrollToOffset({
-            animated: animated,
+        this.scrollerList[scrollIndex].scrollToOffset({
+            animated: true,
             offset: newScrollHeight,
         });
-
         return newScrollHeight / targetItemHeight;
     }
 
@@ -198,9 +193,7 @@ export default class ScrollPicker extends Component<Props> {
      */
     renderOther = () => {
         let {containerHeight, targetItemHeight} = this.props;
-
         let space = (containerHeight - targetItemHeight) / 2;
-
         return (<View style={{flex: 1, height: space}}/>);
     };
 
@@ -218,6 +211,40 @@ export default class ScrollPicker extends Component<Props> {
             index: index
         })
     };
+
+    /**
+     * 侦测手指抬起后是否有滚动加速度
+     *
+     * 如果手指抬起时,没有加速度,则立即修正位置
+     * 如果手指抬起时,有加速度,刷新率60帧,则17毫秒检测一次滚动是否停止,检测到停止的话,则立即修正位置
+     * @param scrollIndex 滚动view的index
+     * @param upY 事件的Y坐标点
+     */
+    handlerFlingEnd(scrollIndex, upY) {
+        if (this.timer) {
+            this.timer.stop();
+        }
+        let thiz = this;
+        this.timer = new Timer(17, () => {
+            if (upY === thiz.currentY) {
+                //没有加速度
+                thiz.onScrollEnd(scrollIndex, thiz.currentY);
+                thiz.timer.stop();
+            } else {
+                //有加速度
+                //当前滚动回调的次数不再增加,则可以认为加速度滚动停止了
+                if (thiz.flingY === thiz.currentY) {
+                    //当加速度运动停止时
+                    thiz.onScrollEnd(scrollIndex, thiz.currentY);
+                    thiz.timer.stop();
+                } else {
+                    //当还在运动中,记录当前滚动回调的次数
+                    thiz.flingY = thiz.currentY;
+                }
+            }
+        });
+        this.timer.start();
+    }
 
     render() {
 
@@ -237,7 +264,7 @@ export default class ScrollPicker extends Component<Props> {
                                 <FlatList
                                     style={{flex: 1}}
                                     ref={(c) => {
-                                        this.scrollers[scrollIndex] = c;
+                                        this.scrollerList[scrollIndex] = c;
                                     }}
 
                                     extraData={this.state}
@@ -246,22 +273,16 @@ export default class ScrollPicker extends Component<Props> {
                                     showsVerticalScrollIndicator={false}
                                     getItemLayout={this.getItemLayout}
                                     initialNumToRender={list[scrollIndex].length}
-                                    onScroll={() => {
-                                        this.scrollCount++;
+                                    onScroll={(e) => {
+                                        this.currentY = e.nativeEvent.contentOffset.y;
                                     }}
                                     onMomentumScrollEnd={(e) => {
-                                        this.onScroll(scrollIndex, e.nativeEvent.contentOffset.y);
+                                        this.onScrollEnd(scrollIndex, e.nativeEvent.contentOffset.y);
                                     }}
                                     onScrollEndDrag={(e) => {
                                         //此举为了确实手指抬起时是否有加速度滚动
-                                        let endScrollCount = this.scrollCount;
-                                        let thiz = this;
-                                        let height = e.nativeEvent.contentOffset.y;
-                                        setTimeout(() => {
-                                            if (endScrollCount === thiz.scrollCount) {
-                                                thiz.onScroll(scrollIndex, height);
-                                            }
-                                        }, 20);
+                                        let upY = e.nativeEvent.contentOffset.y;
+                                        this.handlerFlingEnd(scrollIndex, upY);
                                     }}
                                     renderItem={({item}) => this.renderItem(item)}
                                     horizontal={false} // 水平还是垂直
@@ -307,7 +328,6 @@ const styles = StyleSheet.create({
         textAlign: 'center',
     },
 
-
     indicator: {
         position: 'absolute',
         top: 0,
@@ -320,5 +340,4 @@ const styles = StyleSheet.create({
     indicatorMask: {
         backgroundColor: 'rgba(255, 255, 255, 0.75)',
     },
-
 });
