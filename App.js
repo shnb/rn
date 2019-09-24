@@ -8,7 +8,7 @@
 import React,{Component} from 'react';
 import {StyleSheet, ScrollView, Text, View,AppRegistry,} from 'react-native';
 import {Colors} from "./config/Colors";
-import SplitLine from "./compoment/SplitLine/SplitLine";
+import Divider from "./compoment/Divider/Divider";
 import Space from "./compoment/Space/Space";
 import Label from "./compoment/Label/Label";
 import Button from "./compoment/Button/Button";
@@ -115,13 +115,13 @@ export default class App extends BasePage<Props, State> {
                 <ToolBar title='RNBase演示' isBack={false}/>
                 <ScrollView style={{flex: 1}}>
                     <View style={styles.container}>
-                        {/*splitLine*/}
-                        <Text style={styles.title}>SplitLine演示:</Text>
+                        {/*Divider*/}
+                        <Text style={styles.title}>Divider演示:</Text>
                         <Text style={styles.desc}>ios风格的分割线</Text>
-                        <SplitLine backgroundColor={Colors.backgroundColor}/>
+                        <Divider backgroundColor={Colors.backgroundColor}/>
                         <Space height={16}/>
                         <Text style={styles.desc}>android风格的分割线</Text>
-                        <SplitLine enableMarginLeft={false}/>
+                        <Divider enableMarginLeft={false}/>
                         {/*space*/}
                         <Space height={40}/>
                         <Text style={styles.title}>Space演示:</Text>
