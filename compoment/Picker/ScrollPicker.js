@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {FlatList, StyleSheet, Text, View,} from 'react-native';
+import {FlatList, StyleSheet, Text, View, Platform} from 'react-native';
 import Timer from "../../function/Timer";
 
 type Props = {
@@ -164,7 +164,7 @@ export default class ScrollPicker extends Component<Props> {
 
         //滚动到对应的位置
         this.scrollerList[scrollIndex].scrollToOffset({
-            animated: true,
+            animated: Platform.OS !== 'ios',
             offset: newScrollHeight,
         });
         return newScrollHeight / targetItemHeight;
