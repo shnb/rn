@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {Image, Text, TouchableOpacity, View} from 'react-native';
 import Utils from "../../utils";
-import SplitLine from "../SplitLine/SplitLine";
+import Divider from "../Divider/Divider";
 
 type Props = {
     //是否有返回键
@@ -178,7 +178,7 @@ export default class ToolBar extends Component<Props, State> {
                         </TouchableOpacity>
                         : null}
                 </View>
-                <SplitLine enableMarginLeft={false}/>
+                <Divider enableMarginLeft={false}/>
             </View>
         );
     }

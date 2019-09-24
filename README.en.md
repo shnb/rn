@@ -48,7 +48,7 @@ git地址:git@172.31.13.131:mobile_rn/Collie.git
 
 - Space
 
-- SplitLine
+- Divider
 
 - StackLayout
 

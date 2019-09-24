@@ -2,7 +2,7 @@ import React from "react";
 import PopLayer from "../PopLayer/PopLayer";
 import PopLayerView from "../PopLayer/PopLayerView";
 import {StyleSheet, Text, TouchableOpacity} from "react-native";
-import SplitLine from "../SplitLine/SplitLine";
+import Divider from "../Divider/Divider";
 
 /**
  * 弹窗按钮,可根据剩余空间自动确定pop的位置
@@ -125,7 +125,7 @@ class PopMenuView extends PopLayerView<Props, State> {
         list.map((value, index) => {
             ret.push(this.renderMenuItem(value, index));
             if (index !== list.length) {
-                ret.push(<SplitLine key={index + 100} enableMarginLeft={false}/>)
+                ret.push(<Divider key={index + 100} enableMarginLeft={false}/>)
             }
         });
 

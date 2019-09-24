@@ -3,7 +3,7 @@ import Layer from "../Layer/Layer";
 import LayerView from "../Layer/LayerView";
 import {PixelRatio, StyleSheet, Text, TouchableOpacity, View} from "react-native";
 import {Colors as Color} from "../../config/Colors";
-import SplitLine from "../SplitLine/SplitLine";
+import Divider from "../Divider/Divider";
 
 /**
  * 通用的dialog
@@ -79,7 +79,7 @@ class DialogView extends LayerView<Props> {
             );
             ret.push(button);
             if (i !== buttons.length - 1) {
-                let splitLine = (
+                let Divider = (
                     <View
                         key={i + 100}
                         style={{
@@ -88,7 +88,7 @@ class DialogView extends LayerView<Props> {
                             backgroundColor: Color.lineColor
                         }}/>
                 );
-                ret.push(splitLine);
+                ret.push(Divider);
             }
         }
         return (
@@ -136,7 +136,7 @@ class DialogView extends LayerView<Props> {
                             marginBottom: 8,
                         }, contentStyle]}>{content + '\n'}</Text>
 
-                        {buttons && buttons.length > 0 && <SplitLine enableMarginLeft={false}/>}
+                        {buttons && buttons.length > 0 && <Divider enableMarginLeft={false}/>}
                         {this.renderButton()}
                     </View>
                 </View>
