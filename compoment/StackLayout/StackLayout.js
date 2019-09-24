@@ -18,7 +18,11 @@ export default class StackLayout extends Component {
         //如果hide===true的话则扔掉此view
         let filterChild = children.filter((element) => {
             let childProps = element.props;
-            return childProps && !childProps.hide;
+            if (childProps && childProps.style) {
+                return childProps && !childProps.style.hide;
+            } else {
+                return true;
+            }
         });
 
         return filterChild.map((element, index) => {
@@ -35,7 +39,7 @@ export default class StackLayout extends Component {
             //必须浮动
             style.position = 'absolute';
             //默认设置铺满
-            if (!style.left && !style.right && !style.top && !style.bottom) {
+            if (style.flex === 1) {
                 style.left = 0;
                 style.right = 0;
                 style.top = 0;
