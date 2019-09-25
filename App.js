@@ -102,6 +102,7 @@ export default class App extends BasePage<Props, State> {
                     alignItems: 'center',
                     backgroundColor: colors[i],
                 }}>
+
                 <Text>cell</Text>
             </View>
         })
@@ -181,12 +182,26 @@ export default class App extends BasePage<Props, State> {
                         {/*GridLayout*/}
                         <Text style={styles.title}>GridLayout演示:</Text>
                         <Text style={styles.desc}>网格布局组件</Text>
+                        <View style={{flexDirection:'row',flex:1}}>
+                            <View style={{flex:1,backgroundColor:'red'}}/>
+                            {/*<View style={{flex:1,backgroundColor:'green'}}/>*/}
+
+                            <GridLayout colNum={4}
+                                        columnSpace={17}
+                                        rowSpace={10}
+                                style={{flex:4}}>
+                                {this.renderGridCell()}
+                            </GridLayout>
+                        </View>
                         <GridLayout colNum={7}
-                                    columnSpace={17}
-                                    rowSpace={10}>
+                                    columnSpace={7}
+                                    rowSpace={10}
+                                    // style={{width:300}}
+
+                        >
+
                             {this.renderGridCell()}
                         </GridLayout>
-                        {/*Toast*/}
                         <Text style={styles.title}>Toast演示:</Text>
                         <Text style={styles.desc}>显示一个toast</Text>
                         <Button
