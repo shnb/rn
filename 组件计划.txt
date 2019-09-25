@@ -44,7 +44,7 @@
 	按钮组件
 21.PlaceHolderText 已完结
 	支持placeholder的文本组件
-22.SplitLine 已完结
+22.Divider 已完结
 	分隔线组件
 23.Space 已完结
 	支持高度的空闲组件

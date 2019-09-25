@@ -18,11 +18,11 @@ type Props = {
 /**
  * 分隔线
  */
-export default class SplitLine extends Component<Props> {
+export default class Divider extends Component<Props> {
     static defaultProps = {
         marginLeft: 16,
         lineColor: Colors.lineColor,
-        enableMarginLeft: true,
+        enableMarginLeft: false,
         backgroundColor: Colors.transparent,
         height: 1 / PixelRatio.get(),
     };

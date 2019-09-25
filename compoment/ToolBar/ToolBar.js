@@ -1,15 +1,15 @@
 import React, {Component} from 'react';
 import {Image, Text, TouchableOpacity, View} from 'react-native';
 import Utils from "../../utils";
-import SplitLine from "../SplitLine/SplitLine";
+import Divider from "../Divider/Divider";
 
 type Props = {
     //是否有返回键
-    isBack?: Boolean,
+    isBack?: boolean,
     //标题 可不传
-    title?:String;
+    title?:string;
     //右标题
-    menuTitle?: String;
+    menuTitle?: string;
     //右标题图片
     menuIcon?: any,
     //图片按钮的style
@@ -21,7 +21,7 @@ type Props = {
     //按钮事件
     menuAction?: Function,
     //是否中间元素强制居中
-    isCenter: Boolean,
+    isCenter: boolean,
     //标题的样式
     titleStyle?: {},
     //返回键的按钮
@@ -178,7 +178,7 @@ export default class ToolBar extends Component<Props, State> {
                         </TouchableOpacity>
                         : null}
                 </View>
-                <SplitLine enableMarginLeft={false}/>
+                <Divider enableMarginLeft={false}/>
             </View>
         );
     }
