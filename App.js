@@ -92,8 +92,8 @@ export default class App extends BasePage<Props, State> {
     }
 
     renderGridCell() {
-        let colors = utils.getRGBArray(50);
-        return utils.range(50).map((_, i,) => {
+        let colors = utils.getRGBArray(20);
+        return utils.range(20).map((_, i,) => {
             return <View
                 key={i}
                 style={{
@@ -102,7 +102,6 @@ export default class App extends BasePage<Props, State> {
                     alignItems: 'center',
                     backgroundColor: colors[i],
                 }}>
-
                 <Text>cell</Text>
             </View>
         })
@@ -182,28 +181,10 @@ export default class App extends BasePage<Props, State> {
                         {/*GridLayout*/}
                         <Text style={styles.title}>GridLayout演示:</Text>
                         <Text style={styles.desc}>网格布局组件</Text>
-                        <View style={{flexDirection:'row',flex:1}}>
-                            <View style={{flex:1.33,backgroundColor:'red'}}/>
-                            <View style={{flex:3.111,backgroundColor:'green'}}/>
-                            <View style={{flex:3.111,backgroundColor:'blue',height:200}}/>
-                            <View style={{flex:3.111,backgroundColor:'blue',height:200}}/>
-
-                            {/*<GridLayout colNum={5}*/}
-                            {/*            columnSpace={17}*/}
-                            {/*            rowSpace={10}*/}
-                            {/*    style={{flex:3.111}}>*/}
-                            {/*    {this.renderGridCell()}*/}
-                            {/*</GridLayout>*/}
-                        </View>
-                        <GridLayout colNum={7}
-                                    columnSpace={7}
-                                    rowSpace={10}
-                                    // style={{width:300}}
-
-                        >
-
+                        <GridLayout colNum={11}>
                             {this.renderGridCell()}
                         </GridLayout>
+                        {/*Toast*/}
                         <Text style={styles.title}>Toast演示:</Text>
                         <Text style={styles.desc}>显示一个toast</Text>
                         <Button
@@ -472,14 +453,6 @@ export default class App extends BasePage<Props, State> {
                                         primaryColor: '#0c91ff',
                                         headerImage: {uri: 'http://d-pic-image.yesky.com/220x165/uploadImages/2018/180/36/F569WN59VEL9.jpg'}
                                     });
-                            }}/>
-                        <Space height={40}/>
-                        <Text style={styles.title}>演示:自定义键盘</Text>
-                        <Text style={styles.desc}>keyboard</Text>
-                        <Button
-                            text='进入自定义键盘页面'
-                            onPress={() => {
-                                this.navigate('NumberPayKeyboardPage');
                             }}/>
                         <Space height={40}/>
                         <Space height={300}/>
