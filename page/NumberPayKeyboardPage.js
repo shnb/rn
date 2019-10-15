@@ -4,7 +4,7 @@ import {StyleSheet, Text, View} from 'react-native';
 import Space from "../compoment/Space/Space";
 import utils from "../utils";
 import ToolBar from "../compoment/ToolBar/ToolBar";
-import NumberPayKeyboard, {KEYBOARD_BACKGROUND_COLOR} from "../compoment/Keyboard/NumberPayKeyboard";
+import NumberPayKeyboard from "../compoment/Keyboard/NumberPayKeyboard";
 
 
 export default class LoadingPage extends BasePage {
@@ -41,13 +41,11 @@ export default class LoadingPage extends BasePage {
                 <View style={{flexDirection: 'row', flex: 1, alignItems: 'center',}}>
                     <Text style={styles.text}>{this.state.password}</Text>
                 </View>
-                <View style={styles.keyboard}>
-                    <NumberPayKeyboard
-                        style={{}}
-                        touchNumber={(number => {
+                <NumberPayKeyboard
+                    style={styles.keyboard}
+                    touchNumber={(number => {
                         this._onPressTouchable(number);
                     })}/>
-                </View>
             </View>
         );
     }
@@ -68,6 +66,6 @@ const styles = StyleSheet.create({
         left: 0,
         right: 0,
         bottom: 0,
-        backgroundColor: KEYBOARD_BACKGROUND_COLOR
+        backgroundColor: '#E9EAEB'
     },
 });

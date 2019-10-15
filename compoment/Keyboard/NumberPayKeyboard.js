@@ -9,7 +9,6 @@ import util from "../../utils";
 
 const keyBoardRow = 3;
 const keyboardColumn = 4;
-export const KEYBOARD_BACKGROUND_COLOR = '#E9EAEB';
 type Props = {
     //点击键盘按钮的回调
     touchNumber: Function<string>,
@@ -20,7 +19,7 @@ export default class NumberPayKeyboard extends Component<Props> {
 
     static defaultProps = {
         touchNumber: null,
-        style:{}
+        style:{backgroundColor: '#E9EAEB'}
     };
 
     constructor(props) {
@@ -71,12 +70,13 @@ export default class NumberPayKeyboard extends Component<Props> {
 
     render() {
         let {style} = this.props;
+        let {backgroundColor} = style;
         return (
             <View style={style}>
                 <View style={{marginBottom:util.isIphoneX ? 20:6}}>
                     {this._renderKeyboard()}
                 </View>
-                <View style={styles.bottomView}/>
+                <View style={[styles.bottomView,{backgroundColor}]}/>
             </View>
         );
     }
@@ -123,7 +123,6 @@ const styles = StyleSheet.create({
     bottomView: {
         width: util.screenWidth,
         height: util.isIphoneX ? 20:6,
-        backgroundColor: KEYBOARD_BACKGROUND_COLOR,
         position: 'absolute',
         bottom: 0,
     },
