@@ -37,6 +37,7 @@ export default class GridLayout extends Component<Props> {
         super(props);
     }
 
+
     onLayout(e) {
         this.width = e.nativeEvent.layout.width;
         this.extraPxSmall = this.width % 1;
@@ -51,6 +52,7 @@ export default class GridLayout extends Component<Props> {
     render() {
 
         let {style, colNum, columnSpace, rowSpace} = this.props;
+
         let {width} = style;
         width = width === undefined ? this.width : width; //如果外界有设置style.width 则取外界设置的，如果没有设置取onLayout算出来的值.
         console.log("render this.width = ", width);
@@ -72,15 +74,18 @@ export default class GridLayout extends Component<Props> {
             }
             childProps.style = {...childProps.style};
 
+            // return  React.createElement('View',null,...childProps);
+
+
             if ((index % colNum) !== 0) {
                 childProps.style.marginLeft = columnSpace;
             }
             childProps.style.marginBottom = rowSpace;
             let shouldAddOnePx = ((index % colNum) <= (extraPx - 1)) ? 1 : 0;
-            let shouldAddExtraSmallPx = index % colNum === 0 ? this.extraPxSmall : 0;
-            childProps.style.width = averageWidth + shouldAddOnePx + shouldAddExtraSmallPx * 0.5;
-            console.log("childProps.style.width  = ",childProps.style.width,index);
+            let shouldAddExtraSmallPx = index % colNum === 0 ? this.extraPxSmall * 0.5 : 0;
+            childProps.style.width = averageWidth + shouldAddOnePx + shouldAddExtraSmallPx;
             // childProps.style.flex = 1;
+            console.log("childProps.style.width  = ",childProps.style.width,index);
             return React.cloneElement(element, {
                 ...childProps, key: index
             });
@@ -99,5 +104,6 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         flexWrap: 'wrap',
         flex: 1,
+        backgroundColor:'yellow'
     }
 });
