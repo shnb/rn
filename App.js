@@ -479,7 +479,7 @@ export default class App extends BasePage<Props, State> {
                         <Button
                             text='进入自定义键盘页面'
                             onPress={() => {
-                                this.navigate('KeyboardPage');
+                                this.navigate('NumberPayKeyboardPage');
                             }}/>
                         <Space height={40}/>
                         <Space height={300}/>

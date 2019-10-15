@@ -13,11 +13,14 @@ export const KEYBOARD_BACKGROUND_COLOR = '#E9EAEB';
 type Props = {
     //点击键盘按钮的回调
     touchNumber: Function<string>,
+    //外界可以通过style给键盘内部设置样式
+    style?:Object
 }
-export default class Keyboard extends Component<Props> {
+export default class NumberPayKeyboard extends Component<Props> {
 
     static defaultProps = {
-        touchNumber: null
+        touchNumber: null,
+        style:{}
     };
 
     constructor(props) {
@@ -67,10 +70,14 @@ export default class Keyboard extends Component<Props> {
     }
 
     render() {
+        let {style} = this.props;
         return (
-            <Fragment>
-                {this._renderKeyboard()}
-            </Fragment>
+            <View style={style}>
+                <View style={{marginBottom:util.isIphoneX ? 20:6}}>
+                    {this._renderKeyboard()}
+                </View>
+                <View style={styles.bottomView}/>
+            </View>
         );
     }
 }
@@ -112,5 +119,12 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         textAlignVertical: 'center',
         color: '#444444',
-    }
+    },
+    bottomView: {
+        width: util.screenWidth,
+        height: util.isIphoneX ? 20:6,
+        backgroundColor: KEYBOARD_BACKGROUND_COLOR,
+        position: 'absolute',
+        bottom: 0,
+    },
 });
