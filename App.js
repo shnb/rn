@@ -92,8 +92,8 @@ export default class App extends BasePage<Props, State> {
     }
 
     renderGridCell() {
-        let colors = utils.getRGBArray(10);
-        return utils.range(11).map((_, i,) => {
+        let colors = utils.getRGBArray(20);
+        return utils.range(20).map((_, i,) => {
             return <View
                 key={i}
                 style={{
@@ -181,7 +181,7 @@ export default class App extends BasePage<Props, State> {
                         {/*GridLayout*/}
                         <Text style={styles.title}>GridLayout演示:</Text>
                         <Text style={styles.desc}>网格布局组件</Text>
-                        <GridLayout colNum={4}>
+                        <GridLayout colNum={11}>
                             {this.renderGridCell()}
                         </GridLayout>
                         {/*Toast*/}
