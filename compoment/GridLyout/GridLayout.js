@@ -9,8 +9,10 @@ type Props = {
     colNum: number,
     //宽度
     width?: number,
-    rowSpace: number,
-    columnSpace: number,
+    //行空隙
+    rowSpace?: number,
+    //列空隙
+    columnSpace?: number,
 };
 /**
  * 网格布局组件
