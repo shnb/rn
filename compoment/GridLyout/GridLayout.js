@@ -6,9 +6,11 @@ type Props = {
     //容器的style
     style?: any,
     //列数
-    colNum: Number;
+    colNum: number,
     //宽度
-    width?: Number
+    width?: number,
+    rowSpace: number,
+    columnSpace: number,
 };
 /**
  * 网格布局组件
@@ -21,15 +23,18 @@ export default class GridLayout extends Component<Props> {
         style: {},
         colNum: 2,
         width: utils.screenWidth,
+        rowSpace: 0,
+        columnSpace: 0,
     };
 
     constructor(props: Object) {
         super(props);
     }
 
-    renderColumn(cells: Array) {
+    renderColumn(overspread, cells: Array) {
         let colNum: number = this.props.colNum;
         let width: number = this.props.width;
+        let rowSpace: number = this.props.rowSpace;
         return cells.map((element, index) => {
             let childProps = element.props;
 
@@ -39,12 +44,20 @@ export default class GridLayout extends Component<Props> {
             if (childProps.style == null) {
                 childProps.style = {};
             }
-            if (cells.length < colNum) {
-                //不满一行
-                childProps.style.width = width / colNum;
+            if (rowSpace > 0) {
+                let realWidth = width - (rowSpace * (colNum - 1));
+                childProps.style.width = realWidth / colNum;
+                if (!overspread) {
+                    childProps.style.marginRight = rowSpace;
+                }
             } else {
-                //满一行
-                childProps.style.flex = 1;
+                if (overspread) {
+                    //满一行
+                    childProps.style.flex = 1;
+                } else {
+                    //不满一行
+                    childProps.style.width = width / colNum;
+                }
             }
             return React.cloneElement(element, {...childProps, key: index});
         });
@@ -54,6 +67,12 @@ export default class GridLayout extends Component<Props> {
         let temp = [];
         let children: Array = this.props.children;
         let colNum: number = this.props.colNum;
+        let columnSpace: number = this.props.columnSpace;
+
+        if (!(children instanceof Array)) {
+            if (children) children = [children];
+            else children = [];
+        }
         for (let i = 0; i < row; i++) {
             let begin = i * colNum;
             let end = i * colNum + colNum;
@@ -61,8 +80,16 @@ export default class GridLayout extends Component<Props> {
                 end = children.length;
             }
             let cells = children.slice(begin, end);
-            temp.push(<View key={i + children.length} style={{width: '100%', flexDirection: 'row'}}>
-                {this.renderColumn(cells)}
+            let overspread = cells.length === colNum;
+            let isLast = i === row - 1;
+            temp.push(<View key={i + children.length}
+                            style={{
+                                width: '100%',
+                                flexDirection: 'row',
+                                marginBottom: isLast ? 0 : columnSpace,
+                                justifyContent: overspread ? 'space-between' : 'flex-start'
+                            }}>
+                {this.renderColumn(overspread, cells)}
             </View>)
         }
         return temp;
@@ -70,7 +97,7 @@ export default class GridLayout extends Component<Props> {
 
     render() {
         let {style, colNum, children} = this.props;
-        let row = Math.round(children.length / colNum);
+        let row = Math.ceil(children.length / colNum);
         return (
             <View style={[styles.container, {...style}]}>
                 {this.renderRow(row)}
