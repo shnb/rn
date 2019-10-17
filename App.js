@@ -5,8 +5,8 @@
  * @format
  */
 
-import React,{Component} from 'react';
-import {StyleSheet, ScrollView, Text, View,AppRegistry,} from 'react-native';
+import React, {Component} from 'react';
+import {StyleSheet, ScrollView, Text, View, AppRegistry,} from 'react-native';
 import {Colors} from "./config/Colors";
 import Divider from "./compoment/Divider/Divider";
 import Space from "./compoment/Space/Space";
@@ -91,9 +91,9 @@ export default class App extends BasePage<Props, State> {
         dismissKeyboard();
     }
 
-    renderGridCell() {
-        let colors = utils.getRGBArray(20);
-        return utils.range(20).map((_, i,) => {
+    renderGridCell(num) {
+        let colors = utils.getRGBArray(num);
+        return utils.range(num).map((_, i,) => {
             return <View
                 key={i}
                 style={{
@@ -181,8 +181,8 @@ export default class App extends BasePage<Props, State> {
                         {/*GridLayout*/}
                         <Text style={styles.title}>GridLayout演示:</Text>
                         <Text style={styles.desc}>网格布局组件</Text>
-                        <GridLayout colNum={11}>
-                            {this.renderGridCell()}
+                        <GridLayout colNum={4} rowSpace={6} columnSpace={12}>
+                            {this.renderGridCell(20)}
                         </GridLayout>
                         {/*Toast*/}
                         <Text style={styles.title}>Toast演示:</Text>
