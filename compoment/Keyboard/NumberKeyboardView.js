@@ -1,14 +1,13 @@
-import React, {Component, Fragment} from "react";
+import React, {Component} from "react";
 import {
     View,
     Text,
     StyleSheet,
     TouchableOpacity,
 } from 'react-native';
-import util from "../../utils";
 
-const keyBoardRow = 3;
-const keyboardColumn = 4;
+const KEYBOARD_ROW = 3;
+const KEYBOARD_COLUMN = 4;
 type Props = {
     //点击键盘按钮的回调
     touchNumber: Function<string>,
@@ -45,7 +44,7 @@ export default class NumberKeyboardView extends Component<Props> {
             return items;
         }
         //前三行普通处理
-        for (let i = 0; i < keyBoardRow; i++) {
+        for (let i = 0; i < KEYBOARD_ROW; i++) {
             let title = (i + 1) + (column * 3);
             items.push(<TouchableOpacity key={title} style={[styles.touchStyle, styles.shadow]} onPress={() => {
                 this.props.touchNumber && this.props.touchNumber(title);
@@ -58,7 +57,7 @@ export default class NumberKeyboardView extends Component<Props> {
 
     _renderKeyboard() {
         let itemsRow = [];
-        for (let i = 0; i < keyboardColumn; i++) {
+        for (let i = 0; i < KEYBOARD_COLUMN; i++) {
             itemsRow.push(<View key={i} style={[styles.keyboardRow, i === 3 ? {marginBottom:5} : {}]}>
                     {this._renderKeyboardRow(i)}
                 </View>);

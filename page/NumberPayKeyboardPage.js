@@ -7,7 +7,7 @@ import ToolBar from "../compoment/ToolBar/ToolBar";
 import NumberKeyboardView from "../compoment/Keyboard/NumberKeyboardView";
 
 
-export default class LoadingPage extends BasePage {
+export default class NumberPayKeyboardPage extends BasePage {
     constructor(props) {
         super(props);
         this.state = {
@@ -16,7 +16,6 @@ export default class LoadingPage extends BasePage {
     }
 
     _onPressTouchable = (num) => {
-        console.log("num = ", num);
         let temp = this.state.password;
         if (num === 'X') {
             temp = temp.substr(0, temp.length - 1);
