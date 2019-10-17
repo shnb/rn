@@ -5,11 +5,11 @@ import Divider from "../Divider/Divider";
 
 type Props = {
     //是否有返回键
-    isBack?: Boolean,
+    isBack?: boolean,
     //标题 可不传
-    title?:String;
+    title?:string;
     //右标题
-    menuTitle?: String;
+    menuTitle?: string;
     //右标题图片
     menuIcon?: any,
     //图片按钮的style
@@ -21,7 +21,7 @@ type Props = {
     //按钮事件
     menuAction?: Function,
     //是否中间元素强制居中
-    isCenter: Boolean,
+    isCenter: boolean,
     //标题的样式
     titleStyle?: {},
     //返回键的按钮
