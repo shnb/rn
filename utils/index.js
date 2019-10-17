@@ -2,7 +2,7 @@ import {StatusBar, Dimensions, Platform} from "react-native";
 
 const screenWidth = Dimensions.get('window').width;
 const screenHeight = Dimensions.get('window').height;
-const isIphoneX = (Platform.OS === 'ios' && screenHeight === 812);
+const isIphoneX = (Platform.OS === 'ios' && screenHeight >= 812);
 // 计算 状态栏、头部 高度
 const headerBodyHeight = 44; // iOS 设计规范定义
 let statusHeight = (Platform.OS === 'ios') ? (isIphoneX ? 44 : 20) : (StatusBar.currentHeight);

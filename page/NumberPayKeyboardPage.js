@@ -4,7 +4,7 @@ import {StyleSheet, Text, View} from 'react-native';
 import Space from "../compoment/Space/Space";
 import utils from "../utils";
 import ToolBar from "../compoment/ToolBar/ToolBar";
-import NumberPayKeyboard from "../compoment/Keyboard/NumberPayKeyboard";
+import NumberKeyboardView from "../compoment/Keyboard/NumberKeyboardView";
 
 
 export default class LoadingPage extends BasePage {
@@ -19,9 +19,8 @@ export default class LoadingPage extends BasePage {
         console.log("num = ", num);
         let temp = this.state.password;
         if (num === 'X') {
-           temp  = temp.substr(0, temp.length - 1);
-        }
-        else {
+            temp = temp.substr(0, temp.length - 1);
+        } else {
             temp = this.state.password + num;
         }
         this.setState({
@@ -41,7 +40,7 @@ export default class LoadingPage extends BasePage {
                 <View style={{flexDirection: 'row', flex: 1, alignItems: 'center',}}>
                     <Text style={styles.text}>{this.state.password}</Text>
                 </View>
-                <NumberPayKeyboard
+                <NumberKeyboardView
                     style={styles.keyboard}
                     touchNumber={(number => {
                         this._onPressTouchable(number);
@@ -52,10 +51,10 @@ export default class LoadingPage extends BasePage {
 }
 
 const styles = StyleSheet.create({
-    text:{
-        fontSize:20,
+    text: {
+        fontSize: 20,
         height: 60,
-        lineHeight:60,
+        lineHeight: 60,
         width: '100%',
         backgroundColor: 'green',
         alignItems: 'center',
@@ -65,7 +64,7 @@ const styles = StyleSheet.create({
         position: 'absolute',
         left: 0,
         right: 0,
-        bottom: 0,
+        bottom: utils.isIphoneX ? 20 : 6,
         backgroundColor: '#E9EAEB'
     },
 });

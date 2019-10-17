@@ -455,6 +455,16 @@ export default class App extends BasePage<Props, State> {
                                     });
                             }}/>
                         <Space height={40}/>
+
+                        <Text style={styles.title}>演示:自定义键盘</Text>
+                        <Text style={styles.desc}>keyboard</Text>
+                        <Button
+                            text='进入自定义键盘页面'
+                            onPress={() => {
+                                this.navigate('NumberPayKeyboardPage');
+                            }}/>
+                        <Space height={40}/>
+
                         <Space height={300}/>
                     </View>
 
