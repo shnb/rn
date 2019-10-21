@@ -2,17 +2,12 @@
  * @format
  */
 import React, {Component, PureComponent} from "react";
-import {StyleSheet, AppRegistry, DeviceEventEmitter, View} from 'react-native';
+import {StyleSheet, View} from 'react-native';
 import PropTypes from 'prop-types';
 import LayerView from './LayerView'
 
 
 let keyValue: number = 0;
-
-const addLayer: string = 'addLayer';
-const updateLayer: string = 'updateLayer';
-const removeLayer: string = 'removeLayer';
-const removeAllLayer: string = 'removeAllLayer';
 
 type LayerWrapper = { key: number, layer?: LayerView, ref?: LayerView };
 type State = {
@@ -27,26 +22,31 @@ type State = {
  * 当有多级的LayerManager时,则新的弹出层在最上层的LayerManager容器中
  */
 export default class LayerManager extends Component<any, State> {
+    //根实例对象
+    static _rootLayerManager;
 
     static add(layerWrapper: LayerWrapper, root = false): number {
         let key = ++keyValue;
         layerWrapper.key = key;
-        DeviceEventEmitter.emit(addLayer, layerWrapper, root);
+        LayerManager._getRealManager(root).add(layerWrapper);
         return key;
     }
 
     static update(key: number, data: {} = {}, root = false) {
-        DeviceEventEmitter.emit(updateLayer, {key}, data, root);
+        LayerManager._getRealManager(root).update({key}, data);
     }
 
     static remove(key: number, root = false) {
-        DeviceEventEmitter.emit(removeLayer, {key}, root);
+        LayerManager._getRealManager(root).remove({key});
     }
 
     static removeAll(root = false) {
-        DeviceEventEmitter.emit(removeAllLayer, {}, root);
+        LayerManager._getRealManager(root).removeAll();
     }
 
+    static _getRealManager(root) {
+        return LayerManager._rootLayerManager.getRealManager(root);
+    }
 
     constructor(props) {
         super(props);
@@ -61,14 +61,14 @@ export default class LayerManager extends Component<any, State> {
 
     //react 用于父子间组件通信
     static contextTypes = {
-        registerLayerManager: PropTypes.oneOfType(PropTypes.fun, undefined),
-        unregisterLayerManager: PropTypes.oneOfType(PropTypes.fun, undefined),
+        registerLayerManager: PropTypes.func,
+        unregisterLayerManager: PropTypes.func,
     };
 
     //react 用于父子间组件通信
     static childContextTypes = {
-        registerLayerManager: PropTypes.oneOfType(PropTypes.fun, undefined),
-        unregisterLayerManager: PropTypes.oneOfType(PropTypes.fun, undefined),
+        registerLayerManager: PropTypes.func,
+        unregisterLayerManager: PropTypes.func,
     };
 
     /**
@@ -98,14 +98,6 @@ export default class LayerManager extends Component<any, State> {
     }
 
     /**
-     * get 方法
-     * @returns {LayerManager} 栈顶的LayerManager实例
-     */
-    get manager(): LayerManager {
-        return this.managers.length > 0 ? this.managers[this.managers.length - 1] : this;
-    }
-
-    /**
      * 注册监听
      * 栈底时事件注册给自己,向栈顶回调事件
      */
@@ -115,10 +107,7 @@ export default class LayerManager extends Component<any, State> {
             registerLayerManager(this);
             return;
         }
-        DeviceEventEmitter.addListener(addLayer, (layerWrapper, root) => this.getRealManager(root).add(layerWrapper));
-        DeviceEventEmitter.addListener(updateLayer, (layerWrapper, data, root) => this.getRealManager(root).update(layerWrapper, data));
-        DeviceEventEmitter.addListener(removeLayer, (layerWrapper, root) => this.getRealManager(root).remove(layerWrapper));
-        DeviceEventEmitter.addListener(removeAllLayer, (layerWrapper, root) => this.getRealManager(root).removeAll());
+        LayerManager._rootLayerManager = this;
     }
 
     /**
@@ -132,7 +121,7 @@ export default class LayerManager extends Component<any, State> {
         if (root) {
             return this;
         } else {
-            return this.manager;
+            return this.managers.length > 0 ? this.managers[this.managers.length - 1] : this;
         }
     }
 
@@ -146,10 +135,7 @@ export default class LayerManager extends Component<any, State> {
             unregisterLayerManager(this);
             return;
         }
-
-        DeviceEventEmitter.removeAllListeners(addLayer);
-        DeviceEventEmitter.removeAllListeners(removeLayer);
-        DeviceEventEmitter.removeAllListeners(removeAllLayer);
+        LayerManager._rootLayerManager = null;
     }
 
     /**
