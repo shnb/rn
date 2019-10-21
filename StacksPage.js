@@ -7,6 +7,8 @@ import StackLayoutPage from "./page/StackLayoutPage";
 import ToolBarPage from "./page/ToolBarPage";
 import SwiperPage from "./page/SwiperPage";
 import LoadingPage from "./page/LoadingPage";
+import NumberPayKeyboardPage from "./page/NumberPayKeyboardPage";
+
 
 const StacksPage = createStackNavigator({
 
@@ -36,6 +38,12 @@ const StacksPage = createStackNavigator({
     },
     LoadingPage: {
         screen: LoadingPage,
+        navigationOptions: {
+            header: null
+        }
+    },
+    NumberPayKeyboardPage: {
+        screen: NumberPayKeyboardPage,
         navigationOptions: {
             header: null
         }
