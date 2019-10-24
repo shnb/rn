@@ -195,9 +195,9 @@ export default class LayerManager extends Component<any, State> {
                 </RealDom>
                 {layers.map((item) => {
                     return (
-                        <View key={'layerManager' + item.key} style={styles.layer} pointerEvents='box-none'>
+                        <LayerRoot key={'layerManager' + item.key} style={styles.layer} pointerEvents='box-none'>
                             {item.layer}
-                        </View>
+                        </LayerRoot>
                     );
                 })}
             </View>
@@ -224,6 +224,16 @@ class RealDom extends PureComponent {
     render() {
         return (
             <View style={{flex: 1}}>
+                {this.props.children}
+            </View>
+        );
+    }
+}
+
+class LayerRoot extends PureComponent {
+    render() {
+        return (
+            <View {...this.props}>
                 {this.props.children}
             </View>
         );
