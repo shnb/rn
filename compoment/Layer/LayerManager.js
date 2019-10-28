@@ -230,6 +230,10 @@ class RealDom extends PureComponent {
     }
 }
 
+/**
+ * 用户Layer和Layer之间刷新隔离
+ * 例如添加某个Layer的情况下,其他的Layer不会刷新
+ */
 class LayerRoot extends PureComponent {
     render() {
         return (

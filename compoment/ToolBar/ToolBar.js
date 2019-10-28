@@ -37,9 +37,9 @@ type Props = {
 };
 type State = {
     //标题的左边距
-    tittleMarginLeft: Number,
+    titleMarginLeft: Number,
     //标题的右边距
-    tittleMarginRight: Number,
+    titleMarginRight: Number,
 }
 /**
  * 通用的标题栏
@@ -61,9 +61,16 @@ export default class ToolBar extends Component<Props, State> {
     constructor(props: Object) {
         super(props);
         this.state = {
-            tittleMarginLeft: 0,
-            tittleMarginRight: 16
+            titleMarginLeft: 0,
+            titleMarginRight: 16
         }
+    }
+
+    componentWillReceiveProps(nextProps: Readonly<Props>, nextContext: any): void {
+        this.setState({
+            titleMarginLeft: 0,
+            titleMarginRight: 0
+        })
     }
 
     /**
@@ -79,11 +86,13 @@ export default class ToolBar extends Component<Props, State> {
             if (Math.abs(diff) > 16) {
                 if (diff > 0) {
                     this.setState({
-                        tittleMarginLeft: diff,
+                        titleMarginLeft: diff,
+                        titleMarginRight: 0,
                     })
                 } else {
                     this.setState({
-                        tittleMarginRight: -diff,
+                        titleMarginLeft: 0,
+                        titleMarginRight: -diff,
                     })
                 }
             }
@@ -128,8 +137,8 @@ export default class ToolBar extends Component<Props, State> {
                             flex: 1,
                             justifyContent: 'center',
                             alignItems: 'center',
-                            marginLeft: this.state.tittleMarginLeft,
-                            marginRight: this.state.tittleMarginRight
+                            marginLeft: this.state.titleMarginLeft,
+                            marginRight: this.state.titleMarginRight
                         }}
                               onLayout={({nativeEvent: e}) => this.onTitleLayout(e)}>
                             <Text style={[{color: "#333333", fontSize: 18}, titleStyle]}>
@@ -140,7 +149,7 @@ export default class ToolBar extends Component<Props, State> {
                     {children ?
                         <View style={{
                             flex: 1,
-                            marginLeft: this.state.tittleMarginLeft,
+                            marginLeft: this.state.titleMarginLeft,
                             marginRight: 16
                         }}
                               onLayout={({nativeEvent: e}) => this.onTitleLayout(e)}>
