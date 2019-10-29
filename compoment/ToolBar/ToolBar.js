@@ -7,7 +7,7 @@ type Props = {
     //是否有返回键
     isBack?: boolean,
     //标题 可不传
-    title?:string;
+    title?: string;
     //右标题
     menuTitle?: string;
     //右标题图片
@@ -62,7 +62,7 @@ export default class ToolBar extends Component<Props, State> {
         super(props);
         this.state = {
             titleMarginLeft: 0,
-            titleMarginRight: 16
+            titleMarginRight: 0
         }
     }
 
@@ -107,6 +107,7 @@ export default class ToolBar extends Component<Props, State> {
                 <View style={[{
                     flexDirection: 'row',
                     alignItems: 'center',
+                    width: Utils.screenWidth,
                     height: Utils.headerBodyHeight,
                     backgroundColor: backgroundColor ? backgroundColor : "#fff"
                 }, style]}>

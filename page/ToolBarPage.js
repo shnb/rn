@@ -1,21 +1,23 @@
 import BasePage from "../compoment/Page/BasePage";
 import React from 'react';
 import {StyleSheet, Text, View} from 'react-native';
-import Toast from "../compoment/Toast/Toast";
 import Space from "../compoment/Space/Space";
 import SearchBar from "../compoment/SearchBar/SearchBar";
 import utils from "../utils";
 import ToolBar from "../compoment/ToolBar/ToolBar";
+import Button from "../compoment/Button/Button";
 
 export default class StackLayoutPage extends BasePage {
+    state = {menu: '删除你好好静静'};
 
     render() {
         return (
-            <View style={{flex: 1}}>
+            <View style={{flex: 1, alignItems: 'center'}}>
                 <Space height={utils.statusHeight} spaceColor='#fff'/>
                 <ToolBar
                     title='ToolBar演示'
                     isBack={true}
+                    menuTitle={this.state.menu}
                     navigation={this.props.navigation}
                 />
                 <Text style={styles.desc}>有返回键的标题栏</Text>
@@ -35,6 +37,12 @@ export default class StackLayoutPage extends BasePage {
                     <SearchBar placeholder='请输入商品'/>
                 </ToolBar>
                 <Space height={40}/>
+                <Button text='改变menu' onPress={() => {
+                    let menu = this.state.menu;
+                    this.setState({
+                        menu: menu ? null : '删除好静静'
+                    })
+                }}/>
             </View>
         );
     }
