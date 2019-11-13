@@ -1,32 +1,33 @@
-import Layer from "../Layer/Layer";
 import React from "react";
 import LayerView from "../Layer/LayerView";
 import {ActivityIndicator, StyleSheet, Text, View} from "react-native";
+import LayerEntity from "../Layer/LayerEntity";
 
 /**
  * 加载窗
  */
-export default class Loading extends Layer {
-    static key = -1;
+export default class Loading {
+    static layer: LayerEntity = null;
 
     /**
      * 显示一个加载窗
      * @param title
      */
     static show(title?: string) {
-        if (this.key !== -1) {
-            super.update(this.key, {title});
+        if (this.layer) {
+            this.layer.update({title});
         } else {
-            this.key = super.show(<LoadingView title={title}/>);
+            this.layer = LayerEntity.show(<LoadingView title={title}/>);
         }
     }
+
     /**
      * 隐藏加载窗
      */
     static hide() {
-        if (this.key !== -1) {
-            super.hide(this.key);
-            this.key = -1;
+        if (this.layer !== -1) {
+            this.layer.dismiss();
+            this.layer = null;
         }
     }
 }

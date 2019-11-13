@@ -1,20 +1,20 @@
 import React from "react";
-import Layer from "../Layer/Layer";
 import LayerView from "../Layer/LayerView";
 import {PixelRatio, StyleSheet, Text, TouchableOpacity, View} from "react-native";
 import {Colors as Color} from "../../config/Colors";
 import Divider from "../Divider/Divider";
+import LayerEntity from "../Layer/LayerEntity";
 
 /**
  * 通用的dialog
  */
-export default class Dialog extends Layer {
+export default class Dialog {
 
     static show(title: string,
                 content: string,
                 buttons: Array<{ text: string, style?: {}, onClick: Function }>,
                 options?: { dialogStyle?: {}, titleStyle?: {}, contentStyle?: {}, buttonStyle?: {} }) {
-        super.show(
+        LayerEntity.show(
             <DialogView
                 enableBack={false}
                 title={title}

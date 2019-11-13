@@ -301,9 +301,9 @@ export default class Loading extends Layer {
     /**
      * 隐藏加载窗
      */
-    static hide() {
+    static dismiss() {
         if (this.key !== -1) {
-            super.hide(this.key);
+            super.dismiss(this.key);
             this.key = -1;
         }
     }
@@ -386,7 +386,7 @@ Loading形式的弹窗
         setTimeout(() => {
             Loading.show('加载完毕');
             setTimeout(() => {
-                Loading.hide();
+                Loading.dismiss();
             }, 2000);
         }, 2000);
     }}/>
@@ -397,7 +397,7 @@ Loading形式的弹窗
 | 方法                  | 类型     | 介绍                   |
 | ------------------- | ------ | -------------------- |
 | show(title?:string) | static | 显示Loading,可选是否显示加载文本 |
-| hide()              | static | 去除Loading            |
+| dismiss()              | static | 去除Loading            |
 
 ### <a name="MoneyTextInput">MoneyTextInput</a>
 
@@ -722,14 +722,14 @@ PopMenu.show(this.btn, {
 <StackLayout style={{flex: 1}}>
     <TouchableOpacity onPress={() => {
         Toast.message('我是300x300');
-    }} hide style={{width: 300, height: 300, left: 0, top: 0, backgroundColor: '#e921e4'}}/>
+    }} dismiss style={{width: 300, height: 300, left: 0, top: 0, backgroundColor: '#e921e4'}}/>
     <TouchableOpacity onPress={() => {
         Toast.message('我是250x250');
     }} style={{width: 250, height: 250, left: 0, top: 0, backgroundColor: '#10e91f'}}/>
     <TouchableOpacity onPress={() => {
         Toast.message('我是200x200');
     }} style={{width: 200, height: 200, left: 0, top: 0, backgroundColor: '#0fd2e9'}}/>
-    <TouchableOpacity hide onPress={() => {
+    <TouchableOpacity dismiss onPress={() => {
         Toast.message('我是150x150');
     }} style={{width: 150, height: 150, left: 0, top: 0, backgroundColor: '#b4e912'}}/>
     <TouchableOpacity onPress={() => {

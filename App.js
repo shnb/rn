@@ -296,11 +296,17 @@ export default class App extends BasePage<Props, State> {
                             }}
                             text='试一试'
                             onPress={() => {
-                                PopMenu.show(this.btn, {
-                                    list: ['python', 'ruby', 'java', 'c++', 'php', 'kotlin', 'dart'],
-                                    onClick: (index, value) => Toast.message(value),
-                                    yOffset: -20,
-                                })
+                                this.btn.measure((x, y, width, height, pageX, pageY) => {
+                                        if (width !== 0) {
+                                            let bound = {width, height, x: pageX, y: pageY};
+                                            PopMenu.show(bound, {
+                                                list: ['python', 'ruby', 'java', 'c++', 'php', 'kotlin', 'dart'],
+                                                onClick: (index, value) => Toast.message(value),
+                                                yOffset: -20,
+                                            })
+                                        }
+                                    }
+                                )
                             }}/>
                         <Space height={40}/>
                         {/*Dialog*/}

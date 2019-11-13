@@ -1,15 +1,15 @@
 import React from "react";
-import PopLayer from "../PopLayer/PopLayer";
 import PopLayerView from "../PopLayer/PopLayerView";
 import {StyleSheet, Text, TouchableOpacity} from "react-native";
 import Divider from "../Divider/Divider";
+import LayerEntity from "../Layer/LayerEntity";
 
 /**
  * 弹窗按钮,可根据剩余空间自动确定pop的位置
  */
-export default class PopMenu extends PopLayer {
+export default class PopMenu {
 
-    static show(anchorView, data: {
+    static show(bound: { width: number, height: number, x: number, y: number }, data: {
         list: Array<string>,
         onClick: Function,
         popStyle?: any,
@@ -20,17 +20,15 @@ export default class PopMenu extends PopLayer {
         xOffset?: number,
         yOffset?: number
     }) {
-        this.measure(anchorView).then(bound => {
-            let key = super.show(
-                <PopMenuView
-                    bound={bound}
-                    {...data}
-                    onClick={(index, value) => {
-                        data && data.onClick && data.onClick(index, value);
-                    }}
-                />
-            );
-        });
+        LayerEntity.show(
+            <PopMenuView
+                bound={bound}
+                {...data}
+                onClick={(index, value) => {
+                    data && data.onClick && data.onClick(index, value);
+                }}
+            />
+        );
     }
 }
 
