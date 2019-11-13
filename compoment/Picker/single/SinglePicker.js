@@ -1,11 +1,11 @@
-import Layer from "../../Layer/Layer";
 import SinglePickerView from "./SinglePickerView";
 import React from "react";
+import LayerEntity from "../../Layer/LayerEntity";
 
-export default class SinglePicker extends Layer {
+export default class SinglePicker {
 
     static show(list, value, onResult) {
-        super.show(
+        LayerEntity.show(
             <SinglePickerView
                 list={list}
                 value={value}

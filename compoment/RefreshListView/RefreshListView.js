@@ -21,6 +21,8 @@ export const RefreshState = {
 };
 
 type Props = {
+    //是否允许统一刷新效果
+    enableGlobalLoading: boolean,
     //下拉刷新回调
     onRefresh: Function,
     //上拉加载更多回调
@@ -57,11 +59,24 @@ const LOADING_FAIL_TIPS = "加载失败，请确保网络连接正常，然后�
  */
 export default class RefreshListView extends PureComponent<Props> {
     static defaultProps = {
+        enableGlobalLoading: false,
         refreshState: RefreshState.IDLE,
     };
 
     constructor(props: Object) {
         super(props);
+        this.isPull = false;
+    }
+
+    componentWillReceiveProps(nextProps: Readonly<Props>, nextContext: any): void {
+        if (nextProps.refreshState !== RefreshState.REFRESHING) {
+            this.isPull = false;
+        }
+    }
+
+    onRefresh() {
+        this.isPull = true;
+        this.props.onRefresh();
     }
 
     onRetry = () => {
@@ -133,15 +148,17 @@ export default class RefreshListView extends PureComponent<Props> {
     };
 
     render() {
-        let {renderItem, data, ...rest} = this.props;
+        let {renderItem, data, enableGlobalLoading, ...rest} = this.props;
         let isFirstLoad = data === null || data === undefined || data.length === 0;
         return (
-            <StatusView status={this.props.refreshState} enableLoading={isFirstLoad} onRetry={this.onRetry} {...rest}>
+            <StatusView status={this.props.refreshState}
+                        enableLoading={isFirstLoad && enableGlobalLoading && !this.isPull}
+                        onRetry={this.onRetry} {...rest}>
                 <FlatList
                     ref={this.props.listRef}
                     data={this.props.data}
                     onEndReached={this.onEndReached}
-                    onRefresh={this.props.onRefresh}
+                    onRefresh={this.onRefresh.bind(this)}
                     refreshing={this.props.refreshState === RefreshState.REFRESHING}
                     ListFooterComponent={this.renderFooter}
                     onEndReachedThreshold={0.1}

@@ -4,18 +4,11 @@
 import React, {Component} from "react";
 import ReactNative, {Platform, StyleSheet, View} from 'react-native';
 
-type Props = {
-    style?: any,
-    //关闭的回调
-    onClose?: Function,
-    //是否允许返回
-    enableBack?: boolean,
-}
 /**
- * Layer真正的view
+ * 通用的弹窗基类
  * 此view为所有LayerView的基类
  */
-export default class LayerView extends Component<Props> {
+export default class LayerView extends Component {
 
     static defaultProps = {
         enableBack: true,

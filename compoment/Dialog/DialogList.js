@@ -1,19 +1,19 @@
 import React from "react";
-import Layer from "../Layer/Layer";
 import LayerView from "../Layer/LayerView";
 import {StyleSheet, Text, TouchableOpacity, View} from "react-native";
+import LayerEntity from "../Layer/LayerEntity";
 
 /**
  * 列表形式的dialog
  */
-export default class DialogList extends Layer {
+export default class DialogList {
     /**
      * 显示一个dialog
      * @param list 数据源
      * @param onClick 每一项数据源点击的会调
      */
     static show(list: Array<string>, onClick: Function) {
-        super.show(
+        LayerEntity.show(
             <DialogListView
                 list={list}
                 onClick={onClick}/>
@@ -48,7 +48,6 @@ class DialogListView extends LayerView<Props> {
     }
 
     renderContent() {
-        // noinspection JSUnresolvedVariable
         let list: Array = this.props.list;
         return (
             <View style={{flex: 1, justifyContent: 'center'}}>

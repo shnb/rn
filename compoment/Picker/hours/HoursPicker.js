@@ -1,11 +1,11 @@
-import Layer from "../../Layer/Layer";
 import React from "react";
 import HourPickerView from "./HourPickerView";
+import LayerEntity from "../../Layer/LayerEntity";
 
 /**
  * 时间选择器
  */
-export default class HoursPicker extends Layer {
+export default class HoursPicker {
 
     /**
      * @param startHour 默认显示的时间 00:30
@@ -13,7 +13,7 @@ export default class HoursPicker extends Layer {
      * @param onResult 选择后的回调
      */
     static show(startHour, endHour, onResult) {
-         super.show(
+        LayerEntity.show(
             <HourPickerView
                 startHour={startHour}
                 endHour={endHour}

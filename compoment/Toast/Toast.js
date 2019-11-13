@@ -1,7 +1,7 @@
-import Layer from "../Layer/Layer";
 import React from "react";
 import LayerView from "../Layer/LayerView";
 import {StyleSheet, Text, View} from "react-native";
+import LayerEntity from "../Layer/LayerEntity";
 
 type Duration = | 2000 | 3500;
 type Options = {
@@ -23,9 +23,9 @@ type Options = {
 /**
  * Toast操作类
  */
-export default class Toast extends Layer {
-    //layer的key
-    static key = -1;
+export default class Toast {
+    //layer
+    static layerEntity: LayerEntity = null;
     //toast消失的任务
     static dismissTask;
 
@@ -33,17 +33,16 @@ export default class Toast extends Layer {
      * 外部不可调用
      * @param options
      */
-    static show(options: Options) {
-
+    static _show(options: Options) {
         let {duration, ...others} = options;
 
         //如果当前已经有一个toast在显示,那么关闭它
-        if (this.key !== -1) {
-            super.update(this.key, {...others});
+        if (this.layerEntity) {
+            this.layerEntity.update({...others});
             this.startTimer(duration);
         } else {
             //显示toast
-            this.key = super.show(<ToastView enableBack={false} {...others}/>, true);
+            this.layerEntity = LayerEntity.show(<ToastView enableBack={false} {...others}/>);
             this.startTimer(duration);
         }
     }
@@ -61,15 +60,15 @@ export default class Toast extends Layer {
             duration = 2000;
         //开始消失计时器
         this.dismissTask = setTimeout(() => {
-            this.hide(this.key, true);
-            this.key = -1;
+            this.layerEntity.dismiss();
+            this.layerEntity = null;
             this.dismissTask = null;
         }, duration);
     }
 
     static message(message, options: Options = {}) {
         options.message = message;
-        this.show(options);
+        this._show(options);
     }
 }
 

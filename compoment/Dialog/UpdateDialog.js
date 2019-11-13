@@ -1,13 +1,12 @@
 import React from "react";
 import {StyleSheet, Text, TouchableOpacity, ScrollView, ImageBackground, Image, View} from "react-native";
-import Layer from "../Layer/Layer";
 import LayerView from "../Layer/LayerView";
+import LayerEntity from "../Layer/LayerEntity";
 
 /**
  * 更新弹窗
  */
-export default class UpdateDialog extends Layer {
-    // noinspection JSCheckFunctionSignatures
+export default class UpdateDialog {
     /**
      * @param version v1.0.2
      * @param force true
@@ -21,7 +20,7 @@ export default class UpdateDialog extends Layer {
                 onUpdateClick: Function,
                 style?: { primaryColor: string, headerImage: any },
     ) {
-        super.show(
+        LayerEntity.show(
             <UpdateDialogView
                 version={version}
                 force={force}
