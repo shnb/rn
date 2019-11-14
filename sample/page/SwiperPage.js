@@ -1,11 +1,7 @@
 import React from 'react';
 import {Image, View} from 'react-native';
-import {BasePage, Space, ToolBar} from "rn-collie";
+import {BasePage, Space, Swiper, ToolBar, Toast, IndicatorProgress, IndicatorDot} from "rn-collie";
 import utils from "rn-collie/utils";
-import Swiper from "rn-collie";
-import Toast from "rn-collie";
-import IndicatorProgress from "rn-collie";
-import IndicatorDot from "rn-collie";
 
 export default class SwiperPage extends BasePage {
 
@@ -49,9 +45,8 @@ export default class SwiperPage extends BasePage {
                     <IndicatorProgress process={this.state.process} sum={3} width={60} height={4}/>
                 </View>
                 <View style={{alignItems: 'center', marginTop: 8}}>
-                    <IndicatorDot selectIndex={this.state.process} sum={3} width={60} height={8}/>
+                    <IndicatorDot selectIndex={this.state.index} sum={3} width={60} height={8}/>
                 </View>
-            </View>
-        );
+            </View>);
     }
 }

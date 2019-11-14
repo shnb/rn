@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 import {
     View,
 } from 'react-native'
-import utils from "utils";
+import utils from "../../utils";
 
 type Props = {
     selectIndex: number,
