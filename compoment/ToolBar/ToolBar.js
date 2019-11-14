@@ -67,6 +67,9 @@ export default class ToolBar extends Component<Props, State> {
     }
 
     componentWillReceiveProps(nextProps: Readonly<Props>, nextContext: any): void {
+        if (nextProps.menuTitle === this.props.menuTitle) {
+            return;
+        }
         this.setState({
             titleMarginLeft: 0,
             titleMarginRight: 0
