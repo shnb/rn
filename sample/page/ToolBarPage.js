@@ -1,11 +1,7 @@
-import BasePage from "../compoment/Page/BasePage";
 import React from 'react';
 import {StyleSheet, Text, View} from 'react-native';
-import Space from "../compoment/Space/Space";
-import SearchBar from "../compoment/SearchBar/SearchBar";
-import utils from "../utils";
-import ToolBar from "../compoment/ToolBar/ToolBar";
-import Button from "../compoment/Button/Button";
+import utils from "rn-collie/utils";
+import {BasePage, Button, SearchBar, Space, ToolBar} from "rn-collie";
 
 export default class StackLayoutPage extends BasePage {
     state = {menu: '删除你好好静静'};
@@ -19,13 +15,12 @@ export default class StackLayoutPage extends BasePage {
                     isBack={true}
                     menuTitle={this.state.menu}
                     navigation={this.props.navigation}
-                />
+                    isCenter/>
                 <Text style={styles.desc}>有返回键的标题栏</Text>
                 <Space height={8}/>
                 <ToolBar
                     title='我有返回键'
-                    navigation={this.props.navigation}
-                />
+                    navigation={this.props.navigation}/>
                 <Space height={40}/>
 
 

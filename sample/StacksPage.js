@@ -1,13 +1,13 @@
 import {
     createStackNavigator
 } from 'react-navigation';
-import App from "./App";
 import StatusViewPage from "./page/StatusViewPage";
 import StackLayoutPage from "./page/StackLayoutPage";
 import ToolBarPage from "./page/ToolBarPage";
 import SwiperPage from "./page/SwiperPage";
 import LoadingPage from "./page/LoadingPage";
 import NumberPayKeyboardPage from "./page/NumberPayKeyboardPage";
+import App from "./App";
 
 
 const StacksPage = createStackNavigator({

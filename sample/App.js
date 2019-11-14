@@ -7,29 +7,31 @@
 
 import React, {Component} from 'react';
 import {StyleSheet, ScrollView, Text, View, AppRegistry,} from 'react-native';
-import {Colors} from "./config/Colors";
-import Divider from "./compoment/Divider/Divider";
-import Space from "./compoment/Space/Space";
-import Label from "./compoment/Label/Label";
-import Button from "./compoment/Button/Button";
-import GridLayout from "./compoment/GridLyout/GridLayout";
-import utils from "./utils";
-import Toast from "./compoment/Toast/Toast";
-import SinglePicker from "./compoment/Picker/single/SinglePicker";
-import DatePicker from "./compoment/Picker/date/DatePicker";
-import CityPicker from "./compoment/Picker/city/CityPicker";
-import HoursPicker from "./compoment/Picker/hours/HoursPicker";
-import BasePage from "./compoment/Page/BasePage";
-import ToolBar from "./compoment/ToolBar/ToolBar";
-import PopMenu from "./compoment/PopMenu/PopMenu";
-import Dialog from "./compoment/Dialog/Dialog";
-import DialogList from "./compoment/Dialog/DialogList";
-import SearchBar from "./compoment/SearchBar/SearchBar";
-import CheckBox from "./compoment/CheckBox/CheckBox";
-import MoneyTextInput from "./compoment/MoneyTextInput/MoneyTextInput";
-import {StatusImage} from "./compoment/StatusImage/StatusImage";
-import UpdateDialog from "./compoment/Dialog/UpdateDialog";
-import LayerManager from "./compoment/Layer/LayerManager";
+import {
+    BasePage,
+    Button,
+    Divider,
+    GridLayout,
+    Label,
+    LayerManager,
+    Space,
+    StatusImage,
+    Toast,
+    ToolBar,
+    SinglePicker,
+    DatePicker,
+    CityPicker,
+    HoursPicker,
+    PopMenu,
+    Dialog,
+    DialogList,
+    CheckBox,
+    MoneyTextInput,
+    UpdateDialog
+} from "rn-collie";
+import utils from "rn-collie/utils";
+import SearchBar from "rn-collie/compoment/SearchBar/SearchBar";
+import {Colors} from "rn-collie/config/Colors";
 
 const dismissKeyboard = require('dismissKeyboard');
 
@@ -137,8 +139,8 @@ export default class App extends BasePage<Props, State> {
                         <Text style={styles.title}>演示:StatusImage</Text>
                         <Text style={styles.desc}>StatusImage</Text>
                         <StatusImage
-                            loadingImage={require('./icons/image_loading.png')}
-                            errorImage={require('./icons/image_load_error.png')}
+                            loadingImage={require('./node_modules/rn-collie/icons/image_loading.png')}
+                            errorImage={require('./node_modules/rn-collie/icons/image_load_error.png')}
                             source={{uri: this.state.image}}
                             resizeMode='contain'
                             style={{

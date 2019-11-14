@@ -1,10 +1,8 @@
-import BasePage from "../compoment/Page/BasePage";
 import React from 'react';
 import {Image, View} from 'react-native';
-import Space from "../compoment/Space/Space";
-import utils from "../utils";
-import ToolBar from "../compoment/ToolBar/ToolBar";
-import Swiper from "../compoment/Swiper/Swiper";
+import {BasePage, Space, ToolBar} from "rn-collie";
+import utils from "rn-collie/utils";
+import Swiper from "rn-collie/compoment/Swiper/Swiper";
 
 export default class SwiperPage extends BasePage {
 
@@ -30,11 +28,11 @@ export default class SwiperPage extends BasePage {
                     width={utils.screenWidth}
                     height={238}>
                     <Image style={{width: utils.screenWidth, height: 238}} resizeMode='cover'
-                           source={require('../icons/swiper1.jpg')}/>
+                           source={require('../node_modules/rn-collie/icons/swiper1.jpg')}/>
                     <Image style={{width: utils.screenWidth, height: 238}} resizeMode='cover'
-                           source={require('../icons/swiper2.jpg')}/>
+                           source={require('../node_modules/rn-collie/icons/swiper2.jpg')}/>
                     <Image style={{width: utils.screenWidth, height: 238}} resizeMode='cover'
-                           source={require('../icons/swiper3.jpg')}/>
+                           source={require('../node_modules/rn-collie/icons/swiper3.jpg')}/>
                 </Swiper>
             </View>
         );

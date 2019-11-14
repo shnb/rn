@@ -1,11 +1,7 @@
-import BasePage from "../compoment/Page/BasePage";
 import React from 'react';
 import {StyleSheet, Text, View} from 'react-native';
-import Space from "../compoment/Space/Space";
-import utils from "../utils";
-import ToolBar from "../compoment/ToolBar/ToolBar";
-import Button from "../compoment/Button/Button";
-import Loading from "../compoment/Loading/Loading";
+import {BasePage, Button, Loading, Space, ToolBar} from "rn-collie";
+import utils from "rn-collie/utils";
 
 
 export default class LoadingPage extends BasePage {

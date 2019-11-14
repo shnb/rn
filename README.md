@@ -259,20 +259,17 @@ render(){
 
 Layer是所有弹窗的组件的基础
 由三个文件组成
-分别为Layer,LayerManager,LayerView
+分别为LayerEntity,LayerManager,LayerView
 
-    1.LayerManager作为LayerView的容器管理所有的LayerView, 同时根节点的LayerManager管理页面级的LayerManager
-    2.Layer通过发送事件的方式,通知LayerManager创建LayerView并显示.
-    3.LayerView作为具体显示的弹窗,需要子类去实现
+    1.LayerManager作为LayerEntity的容器管理所有的LayerEntity
+    2.LayerEntity通过LayerManager来添加到layer栈中.
+    3.LayerView是一个弹窗的基类,帮助快速构建layer,可不适用
 
 具体的使用形式请参考Loading,Toast组件
 
 目前提供三种基本功能:
 
     1. 创建并显示LayerView
-    
-        *可选择在root层创建,或者子页面创建,例如Toast就在root节点创建,所以Toast悬浮于整个App的上方,
-        *具体的子类实现层有权决定是否显示在root层还是子页面
     
     2. 更新当前已显示的LayerView,通过远程发送state的形似
     
