@@ -21,7 +21,7 @@ type Props = {
     //按钮事件
     menuAction?: Function,
     //是否中间元素强制居中
-    isCenter: boolean,
+    isCenter: ?boolean,
     //标题的样式
     titleStyle?: {},
     //返回键的按钮

@@ -1,11 +1,8 @@
-import BasePage from "../compoment/Page/BasePage";
 import React from 'react';
 import {View, TouchableOpacity} from 'react-native';
-import ToolBar from "../compoment/ToolBar/ToolBar";
-import Toast from "../compoment/Toast/Toast";
-import StackLayout from "../compoment/StackLayout/StackLayout";
-import Space from "../compoment/Space/Space";
-import utils from "../utils";
+import {BasePage, Space, StackLayout, Toast, ToolBar} from "rn-collie";
+import utils from "rn-collie/utils";
+
 
 export default class StackLayoutPage extends BasePage {
 

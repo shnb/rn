@@ -1,10 +1,8 @@
-import BasePage from "../compoment/Page/BasePage";
 import React from 'react';
 import {StyleSheet, Text, View} from 'react-native';
-import Space from "../compoment/Space/Space";
-import utils from "../utils";
-import ToolBar from "../compoment/ToolBar/ToolBar";
-import NumberKeyboardView from "../compoment/Keyboard/NumberKeyboardView";
+import {BasePage, NumberKeyboardView, Space, ToolBar} from "rn-collie";
+import utils from "rn-collie/utils";
+
 
 
 export default class NumberPayKeyboardPage extends BasePage {
