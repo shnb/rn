@@ -1,7 +1,7 @@
 import React from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 import utils from "rn-collie/utils";
-import {BasePage, Button, SearchBar, Space, ToolBar} from "rn-collie";
+import {BasePage, Button, SearchBar, Space, ToolBar} from "../rn-collie";
 
 export default class StackLayoutPage extends BasePage {
     state = {menu: '删除你好好静静'};

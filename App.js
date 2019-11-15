@@ -139,8 +139,8 @@ export default class App extends BasePage<Props, State> {
                         <Text style={styles.title}>演示:StatusImage</Text>
                         <Text style={styles.desc}>StatusImage</Text>
                         <StatusImage
-                            loadingImage={require('./node_modules/rn-collie/icons/image_loading.png')}
-                            errorImage={require('./node_modules/rn-collie/icons/image_load_error.png')}
+                            loadingImage={require('./rn-collie/icons/image_loading.png')}
+                            errorImage={require('./rn-collie/icons/image_load_error.png')}
                             source={{uri: this.state.image}}
                             resizeMode='contain'
                             style={{

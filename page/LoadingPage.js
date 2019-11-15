@@ -1,7 +1,7 @@
 import React from 'react';
 import {StyleSheet, Text, View} from 'react-native';
-import {BasePage, Button, Loading, Space, ToolBar} from "rn-collie";
-import utils from "rn-collie/utils";
+import {BasePage, Button, Loading, Space, ToolBar} from "../rn-collie";
+import utils from "../rn-collie/utils";
 
 
 export default class LoadingPage extends BasePage {

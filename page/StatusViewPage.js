@@ -2,7 +2,7 @@ import React from 'react';
 import {TouchableOpacity, Text, View} from 'react-native';
 import utils from "rn-collie/utils";
 import {LOAD_STATUS} from "rn-collie/compoment/StatusView/StatusView";
-import {BasePage, GridLayout, Space, StatusView, Toast, ToolBar} from "rn-collie";
+import {BasePage, GridLayout, Space, StatusView, Toast, ToolBar} from "../rn-collie";
 
 
 export default class StatusViewPage extends BasePage {
