@@ -27,12 +27,12 @@ export default class SwiperPage extends BasePage {
                     loop={true}
                     style={{height: 238}}
                     autoPlay={true}
-                    pageChange={(index, process) => {
-                        this.setState({
-                            index: index,
-                            process: process
-                        });
+                    onSelectedChange={(index) => {
+                        this.setState({index});
                         Toast.message('当前的位置:' + index);
+                    }}
+                    onSwiperScroll={(process) => {
+                        this.setState({process});
                     }}>
                     <Image style={{width: utils.screenWidth, height: 238}} resizeMode='cover'
                            source={require('../rn-collie/icons/swiper1.jpg')}/>
@@ -42,10 +42,10 @@ export default class SwiperPage extends BasePage {
                            source={require('../rn-collie/icons/swiper3.jpg')}/>
                 </Swiper>
                 <View style={{alignItems: 'center', marginTop: 8}}>
-                    <IndicatorProgress process={this.state.process} sum={3} width={60} height={4}/>
+                    <IndicatorProgress process={this.state.process} size={3} width={60} height={4}/>
                 </View>
                 <View style={{alignItems: 'center', marginTop: 8}}>
-                    <IndicatorDot selectIndex={this.state.index} sum={3} width={60} height={8}/>
+                    <IndicatorDot selectIndex={this.state.index} size={3} width={60} height={8}/>
                 </View>
             </View>);
     }
