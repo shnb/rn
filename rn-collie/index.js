@@ -39,7 +39,6 @@ import Toast from "./compoment/Toast/Toast";
 import TouchableAnimatedView from "./compoment/Touchable/TouchableAnimatedView";
 import Timer from "./function/Timer";
 import ToolBar from "./compoment/ToolBar/ToolBar";
-import Swiper from "./compoment/Swiper/Swiper";
 import IndicatorProgress from "./compoment/Indicator/IndicatorProgress";
 import IndicatorDot from "./compoment/Indicator/IndicatorDot";
 
@@ -85,7 +84,6 @@ let Collie = {
     TouchableAnimatedView,
     Timer,
     ToolBar,
-    Swiper,
     IndicatorProgress,
     IndicatorDot
 };

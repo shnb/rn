@@ -1,0 +1,16 @@
+{
+  "name": "rn-collie-swiper",
+  "version": "1.0.0",
+  "description": "A swiper for react native,indicator is in rn-collie",
+  "scripts": {
+    "test": "jest"
+  },
+  "keywords": [
+    "rn-collie",
+    "react",
+    "native",
+    "swiper",
+    "library"
+  ],
+  "author": "syiyi"
+}

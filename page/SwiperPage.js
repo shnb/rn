@@ -1,7 +1,8 @@
 import React from 'react';
 import {Image, View} from 'react-native';
-import {BasePage, Space, Swiper, ToolBar, Toast, IndicatorProgress, IndicatorDot} from "../rn-collie";
+import {BasePage, Space, ToolBar, Toast, IndicatorProgress, IndicatorDot} from "../rn-collie";
 import utils from "../rn-collie/utils";
+import Swiper from "../rn-collie-swiper";
 
 export default class SwiperPage extends BasePage {
 
