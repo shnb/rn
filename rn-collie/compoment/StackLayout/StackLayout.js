@@ -46,7 +46,10 @@ export default class StackLayout extends Component {
                 style.bottom = 0;
             }
 
-            return React.cloneElement(element, {...childProps, key: index});
+            childProps.key = index;
+            element.props = childProps;
+            
+            return element;
         });
     }
 
