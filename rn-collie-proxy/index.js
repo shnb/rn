@@ -2,9 +2,9 @@ import BaseInterceptor from "./BaseInterceptor";
 import Proxy from "./Proxy";
 import MethodEntity from "./MethodEntity";
 
-let Proxy = {
+let exports = {
     Proxy,
     BaseInterceptor,
     MethodEntity
 };
-module.exports = Proxy;
+module.exports = exports;
