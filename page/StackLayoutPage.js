@@ -12,6 +12,7 @@ export default class StackLayoutPage extends BasePage {
                 <Space height={utils.statusHeight} spaceColor='#fff'/>
                 <ToolBar
                     title='StackLayout演示'
+                    mode={"light"}
                     navigation={this.props.navigation}
                 />
                 <StackLayout style={{flex: 1}}>

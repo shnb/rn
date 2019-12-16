@@ -4,6 +4,7 @@ import Utils from "../../utils";
 import Divider from "../Divider/Divider";
 
 type Props = {
+    mode?: 'light' | 'dark',
     //是否有返回键
     isBack?: boolean,
     //标题 可不传
@@ -54,7 +55,8 @@ export default class ToolBar extends Component<Props, State> {
         menuIcon: null,
         menuIconStyle: null,
         isCenter: true,
-        iconTintColor: '#000',
+        iconTintColor: null,
+        mode: 'dark',
     };
 
 
@@ -104,7 +106,14 @@ export default class ToolBar extends Component<Props, State> {
     };
 
     render() {
-        let {isBack, iconTintColor, navigation, overrideBack, children, title, menuTitle, menuIcon, menuIconStyle, backgroundColor, titleStyle, backIcon, menuTitleStyle, menuAction, style} = this.props;
+        let {isBack, mode, iconTintColor, navigation, overrideBack, children, title, menuTitle, menuIcon, menuIconStyle, backgroundColor, titleStyle, backIcon, menuTitleStyle, menuAction, style} = this.props;
+        if (!iconTintColor) {
+            iconTintColor = mode === 'dark' ? '#333333' : '#fff';
+        }
+
+        if (!backgroundColor) {
+            backgroundColor = mode === 'dark' ? '#fff' : '#000';
+        }
         return (
             <View>
                 <View style={[{
@@ -145,7 +154,7 @@ export default class ToolBar extends Component<Props, State> {
                             marginRight: this.state.titleMarginRight
                         }}
                               onLayout={({nativeEvent: e}) => this.onTitleLayout(e)}>
-                            <Text style={[{color: "#333333", fontSize: 18}, titleStyle]}>
+                            <Text style={[{color: mode === 'dark' ? "#333" : '#fff', fontSize: 18}, titleStyle]}>
                                 {title}
                             </Text>
                         </View> : null
@@ -185,7 +194,7 @@ export default class ToolBar extends Component<Props, State> {
                                 paddingLeft: 10,
                                 paddingRight: 10
                             }}>
-                            <Text style={[{color: "#333333", fontSize: 16}, menuTitleStyle]}>
+                            <Text style={[{color: mode === 'dark' ? "#333" : '#fff', fontSize: 16}, menuTitleStyle]}>
                                 {menuTitle}
                             </Text>
                         </TouchableOpacity>

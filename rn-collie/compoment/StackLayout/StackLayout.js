@@ -26,10 +26,13 @@ export default class StackLayout extends Component {
         });
 
         return filterChild.map((element, index) => {
-            let childProps = Object.assign(element.props);
+            let childProps;
+
             //如果没有props,创建一个
-            if (!childProps) {
-                childProps = {};
+            if (element.props) {
+                childProps = {...element.props};
+            } else {
+                childProps = {}
             }
             //如果没有style,创建一个
             if (!childProps.style) {
@@ -48,7 +51,7 @@ export default class StackLayout extends Component {
 
             childProps.key = index;
             element.props = childProps;
-            
+
             return element;
         });
     }
