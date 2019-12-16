@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Image, Text, TouchableOpacity, View} from 'react-native';
+import {Image, Text, TouchableOpacity, View, ViewStyle} from 'react-native';
 import Utils from "../../utils";
 import Divider from "../Divider/Divider";
 import {Colors} from "../../config/Colors";
@@ -25,17 +25,17 @@ type Props = {
     //是否中间元素强制居中
     isCenter: ?boolean,
     //标题的样式
-    titleStyle?: {},
+    titleStyle?: ViewStyle,
     //返回键的按钮
     backIcon?: any,
     //图标的颜色
     iconTintColor?: string,
     //菜单的样式
-    menuTitleStyle?: {},
+    menuTitleStyle?: ViewStyle,
     //背景
     backgroundColor?: string,
     //root一级的style
-    style?: {}
+    style?: ViewStyle,
     dividerColor?: string,
 };
 type State = {
