@@ -32,7 +32,7 @@ export default class Divider extends Component<Props> {
     }
 
     render() {
-        let {enableMarginLeft, lineColor, backgroundColor, marginLeft, height} = this.props;
+        let {enableMarginLeft, lineColor = Colors.lineColor, backgroundColor, marginLeft, height} = this.props;
         let margin = 0;
         if (enableMarginLeft) {
             margin = marginLeft

@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {Image, Text, TouchableOpacity, View} from 'react-native';
 import Utils from "../../utils";
 import Divider from "../Divider/Divider";
+import {Colors} from "../../config/Colors";
 
 type Props = {
     mode?: 'light' | 'dark',
@@ -35,6 +36,7 @@ type Props = {
     backgroundColor?: string,
     //root一级的style
     style?: {}
+    dividerColor?: string,
 };
 type State = {
     //标题的左边距
@@ -106,13 +108,17 @@ export default class ToolBar extends Component<Props, State> {
     };
 
     render() {
-        let {isBack, mode, iconTintColor, navigation, overrideBack, children, title, menuTitle, menuIcon, menuIconStyle, backgroundColor, titleStyle, backIcon, menuTitleStyle, menuAction, style} = this.props;
+        let {isBack, mode, iconTintColor, dividerColor, navigation, overrideBack, children, title, menuTitle, menuIcon, menuIconStyle, backgroundColor, titleStyle, backIcon, menuTitleStyle, menuAction, style} = this.props;
         if (!iconTintColor) {
             iconTintColor = mode === 'dark' ? '#333333' : '#fff';
         }
 
         if (!backgroundColor) {
             backgroundColor = mode === 'dark' ? '#fff' : '#000';
+        }
+
+        if (!dividerColor) {
+            backgroundColor = mode === 'dark' ? null : Colors.transparent;
         }
         return (
             <View>
@@ -200,7 +206,7 @@ export default class ToolBar extends Component<Props, State> {
                         </TouchableOpacity>
                         : null}
                 </View>
-                <Divider enableMarginLeft={false}/>
+                <Divider enableMarginLeft={false} lineColor={dividerColor}/>
             </View>
         );
     }

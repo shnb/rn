@@ -1,6 +1,6 @@
 {
   "name": "rn-collie",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "A UI library for react native.",
   "scripts": {
     "test": "jest"
