@@ -7,9 +7,9 @@ type Props = {
     //确认的回调
     onConfirm: Function,
     //背景颜色
-    bgColor?: String,
+    bgColor?: string,
     //高度
-    height?: Number
+    height?: string
 };
 const DEFAULT_HEIGHT = 45;
 /**

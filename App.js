@@ -81,7 +81,7 @@ export default class App extends BasePage<Props, State> {
         this.state = {
             placeHolderTextValue: null,
             singlePickerData: null,
-            date: '20200608',
+            date: null,
             city: null,
             hourStart: '08:00',
             hourEnd: '17:00',
@@ -223,11 +223,15 @@ export default class App extends BasePage<Props, State> {
                         <Button
                             text='试一试'
                             onPress={() => {
-                                DatePicker.show(this.state.date, (date) => {
-                                    this.setState({
-                                        date: date
-                                    })
-                                })
+                                DatePicker.show({
+                                    date: this.state.date,
+                                    onResult: (date) => {
+                                        this.setState({
+                                            date: date
+                                        })
+                                    },
+                                    column: 1,
+                                });
                             }}/>
 
                         {/*城市选择器*/}

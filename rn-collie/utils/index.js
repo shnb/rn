@@ -8,7 +8,7 @@ const headerBodyHeight = 44; // iOS 设计规范定义
 let statusHeight = (Platform.OS === 'ios') ? (isIphoneX ? 44 : 20) : (StatusBar.currentHeight);
 let headerHeight = headerBodyHeight + statusHeight;
 
-function range(length: Number, start = 0) {
+function range(length: string, start = 0) {
     const ret = [];
 
     for (let i = 0; i < length; i++) {
@@ -63,7 +63,7 @@ function randomHsl() {
 }
 
 // 获取HSL数组
-function getRGBArray(hslLength: Number) {
+function getRGBArray(hslLength: number) {
     let HSL = [];
     for (let i = 0; i < hslLength; i++) {
         let ret = randomHsl();

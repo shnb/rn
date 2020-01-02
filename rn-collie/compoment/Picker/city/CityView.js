@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import ScrollPicker from "../ScrollPicker";
 
 type Props = {
-    contentHeight: Number,
+    contentHeight: number,
     city: string,
     source: Array,
     column: number,

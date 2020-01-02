@@ -4,7 +4,11 @@ import moment from 'moment';
 import utils from "../../../utils";
 
 type Props = {
-    contentHeight: Number
+    contentHeight: number,
+    startYear: number,
+    numberOfYears: number,
+    date: string,
+    column: number,
 };
 /**
  * 时间滚轮view
@@ -20,39 +24,49 @@ export default class DateView extends Component<Props> {
         };
     }
 
-    // noinspection JSMethodCanBeStatic
     /**
      * 初始化数据源和默认值
      */
     initialize(props) {
-        let {startYear, numberOfYears, date} = props;
+        let {startYear, numberOfYears, date, column} = props;
+
         let years = utils.range(numberOfYears, startYear);
         let months = utils.range(12, 1);
 
-        date = moment(date, 'YYYYMMDD');
+        //get format
+        let format = '';
+        if (column >= 3) {
+            format = "YYYYMMDD";
+        } else if (column >= 2) {
+            format = "YYYYMM";
+        } else if (column >= 0) {
+            format = "YYYY";
+        }
+
+        date = moment(date, format);
 
         if (!date.isValid()) {
             date = moment();
         }
 
-        let year = date.year();
-        let month = date.month() + 1;
-        let day = date.date();
+        let year = column >= 0 ? date.year() : null;
+        let month = column >= 2 ? date.month() + 1 : null;
+        let day = column >= 3 ? date.date() : null;
 
-        let days = utils.getDays(year, month);
-
-        let list = [
-            years,
-            months,
-            days,
-        ];
-
-        let value = [
-            years.indexOf(year),
-            months.indexOf(month),
-            days.indexOf(day)
-        ];
-
+        let list = [], value = [];
+        if (column >= 1) {
+            list.push(years);
+            value.push(years.indexOf(year));
+        }
+        if (column >= 2) {
+            list.push(months);
+            value.push(months.indexOf(month));
+        }
+        if (column >= 3) {
+            let days = utils.getDays(year, month);
+            list.push(days);
+            value.push(days.indexOf(day));
+        }
 
         return {
             list,
@@ -105,6 +119,7 @@ export default class DateView extends Component<Props> {
      */
     onChange(columnIndex, index) {
         let {list, value} = this.state;
+        let {column} = this.props;
         //新的数据源
         let newList = list;
         //新的默认值
@@ -112,34 +127,31 @@ export default class DateView extends Component<Props> {
 
         newValue[columnIndex] = index;
 
-        let year,
-            month,
-            day,
-            days;
-        //年时，重置月和日
-        if (columnIndex === 0) {
-            year = list[columnIndex][index];
-            month = list[1][0];
-        }
-        //月时，重置日
-        if (columnIndex === 1) {
-            year = list[0][value[0]];
-            month = list[columnIndex][index];
-        }
+        //当年月日时,需要计算出当月的所有日期
+        if (column >= 3) {
+            let year, month, day, days;
+            //获取各种场景下的年和月
+            if (columnIndex === 0) {
+                year = list[columnIndex][index];
+                month = list[1][0];
+            }
+            if (columnIndex === 1) {
+                year = list[0][value[0]];
+                month = list[columnIndex][index];
+            }
+            if (columnIndex === 2) {
+                year = list[0][value[0]];
+                month = list[1][value[1]];
+            }
 
-        if (columnIndex === 2) {
-            year = list[0][value[0]];
-            month = list[1][value[1]];
-        }
-        //根据不同年月，获取具体的天的数组
-        days = utils.getDays(year, month);
+            //根据不同年月，获取具体的天的数组
+            days = utils.getDays(year, month);
+            newList[2] = days;
+            day = list[2][value[2]];
 
-        newList[2] = days;
-
-        day = list[2][value[2]];
-
-        if (days.indexOf(day) === -1) {
-            newValue[2] = days.length - 1;
+            if (days.indexOf(day) === -1) {
+                newValue[2] = days.length - 1;
+            }
         }
 
         this.setState({

@@ -40,9 +40,9 @@ type Props = {
 };
 type State = {
     //标题的左边距
-    titleMarginLeft: Number,
+    titleMarginLeft: string,
     //标题的右边距
-    titleMarginRight: Number,
+    titleMarginRight: string,
 }
 /**
  * 通用的标题栏

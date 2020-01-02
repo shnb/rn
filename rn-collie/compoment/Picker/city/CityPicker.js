@@ -13,13 +13,13 @@ import {Citys} from "../../Constants";
 
 type Props = {
     //默认城市
-    city?: String;
+    city?: string;
     onConfirm: Function,
     onCancel: Function,
 };
 type State = {
     //当前显示的城市
-    city: String;
+    city: string;
     opacity: number,
     animal: Animated.Value,
 }

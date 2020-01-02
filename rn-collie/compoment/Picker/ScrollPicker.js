@@ -10,11 +10,11 @@ type Props = {
     //每一列的权重
     proportion?: Array,
     //item的字体大小
-    fontSize?: Number,
+    fontSize?: string,
     //容器的高度
-    containerHeight?: Number,
+    containerHeight?: string,
     //每一行的高度
-    targetItemHeight?: Number,
+    targetItemHeight?: string,
     //当选中数据变化时的回调
     onChange?: Function,
 }
