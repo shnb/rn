@@ -118,7 +118,7 @@ export default class ToolBar extends Component<Props, State> {
         }
 
         if (!dividerColor) {
-            dividerColor = mode === 'dark' ? Colors.transparent : null;
+            dividerColor = mode === 'dark' ? Colors.lineColor : Colors.transparent;
         }
         return (
             <View>
