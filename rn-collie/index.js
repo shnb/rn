@@ -18,7 +18,6 @@ import BaseSearchPage from "./compoment/Page/BaseSearchPage";
 import ScrollPicker from "./compoment/Picker/ScrollPicker";
 import ConfirmBar from "./compoment/Picker/ConfirmBar";
 import CityPicker from "./compoment/Picker/city/CityPicker";
-import CityPickerView from "./compoment/Picker/city/CityPickerView";
 import CityView from "./compoment/Picker/city/CityView";
 import DatePicker from "./compoment/Picker/date/DatePicker";
 import DatePickerView from "./compoment/Picker/date/DatePickerView";
@@ -63,7 +62,6 @@ let Collie = {
     ScrollPicker,
     ConfirmBar,
     CityPicker,
-    CityPickerView,
     CityView,
     DatePicker,
     DatePickerView,

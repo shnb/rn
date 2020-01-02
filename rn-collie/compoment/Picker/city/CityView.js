@@ -1,15 +1,14 @@
 import React, {Component} from 'react';
 import ScrollPicker from "../ScrollPicker";
-import {Citys} from '../../Constants'
 
 type Props = {
-    contentHeight: Number
+    contentHeight: Number,
+    city: string,
+    source: Array,
+    column: number,
 };
 
 export default class CityView extends Component<Props> {
-    static defaultProps = {
-        city: '北京 北京市 东城区',
-    };
 
     constructor(props) {
         super(props);
@@ -24,28 +23,37 @@ export default class CityView extends Component<Props> {
      * @returns {{list: *[], value: Array}}
      */
     initialize(props) {
-        let {city} = props;
+        let {city, column, source} = props;
         //选择的城市数组
-        let selectValue = city.split(' ');
+        let selectValue = column === 1 ? [city] : city.split(' ');
         //新的选择城市的数组
         let newSelectValue = [];
+        let list, provinces, cities, areas;
+        list = [];
         //省
-        let provinces = Citys;
-        newSelectValue[0] = provinces.findIndex(value => {
-            return value.name === selectValue[0];
-        });
+        if (column >= 1) {
+            provinces = source;
+            newSelectValue[0] = provinces.findIndex(value => {
+                return value.name === selectValue[0];
+            });
+            list.push(provinces);
+        }
         //市
-        let cities = provinces[newSelectValue[0]].children;
-        newSelectValue[1] = cities.findIndex(value => {
-            return value.name === selectValue[1];
-        });
-        //县
-        let areas = cities[newSelectValue[1]].children;
-        newSelectValue[2] = areas.findIndex(value => {
-            return value.name === selectValue[2];
-        });
-
-        let list = [provinces, cities, areas];
+        if (column >= 2) {
+            cities = provinces[newSelectValue[0]].children;
+            newSelectValue[1] = cities.findIndex(value => {
+                return value.name === selectValue[1];
+            });
+            list.push(cities);
+        }
+        if (column >= 3) {
+            //县
+            areas = cities[newSelectValue[1]].children;
+            newSelectValue[2] = areas.findIndex(value => {
+                return value.name === selectValue[2];
+            });
+            list.push(areas);
+        }
 
         return {
             list,
@@ -68,6 +76,7 @@ export default class CityView extends Component<Props> {
      */
     onChange(columnIndex, index) {
         const {list, value} = this.state;
+        let {source, column} = this.props;
         //新的数据源
         let newList = list;
         //新的显示值
@@ -77,13 +86,17 @@ export default class CityView extends Component<Props> {
 
         //重置市、县
         if (columnIndex === 0) {
-            newValue[1] = 0;
-            newValue[2] = 0;
-            newList[1] = Citys[index].children;
-            newList[2] = newList[1][0].children;
+            if (column >= 2) {
+                newValue[1] = 0;
+                newList[1] = source[index].children;
+            }
+            if (column >= 3) {
+                newList[2] = newList[1][0].children;
+                newValue[2] = 0;
+            }
         }
         //重置县
-        if (columnIndex === 1) {
+        if (columnIndex === 1 && column >= 2) {
             newValue[2] = 0;
             newList[2] = newList[1][index].children;
         }
@@ -92,7 +105,16 @@ export default class CityView extends Component<Props> {
             list: newList,
             value: newValue,
         });
-        let city = newList[0][newValue[0]].name + ' ' + newList[1][newValue[1]].name + ' ' + newList[2][newValue[2]].name;
+        let city = '';
+        if (column >= 1) {
+            city += newList[0][newValue[0]].name;
+        }
+        if (column >= 2) {
+            city += (' ' + newList[1][newValue[1]].name);
+        }
+        if (column >= 3) {
+            city += (' ' + newList[2][newValue[2]].name);
+        }
         this.props.onChange && this.props.onChange(city);
     }
 

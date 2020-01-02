@@ -241,10 +241,14 @@ export default class App extends BasePage<Props, State> {
                         <Button
                             text='试一试'
                             onPress={() => {
-                                CityPicker.show(this.state.city, (city) => {
-                                    this.setState({
-                                        city: city
-                                    })
+                                CityPicker.show({
+                                    city: this.state.city,
+                                    column: 1,
+                                    onResult: (city) => {
+                                        this.setState({
+                                            city: city
+                                        })
+                                    }
                                 })
                             }}/>
                         {/*时间区间选择器*/}
