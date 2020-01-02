@@ -5,6 +5,7 @@ import {
     StyleSheet,
     TouchableOpacity,
 } from 'react-native';
+import type {ViewStyle} from "react-native/Libraries/StyleSheet/StyleSheet";
 
 const KEYBOARD_ROW = 3;
 const KEYBOARD_COLUMN = 4;
@@ -12,7 +13,7 @@ type Props = {
     //点击键盘按钮的回调
     touchNumber: Function<string>,
     //外界可以通过style给键盘内部设置样式
-    style?:Object
+    style?:ViewStyle
 }
 export default class NumberKeyboardView extends Component<Props> {
 

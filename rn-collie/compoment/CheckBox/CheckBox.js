@@ -1,13 +1,14 @@
 import React, {Component} from 'react';
 import {StyleSheet, TouchableOpacity, Text, Image} from 'react-native';
+import type {ViewStyle} from "react-native/Libraries/StyleSheet/StyleSheet";
 
 type Props = {
     //容器的style
-    style?: {},
+    style?: ViewStyle,
     //文本的style
-    labelStyle?: {},
+    labelStyle?: ViewStyle,
     //图片的style
-    imageStyle: {},
+    imageStyle: ViewStyle,
     //激活下文字颜色
     activeColor: string,
     //非激活下文字颜色

@@ -15,7 +15,7 @@ type Props = {
     //右标题图片
     menuIcon?: any,
     //图片按钮的style
-    menuIconStyle?: any;
+    menuIconStyle?: ViewStyle;
     //导航
     navigation: any;
     //重写返回

@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {Image, TouchableOpacity, View, TextInput} from 'react-native';
+import type {ViewStyle} from "react-native/Libraries/StyleSheet/StyleSheet";
 
 type Props = {
     //当输入文字变化时
@@ -13,7 +14,7 @@ type Props = {
     //图标的颜色
     tintColor?: string,
     //容器的style
-    style?: {}
+    style?: ViewStyle
 };
 type State = {
     //是否显示清除按钮

@@ -39,9 +39,15 @@ import Timer from "./function/Timer";
 import ToolBar from "./compoment/ToolBar/ToolBar";
 import IndicatorProgress from "./compoment/Indicator/IndicatorProgress";
 import IndicatorDot from "./compoment/Indicator/IndicatorDot";
+import ImageButton from "./compoment/Button/ImageButton";
+import TextButton from "./compoment/Button/TextButton";
+import {Switch} from "./compoment/Switch";
+import {Progress} from "./compoment/Progress";
 
 let Collie = {
     Button,
+    ImageButton,
+    TextButton,
     CheckBox,
     Dialog,
     DialogList,
@@ -81,7 +87,9 @@ let Collie = {
     Timer,
     ToolBar,
     IndicatorProgress,
-    IndicatorDot
+    IndicatorDot,
+    Switch,
+    Progress,
 };
 
 module.exports = Collie;

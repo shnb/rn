@@ -4,6 +4,7 @@ import {PixelRatio, StyleSheet, Text, TouchableOpacity, View} from "react-native
 import {Colors as Color} from "../../config/Colors";
 import Divider from "../Divider/Divider";
 import LayerEntity from "../Layer/LayerEntity";
+import type {ViewStyle} from "react-native/Libraries/StyleSheet/StyleSheet";
 
 /**
  * 通用的dialog
@@ -13,7 +14,7 @@ export default class Dialog {
     static show(title: string,
                 content: string,
                 buttons: Array<{ text: string, style?: {}, onClick: Function }>,
-                options?: { dialogStyle?: {}, titleStyle?: {}, contentStyle?: {}, buttonStyle?: {} }) {
+                options?: { dialogStyle?: ViewStyle, titleStyle?: ViewStyle, contentStyle?: ViewStyle, buttonStyle?: ViewStyle }) {
         LayerEntity.show(
             <DialogView
                 enableBack={false}
@@ -36,12 +37,12 @@ type Props = {
         //文字
         text: string,
         //按钮颜色
-        style?: {},
+        style?: ViewStyle,
         //回调
         onClick: Function,
     }>,
     //剩余的属性
-    options?: { dialogStyle?: {}, titleStyle?: {}, contentStyle?: {}, buttonStyle?: {} }
+    options?: { dialogStyle?: ViewStyle, titleStyle?: ViewStyle, contentStyle?: ViewStyle, buttonStyle?: ViewStyle }
 };
 
 /**

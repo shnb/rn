@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {
     View,
 } from 'react-native';
+import type {ViewStyle} from "react-native/Libraries/StyleSheet/StyleSheet";
 
 type Props = {
     //当前的进度
@@ -13,9 +14,9 @@ type Props = {
     //空间的总高度
     height: number,
     //控件的风格,同view的style
-    style?: any,
+    style?: ViewStyle,
     //指示器的风格,同view的style
-    indicatorStyle?: any,
+    indicatorStyle?: ViewStyle,
 }
 /**
  * 进度条形式的指示器

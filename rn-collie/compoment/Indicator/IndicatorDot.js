@@ -3,6 +3,7 @@ import {
     View,
 } from 'react-native';
 import utils from "../../utils";
+import type {ViewStyle} from "react-native/Libraries/StyleSheet/StyleSheet";
 
 type Props = {
     //当前的index
@@ -14,9 +15,9 @@ type Props = {
     //空间的总高度
     height: number,
     //控件的风格,同view的style
-    style?: any,
+    style?: ViewStyle,
     //指示器的风格,同view的style
-    indicatorStyle?: any,
+    indicatorStyle?: ViewStyle,
     //选中的颜色
     selectedColor?: string,
     //未选中的颜色

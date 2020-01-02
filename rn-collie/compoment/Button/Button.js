@@ -4,6 +4,7 @@ import {
     TouchableOpacity,
 } from "react-native";
 import {Colors} from "../../config/Colors";
+import type {ViewStyle} from "react-native/Libraries/StyleSheet/StyleSheet";
 
 type Props = {
     //点击事件
@@ -11,9 +12,9 @@ type Props = {
     //背景颜色
     backgroundColor?: string,
     //按钮的style
-    style?: any,
+    style?: ViewStyle,
     //文字的style
-    textStyle?: any,
+    textStyle?: ViewStyle,
     //按钮的文本
     text: string,
     //真正的ref

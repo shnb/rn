@@ -1,9 +1,10 @@
 import React, {Component} from 'react';
 import {TextInput} from 'react-native';
+import type {ViewStyle} from "react-native/Libraries/StyleSheet/StyleSheet";
 
 type Props = {
     //textInput的style
-    style: any,
+    style: ViewStyle,
     value?: string,
 }
 type State = {

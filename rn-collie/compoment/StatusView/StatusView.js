@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {StyleSheet, TouchableOpacity, Text, View, Image, ActivityIndicator} from 'react-native';
+import type {ViewStyle} from "react-native/Libraries/StyleSheet/StyleSheet";
 
 export const LOAD_STATUS = {
     //正常状态
@@ -17,7 +18,7 @@ type Props = {
     //点击重新加载的回调
     onRetry: Function,
     //自定义的root的style
-    style?: any,
+    style?: ViewStyle,
     //是否允许有loading
     enableLoading: boolean,
     //渲染loading

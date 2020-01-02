@@ -1,10 +1,11 @@
 import React, {Component} from 'react';
 import {StyleSheet, View} from 'react-native';
 import utils from '../../utils'
+import type {ViewStyle} from "react-native/Libraries/StyleSheet/StyleSheet";
 
 type Props = {
     //容器的style
-    style?: any,
+    style?: ViewStyle,
     //列数
     colNum: number,
     //宽度

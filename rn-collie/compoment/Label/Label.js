@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {Text} from 'react-native';
 import {Colors} from "../../config/Colors";
+import type {ViewStyle} from "react-native/Libraries/StyleSheet/StyleSheet";
 
 type Props = {
     //空替换字
@@ -16,7 +17,7 @@ type Props = {
     //字体颜色
     color?: string,
     //字体的其他自定义的style
-    style?: any
+    style?: ViewStyle
 };
 export default class Label extends Component<Props> {
     static defaultProps = {
