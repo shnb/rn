@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
-import {PixelRatio, View} from 'react-native';
+import {View} from 'react-native';
 import {Colors} from '../../config/Colors'
+import {Variable} from "../../config/Variable";
 
 
 type Props = {
@@ -24,7 +25,7 @@ export default class Divider extends Component<Props> {
         lineColor: Colors.lineColor,
         enableMarginLeft: false,
         backgroundColor: Colors.transparent,
-        height: 1 / PixelRatio.get(),
+        height: Variable.onePixel,
     };
 
     constructor(props: Object) {

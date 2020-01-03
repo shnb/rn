@@ -1,10 +1,11 @@
 import React from "react";
 import LayerView from "../Layer/LayerView";
-import {PixelRatio, StyleSheet, Text, TouchableOpacity, View} from "react-native";
+import {StyleSheet, Text, TouchableOpacity, View} from "react-native";
 import {Colors as Color} from "../../config/Colors";
 import Divider from "../Divider/Divider";
 import LayerEntity from "../Layer/LayerEntity";
 import type {ViewStyle} from "react-native/Libraries/StyleSheet/StyleSheet";
+import {Variable} from "../../config/Variable";
 
 /**
  * 通用的dialog
@@ -84,7 +85,7 @@ class DialogView extends LayerView<Props> {
                     <View
                         key={i + 100}
                         style={{
-                            width: 1 / PixelRatio.get(),
+                            width: Variable.onePixel,
                             height: '100%',
                             backgroundColor: Color.lineColor
                         }}/>
