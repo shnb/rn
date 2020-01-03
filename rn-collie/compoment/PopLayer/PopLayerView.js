@@ -149,7 +149,6 @@ export default class PopLayerView extends LayerView<Props, State> {
         }
     }
 
-    // noinspection JSMethodCanBeStatic
     /**
      * 得到pop弹出层的style信息
      * 此方法需要子类实现
@@ -162,7 +161,6 @@ export default class PopLayerView extends LayerView<Props, State> {
         return styles.defaultPopStyle;
     }
 
-    // noinspection JSMethodCanBeStatic
     /**
      * 渲染真是的pop
      * 此方法需要子类实现
