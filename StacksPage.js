@@ -8,6 +8,7 @@ import SwiperPage from "./page/SwiperPage";
 import LoadingPage from "./page/LoadingPage";
 import NumberPayKeyboardPage from "./page/NumberPayKeyboardPage";
 import App from "./App";
+import CellPage from "./page/CellPage";
 
 
 const StacksPage = createStackNavigator({
@@ -50,6 +51,12 @@ const StacksPage = createStackNavigator({
     },
     SwiperPage: {
         screen: SwiperPage,
+        navigationOptions: {
+            header: null
+        }
+    },
+    CellPage: {
+        screen: CellPage,
         navigationOptions: {
             header: null
         }

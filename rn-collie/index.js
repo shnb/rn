@@ -44,6 +44,15 @@ import {Progress} from "./compoment/Progress";
 import BottomSheet from "./compoment/BottomSheet/BottomSheet";
 import AutoHideKeyboard from "./compoment/AutoHideKeyboard"
 import Expand from "./compoment/Expand";
+import Input from "./compoment/Input/Input";
+import ClearAction from "./compoment/Input/ClearAction";
+import GetCodeAction from "./compoment/Input/GetCodeAction";
+import IconAction from "./compoment/Input/IconAction";
+import SecureTextAction from "./compoment/Input/SecureTextAction";
+import TitleAction from "./compoment/Input/TitleAction";
+import RowCell from "./compoment/Cell/RowCell";
+import SelectCell from "./compoment/Cell/SelectCell";
+import InputCell from "./compoment/Cell/InputCell";
 
 let Collie = {
     Button,
@@ -92,6 +101,15 @@ let Collie = {
     Progress,
     AutoHideKeyboard,
     Expand,
+    Input,
+    ClearAction,
+    GetCodeAction,
+    IconAction,
+    SecureTextAction,
+    TitleAction,
+    InputCell,
+    RowCell,
+    SelectCell,
 };
 
 module.exports = Collie;
