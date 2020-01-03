@@ -48,7 +48,7 @@ export default class DatePicker extends BottomSheet<Props, State> {
             ...this.state,
             ...props,
         };
-        if (props.date) {
+        if (!props.date) {
             this.state.date = this.__getDefaultDate(props);
         }
     }

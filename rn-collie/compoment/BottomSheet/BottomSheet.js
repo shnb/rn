@@ -27,27 +27,27 @@ export default class BottomSheet extends LayerView <Props, State> {
     constructor(props: Object) {
         super(props);
         this.state = {
-            opacity: 1,
-            animal: new Animated.Value(1)
+            opacity: 0,
+            animal: new Animated.Value(0)
         }
     }
 
     onLayout(e) {
         this.height = e.nativeEvent.layout.height;
-        // this.setState({
-        //     opacity: 1
-        // });
-        // this.animal = Animated.timing(this.state.animal, {
-        //     toValue: 1,
-        //     duration: 300,
-        // }).start();
+        this.setState({
+            opacity: 1
+        });
+        this.animal = Animated.timing(this.state.animal, {
+            toValue: 1,
+            duration: 250,
+        }).start();
     }
 
     close() {
         this.animal && this.animal.stop();
         this.animal = Animated.timing(this.state.animal, {
             toValue: 0,
-            duration: 300
+            duration: 150
         }).start(() => {
             super.close();
         });
@@ -83,17 +83,16 @@ export default class BottomSheet extends LayerView <Props, State> {
             outputRange: [this.height, 0]
         });
         return (
-            <View style={{flex: 1}}>
+            <View style={{flex: 1, justifyContent: 'flex-end'}}>
                 <TouchableAnimatedView style={[styles.mask, {opacity: animal}]}
                                        onPress={this.close.bind(this)}/>
                 <Animated.View onLayout={this.onLayout.bind(this)}
-                               style={[styles.container, {
+                               style={{
                                    opacity: opacity,
                                    transform: [{
                                        translateY: translateY
                                    }]
-                               }
-                               ]}
+                               }}
                                pointerEvents='box-none'>
                     {this._getContent()}
                 </Animated.View>
@@ -108,13 +107,5 @@ const styles = StyleSheet.create({
         left: 0,
         right: 0,
         bottom: 0,
-    },
-    container: {
-        position: 'absolute',
-        top: 0,
-        left: 0,
-        right: 0,
-        bottom: 0,
-        justifyContent: 'flex-end'
     }
 });
