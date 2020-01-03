@@ -146,6 +146,15 @@ function getDays(yearInt, monthInt) {
     return range(dayNum, 1);
 }
 
+function process(obj: Object, fn: Function) {
+    if (obj) {
+        fn(obj);
+        return true;
+    } else {
+        return false;
+    }
+}
+
 export default {
     screenWidth,
     screenHeight,
@@ -157,5 +166,6 @@ export default {
     convert2Digit,
     getDays,
     isEmpty,
-    isIphoneX
+    isIphoneX,
+    process
 }

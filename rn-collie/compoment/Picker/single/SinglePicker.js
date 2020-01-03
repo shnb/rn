@@ -1,12 +1,34 @@
-import SinglePickerView from "./SinglePickerView";
+/**
+ * @format
+ */
 import React from "react";
+import {View} from 'react-native';
+import ConfirmBar from "../ConfirmBar";
+import ScrollPicker from "../ScrollPicker";
+import utils from "../../../utils";
+import BottomSheet from "../../BottomSheet/BottomSheet";
 import LayerEntity from "../../Layer/LayerEntity";
 
-export default class SinglePicker {
+type Props = {
+    //默认选中的value
+    value?: any,
+    //数据源
+    list: Array<any>,
+    onConfirm: Function,
+    onCancel: Function,
+};
+type State = {
+    //当前选中的index
+    index?: number;
+}
+/**
+ * SinglePicker的实际view,不可直接使用
+ */
+export default class SinglePicker extends BottomSheet<Props, State> {
 
     static show(list, value, onResult) {
         LayerEntity.show(
-            <SinglePickerView
+            <SinglePicker
                 list={list}
                 value={value}
                 enableBack={true}
@@ -14,5 +36,65 @@ export default class SinglePicker {
                     onResult && onResult(index, data);
                 }}/>
         );
+    }
+
+    static defaultProps = {
+        ...super.defaultProps,
+        value: null,
+    };
+
+    constructor(props: Object) {
+        super(props);
+        this.state = this.processProps(props);
+    }
+
+    processProps(props: any) {
+        let index = 0;
+        if (!utils.isEmpty(props.value)) {
+            let data: Array<any> = props.list;
+            index = data.findIndex((item) => {
+                return item.value === props.value;
+            });
+        }
+        let temp = {...this.state, index: index};
+        if (temp.index && temp.index < 0) {
+            temp.index = 0;
+        }
+
+        return temp;
+    }
+
+    /**
+     * 当选择变化时
+     * @param columnIndex 第几列
+     * @param index 选中的index
+     */
+    onChange(columnIndex: number, index: number) {
+        this.setState({
+            index: index
+        })
+    }
+
+    onConfirm = () => {
+        this.close();
+        let index = this.state.index;
+        let data = this.props.list[index];
+        this.props.onConfirm && this.props.onConfirm(index, data);
+    };
+
+
+    renderBottom() {
+        let {index} = this.state;
+        return (
+            <View style={{backgroundColor: '#fff'}}>
+                <ConfirmBar onCancel={this.close.bind(this)} onConfirm={this.onConfirm}/>
+                <ScrollPicker
+                    list={[this.props.list]}
+                    value={[index]}
+                    containerHeight={210}
+                    proportion={[1]}
+                    onChange={this.onChange.bind(this)}
+                />
+            </View>);
     }
 }

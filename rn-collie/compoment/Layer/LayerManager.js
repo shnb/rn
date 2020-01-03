@@ -12,15 +12,20 @@ type State = {
 /**
  * 管理所有的layer
  * 作为layer层的父组件
- * 此组件会通过hook的方式自动注册至项目的根view
- * 此组件单独可放置到page层级(可在不同的页面叠加使用)
- * 当有多级的LayerManager时,则新的弹出层在最上层的LayerManager容器中
+ * 适用layer有关的组件,需要在根部的view上包裹LayerManager
+ * demo:
+ * <LayerManager>
+ *     <RootView/>
+ * </LayerManager>
  */
 export default class LayerManager extends Component<any, State> {
     //根实例对象
     static _rootLayerManager;
 
     static getInstance(): LayerManager {
+        if (!LayerManager._rootLayerManager) {
+            throw new Error('please use LayoutManager wrap your root view')
+        }
         return LayerManager._rootLayerManager;
     }
 

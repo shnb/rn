@@ -21,10 +21,8 @@ import CityPicker from "./compoment/Picker/city/CityPicker";
 import CityView from "./compoment/Picker/city/CityView";
 import DatePicker from "./compoment/Picker/date/DatePicker";
 import DateView from "./compoment/Picker/date/DateView";
-import HourPickerView from "./compoment/Picker/hours/HourPickerView";
 import HoursPicker from "./compoment/Picker/hours/HoursPicker";
 import SinglePicker from "./compoment/Picker/single/SinglePicker";
-import SinglePickerView from "./compoment/Picker/single/SinglePickerView";
 import PopLayerView from "./compoment/PopLayer/PopLayerView";
 import PopMenu from "./compoment/PopMenu/PopMenu";
 import RefreshListView from "./compoment/RefreshListView/RefreshListView";
@@ -43,6 +41,18 @@ import ImageButton from "./compoment/Button/ImageButton";
 import TextButton from "./compoment/Button/TextButton";
 import {Switch} from "./compoment/Switch";
 import {Progress} from "./compoment/Progress";
+import BottomSheet from "./compoment/BottomSheet/BottomSheet";
+import AutoHideKeyboard from "./compoment/AutoHideKeyboard"
+import Expand from "./compoment/Expand";
+import Input from "./compoment/Input/Input";
+import ClearAction from "./compoment/Input/ClearAction";
+import GetCodeAction from "./compoment/Input/GetCodeAction";
+import IconAction from "./compoment/Input/IconAction";
+import SecureTextAction from "./compoment/Input/SecureTextAction";
+import TitleAction from "./compoment/Input/TitleAction";
+import RowCell from "./compoment/Cell/RowCell";
+import SelectCell from "./compoment/Cell/SelectCell";
+import InputCell from "./compoment/Cell/InputCell";
 
 let Collie = {
     Button,
@@ -59,6 +69,7 @@ let Collie = {
     LayerEntity,
     LayerManager,
     LayerView,
+    BottomSheet,
     Loading,
     MoneyTextInput,
     BaseListPage,
@@ -70,10 +81,8 @@ let Collie = {
     CityView,
     DatePicker,
     DateView,
-    HourPickerView,
     HoursPicker,
     SinglePicker,
-    SinglePickerView,
     PopLayerView,
     PopMenu,
     RefreshListView,
@@ -90,6 +99,17 @@ let Collie = {
     IndicatorDot,
     Switch,
     Progress,
+    AutoHideKeyboard,
+    Expand,
+    Input,
+    ClearAction,
+    GetCodeAction,
+    IconAction,
+    SecureTextAction,
+    TitleAction,
+    InputCell,
+    RowCell,
+    SelectCell,
 };
 
 module.exports = Collie;

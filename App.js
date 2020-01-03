@@ -480,6 +480,13 @@ export default class App extends BasePage<Props, State> {
                                 this.navigate('NumberPayKeyboardPage');
                             }}/>
                         <Space height={40}/>
+                        <Text style={styles.title}>演示:各种cell</Text>
+                        <Button
+                            text='进入自定义键盘页面'
+                            onPress={() => {
+                                this.navigate('CellPage');
+                            }}/>
+                        <Space height={40}/>
 
                         <Space height={300}/>
                     </View>
