@@ -1,5 +1,5 @@
 import React from "react";
-import {Animated, View} from 'react-native';
+import {View} from 'react-native';
 import ConfirmBar from "../ConfirmBar";
 import moment from "moment";
 import DateView from "./DateView";
@@ -18,8 +18,6 @@ type Props = {
 type State = {
     //当前显示的时间
     date: string;
-    opacity: number,
-    animal: Animated.Value,
 }
 /**
  * 时间选择器 年月日,年月,年

@@ -2,7 +2,7 @@
  * @format
  */
 import React from "react";
-import {Animated, View} from 'react-native';
+import {View} from 'react-native';
 import ConfirmBar from "../ConfirmBar";
 import ScrollPicker from "../ScrollPicker";
 import * as Constants from "../../Constants";
@@ -20,8 +20,6 @@ type Props = {
 type State = {
     //默认选中的开始和结束的index
     value?: Array<number>,
-    opacity: number,
-    animal: Animated.Value,
 }
 /**
  * 时间区间选择器,07:00 -  17:00

@@ -1,5 +1,5 @@
 import React from "react";
-import {Animated, View} from 'react-native';
+import {View} from 'react-native';
 import ConfirmBar from "../ConfirmBar";
 import CityView from "./CityView";
 import LayerEntity from "../../Layer/LayerEntity";
@@ -15,8 +15,6 @@ type Props = {
 type State = {
     //当前显示的城市
     city: string;
-    opacity: number,
-    animal: Animated.Value,
 }
 /**
  * SinglePicker的实际view,不可直接使用
