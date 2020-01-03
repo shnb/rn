@@ -43,6 +43,7 @@ import {Switch} from "./compoment/Switch";
 import {Progress} from "./compoment/Progress";
 import BottomSheet from "./compoment/BottomSheet/BottomSheet";
 import AutoHideKeyboard from "./compoment/AutoHideKeyboard"
+import Expand from "./compoment/Expand";
 
 let Collie = {
     Button,
@@ -90,6 +91,7 @@ let Collie = {
     Switch,
     Progress,
     AutoHideKeyboard,
+    Expand,
 };
 
 module.exports = Collie;
