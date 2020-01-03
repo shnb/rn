@@ -1,7 +1,5 @@
-import {TouchableWithoutFeedback, View} from "react-native";
+import {TouchableWithoutFeedback, View, Keyboard} from "react-native";
 import React from "react";
-// noinspection NpmUsedModulesInstalled
-const dismissKeyboard = require('dismissKeyboard');
 
 /**
  * 点击空白区域,键盘消失
@@ -12,7 +10,7 @@ const dismissKeyboard = require('dismissKeyboard');
  */
 export default (props) => {
     let {style, children, ...other} = props;
-    return <TouchableWithoutFeedback onPress={dismissKeyboard}>
+    return <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <View style={[{flex: 1}, style]} {...other}>
             {children}
         </View>
