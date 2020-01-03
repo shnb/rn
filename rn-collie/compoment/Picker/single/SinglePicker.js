@@ -42,10 +42,6 @@ export default class SinglePicker extends BottomSheet<Props, State> {
         );
     }
 
-    height = 0;
-    //动画
-    animal: CompositeAnimation = null;
-
     static defaultProps = {
         ...super.defaultProps,
         value: null,

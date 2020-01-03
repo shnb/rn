@@ -21,7 +21,6 @@ import CityPicker from "./compoment/Picker/city/CityPicker";
 import CityView from "./compoment/Picker/city/CityView";
 import DatePicker from "./compoment/Picker/date/DatePicker";
 import DateView from "./compoment/Picker/date/DateView";
-import HourPickerView from "./compoment/Picker/hours/HourPickerView";
 import HoursPicker from "./compoment/Picker/hours/HoursPicker";
 import SinglePicker from "./compoment/Picker/single/SinglePicker";
 import PopLayerView from "./compoment/PopLayer/PopLayerView";
@@ -42,6 +41,7 @@ import ImageButton from "./compoment/Button/ImageButton";
 import TextButton from "./compoment/Button/TextButton";
 import {Switch} from "./compoment/Switch";
 import {Progress} from "./compoment/Progress";
+import BottomSheet from "./compoment/BottomSheet/BottomSheet";
 
 let Collie = {
     Button,
@@ -58,6 +58,7 @@ let Collie = {
     LayerEntity,
     LayerManager,
     LayerView,
+    BottomSheet,
     Loading,
     MoneyTextInput,
     BaseListPage,
@@ -69,10 +70,8 @@ let Collie = {
     CityView,
     DatePicker,
     DateView,
-    HourPickerView,
     HoursPicker,
     SinglePicker,
-    SinglePickerView: SinglePicker,
     PopLayerView,
     PopMenu,
     RefreshListView,
