@@ -24,7 +24,7 @@ type State = {
     animal: Animated.Value,
 }
 /**
- * 时间选择器
+ * 时间区间选择器,07:00 -  17:00
  */
 export default class HoursPicker extends BottomSheet<Props, State> {
 

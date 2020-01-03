@@ -1,15 +1,10 @@
-/**
- * @format
- */
-import LayerView from "../../Layer/LayerView";
 import React from "react";
-import {Animated, StyleSheet, View} from 'react-native';
+import {Animated, View} from 'react-native';
 import ConfirmBar from "../ConfirmBar";
 import moment from "moment";
 import DateView from "./DateView";
-import type {CompositeAnimation} from "react-native/Libraries/Animated/src/AnimatedImplementation";
-import TouchableAnimatedView from "../../Touchable/TouchableAnimatedView";
 import LayerEntity from "../../Layer/LayerEntity";
+import BottomSheet from "../../BottomSheet/BottomSheet";
 
 type Props = {
     //默认显示的时间
@@ -27,9 +22,9 @@ type State = {
     animal: Animated.Value,
 }
 /**
- * DatePicker的实际view,不可直接使用
+ * 时间选择器 年月日,年月,年
  */
-export default class DatePicker extends LayerView<Props, State> {
+export default class DatePicker extends BottomSheet<Props, State> {
 
     static show({date, onResult, startYear = 1980, numberOfYears = 100, column = 3}) {
         LayerEntity.show(
@@ -43,29 +38,18 @@ export default class DatePicker extends LayerView<Props, State> {
         );
     }
 
-    height = 0;
-    //动画
-    animal: CompositeAnimation = null;
-
     static defaultProps = {
         ...super.defaultProps,
     };
 
     constructor(props: Object) {
         super(props);
-        if (props.date != null) {
-            this.state = {
-                ...props,
-                opacity: 0,
-                animal: new Animated.Value(0)
-            }
-        } else {
-            this.state = {
-                ...props,
-                date: this.__getDefaultDate(props),
-                opacity: 0,
-                animal: new Animated.Value(0)
-            }
+        this.state = {
+            ...this.state,
+            ...props,
+        };
+        if (props.date) {
+            this.state.date = this.__getDefaultDate(props);
         }
     }
 
@@ -85,79 +69,23 @@ export default class DatePicker extends LayerView<Props, State> {
         this.props.onConfirm && this.props.onConfirm(date);
     };
 
-    close() {
-        this.animal && this.animal.stop();
-        this.animal = Animated.timing(this.state.animal, {
-            toValue: 0,
-            duration: 300
-        }).start(() => {
-            super.close();
-        });
-    }
-
-    onLayout(e) {
-        this.height = e.nativeEvent.layout.height;
-        this.setState({
-            opacity: 1,
-        });
-        this.animal = Animated.timing(this.state.animal, {
-            toValue: 1,
-            duration: 300,
-        }).start();
-    }
-
-    renderContent() {
-        let {opacity, animal, date, column, startYear, numberOfYears} = this.state;
-
-        let translateY = animal.interpolate({
-            inputRange: [0, 1],
-            outputRange: [this.height, 0]
-        });
-
+    renderBottom() {
+        let {date, column, startYear, numberOfYears} = this.state;
         return (
-            <View style={{flex: 1}}>
-                <TouchableAnimatedView style={[styles.mask, {opacity: animal}]}
-                                       onPress={this.close.bind(this)}/>
-                <Animated.View onLayout={this.onLayout.bind(this)}
-                               style={[styles.container, {
-                                   opacity: opacity,
-                                   transform: [{
-                                       translateY: translateY
-                                   }]
-                               }]}
-                               pointerEvents='box-none'>
-                    <ConfirmBar onCancel={this.close.bind(this)} onConfirm={this.onConfirm}/>
-                    <DateView
-                        startYear={startYear}
-                        numberOfYears={numberOfYears}
-                        column={column}
-                        date={date}
-                        contentHeight={210}
-                        onChange={(date) => {
-                            this.setState({
-                                date: date
-                            })
-                        }}/>
-                </Animated.View>
+            <View style={{backgroundColor: '#fff'}}>
+                <ConfirmBar onCancel={this.close.bind(this)} onConfirm={this.onConfirm}/>
+                <DateView
+                    startYear={startYear}
+                    numberOfYears={numberOfYears}
+                    column={column}
+                    date={date}
+                    contentHeight={210}
+                    onChange={(date) => {
+                        this.setState({
+                            date: date
+                        })
+                    }}/>
             </View>
         );
     }
 }
-const styles = StyleSheet.create({
-    mask: {
-        backgroundColor: 'rgba(0,0,0,0.6)',
-        position: 'absolute',
-        top: 0,
-        left: 0,
-        right: 0,
-        bottom: 0,
-    },
-    container: {
-        position: 'absolute',
-        top: 0,
-        left: 0,
-        right: 0,
-        bottom: 0,
-        justifyContent: 'flex-end'
-    }
-});
