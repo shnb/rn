@@ -24,7 +24,6 @@ import DateView from "./compoment/Picker/date/DateView";
 import HourPickerView from "./compoment/Picker/hours/HourPickerView";
 import HoursPicker from "./compoment/Picker/hours/HoursPicker";
 import SinglePicker from "./compoment/Picker/single/SinglePicker";
-import SinglePickerView from "./compoment/Picker/single/SinglePickerView";
 import PopLayerView from "./compoment/PopLayer/PopLayerView";
 import PopMenu from "./compoment/PopMenu/PopMenu";
 import RefreshListView from "./compoment/RefreshListView/RefreshListView";
@@ -73,7 +72,7 @@ let Collie = {
     HourPickerView,
     HoursPicker,
     SinglePicker,
-    SinglePickerView,
+    SinglePickerView: SinglePicker,
     PopLayerView,
     PopMenu,
     RefreshListView,
