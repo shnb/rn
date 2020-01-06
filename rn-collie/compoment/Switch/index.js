@@ -1,6 +1,15 @@
 import React, {Component} from 'react'
 import switchStyles from './styles'
-import {Animated, Easing, PanResponder, PanResponderInstance, Platform, StyleSheet, ViewStyle} from 'react-native'
+import {
+    Animated,
+    Easing,
+    PanResponder,
+    PanResponderInstance,
+    Platform,
+    StyleSheet,
+    ViewStyle
+} from 'react-native'
+import type {CompositeAnimation} from "react-native/Libraries/Animated/src/AnimatedImplementation";
 
 const styles = StyleSheet.create(switchStyles);
 
@@ -34,7 +43,8 @@ export interface SwitchState {
 }
 
 export class Switch extends Component<SwitchProps, SwitchState> {
-
+    handlerAnimalCtrl: CompositeAnimation = null;
+    switchAnimalCtrl: CompositeAnimation = null;
     static defaultProps = {
         style: {},
         value: false,
@@ -45,6 +55,7 @@ export class Switch extends Component<SwitchProps, SwitchState> {
 
     offset: number;
     panResponder: PanResponderInstance;
+    time: number = 0;
 
     constructor(props) {
         super(props);
@@ -66,15 +77,18 @@ export class Switch extends Component<SwitchProps, SwitchState> {
             return
         }
 
-        if (typeof nextProps.value !== 'undefined' && nextProps.value !== this.props.value) {
-            this.toggleSwitchToValue(true, nextProps.value)
+        if (typeof nextProps.value !== 'undefined') {
+            this.toggleSwitchToValue(nextProps.value)
         }
     }
 
     componentWillMount() {
+        let should=() => {
+            return new Date().getTime() - this.time >= 800;
+        };
         this.panResponder = PanResponder.create({
-            onStartShouldSetPanResponder: () => true,
-            onStartShouldSetPanResponderCapture: () => true,
+            onStartShouldSetPanResponder: should,
+            onStartShouldSetPanResponderCapture: should,
             onMoveShouldSetPanResponder: () => true,
             onMoveShouldSetPanResponderCapture: () => true,
             onPanResponderTerminationRequest: () => true,
@@ -109,60 +123,61 @@ export class Switch extends Component<SwitchProps, SwitchState> {
         if (disabled) return;
 
         if (toggleable) {
-            this.toggleSwitch(true, onChange)
+            this.toggleSwitch(onChange)
         } else {
             this.animateHandler(rockerSizeMap[rockerSize])
         }
+        this.time = new Date().getTime();
     };
 
     /**
      * 切换
      */
-    toggleSwitch = (result, callback: Function) => {
+    toggleSwitch = (callback: Function) => {
         const {value} = this.state;
-        this.toggleSwitchToValue(result, !value, callback)
+        this.toggleSwitchToValue(!value, callback)
     };
 
-    toggleSwitchToValue = (result, toValue?, callback?: Function) => {
+    toggleSwitchToValue = (toValue?, callback?: Function) => {
         const {switchAnimation} = this.state;
         const {rockerSize} = this.props;
 
         this.animateHandler(rockerSizeMap[rockerSize]);
-        if (result) {
-            this.animateSwitch(toValue, () => {
-                this.setState({
-                    value: toValue,
-                    alignItems: toValue ? 'flex-end' : 'flex-start'
-                }, () => {
-                    callback && callback(toValue)
-                });
-                switchAnimation.setValue(toValue ? -1 : 1)
-            })
-        }
+        this.animateSwitch(toValue, () => {
+            this.setState({
+                value: toValue,
+                alignItems: toValue ? 'flex-end' : 'flex-start'
+            }, () => {
+                callback && callback(toValue)
+            });
+            switchAnimation.setValue(toValue ? -1 : 1)
+        })
     };
 
     animateSwitch = (value, callback = () => null) => {
         const {switchAnimation} = this.state;
-
-        Animated.timing(switchAnimation,
+        this.switchAnimalCtrl && this.switchAnimalCtrl.reset();
+        this.switchAnimalCtrl = Animated.timing(switchAnimation,
             {
                 toValue: value ? this.offset : -this.offset,
                 duration: 200,
                 easing: Easing.linear
             }
-        ).start(callback)
+        );
+        this.switchAnimalCtrl.start(callback)
     };
 
     animateHandler = (value, callback = () => null) => {
         const {handlerAnimation} = this.state;
-
-        Animated.timing(handlerAnimation,
+        this.handlerAnimalCtrl && this.handlerAnimalCtrl.reset();
+        this.handlerAnimalCtrl = Animated.timing(handlerAnimation,
             {
                 toValue: value,
                 duration: 200,
                 easing: Easing.linear
             }
-        ).start(callback)
+        );
+        this.handlerAnimalCtrl.start(callback)
     };
 
     circlePosition = (value) => {

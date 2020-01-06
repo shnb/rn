@@ -32,6 +32,7 @@ import {
 import utils from "rn-collie/utils";
 import SearchBar from "rn-collie/compoment/SearchBar/SearchBar";
 import {Colors} from "rn-collie/config/Colors";
+import {Switch} from "./rn-collie/compoment/Switch";
 
 const dismissKeyboard = require('dismissKeyboard');
 
@@ -86,6 +87,7 @@ export default class App extends BasePage<Props, State> {
             hourStart: '08:00',
             hourEnd: '17:00',
             check: false,
+            switch: false,
         }
     }
 
@@ -487,6 +489,27 @@ export default class App extends BasePage<Props, State> {
                                 this.navigate('CellPage');
                             }}/>
                         <Space height={40}/>
+
+                        <Text style={styles.title}>演示:Switch开关</Text>
+                        <Text style={styles.desc}>Switch</Text>
+                        <Switch ref={ref => {
+                            this.switch = ref
+                        }} value={this.state.switch} onChange={(enable) => {
+                            Dialog.show('警告', '您是否一定要切换',
+                                [
+                                    {
+                                        text: '放弃', onClick: () => {
+                                            this.setState({switch: this.state.switch})
+                                        }
+                                    },
+                                    {
+                                        text: '切换',
+                                        onClick: () => {
+                                            this.setState({switch: enable})
+                                        }
+                                    }]
+                            );
+                        }}/>
 
                         <Space height={300}/>
                     </View>
