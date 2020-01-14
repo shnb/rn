@@ -2,7 +2,7 @@
  * @format
  */
 import React, {Component, PureComponent} from "react";
-import {StyleSheet, View} from 'react-native';
+import {View} from 'react-native';
 import LayerEntity from "./LayerEntity";
 
 type State = {
@@ -11,6 +11,7 @@ type State = {
 }
 /**
  * 管理所有的layer
+ * 通常不需要直接用它,而使用LayerEntity来操作
  * 作为layer层的父组件
  * 适用layer有关的组件,需要在根部的view上包裹LayerManager
  * demo:
@@ -20,13 +21,13 @@ type State = {
  */
 export default class LayerManager extends Component<any, State> {
     //根实例对象
-    static _rootLayerManager;
+    static _instance;
 
-    static getInstance(): LayerManager {
-        if (!LayerManager._rootLayerManager) {
+    static get instance(): LayerManager {
+        if (!LayerManager._instance) {
             throw new Error('please use LayoutManager wrap your root view')
         }
-        return LayerManager._rootLayerManager;
+        return LayerManager._instance;
     }
 
     constructor(props) {
@@ -41,8 +42,8 @@ export default class LayerManager extends Component<any, State> {
      * 栈底时事件注册给自己,向栈顶回调事件
      */
     componentWillMount() {
-        if (LayerManager._rootLayerManager == null) {
-            LayerManager._rootLayerManager = this;
+        if (LayerManager._instance == null) {
+            LayerManager._instance = this;
         }
     }
 
@@ -51,7 +52,7 @@ export default class LayerManager extends Component<any, State> {
      * 让栈底组件移出自身引用
      */
     componentWillUnmount() {
-        LayerManager._rootLayerManager = null;
+        LayerManager._instance = null;
     }
 
     /**
@@ -60,6 +61,9 @@ export default class LayerManager extends Component<any, State> {
      */
     add(layerEntity: LayerEntity) {
         let {layers} = this.state;
+        if (layers.indexOf(layerEntity) < -1) {
+            throw new Error('LayerEntity instance can only be added once');
+        }
         layers.push(layerEntity);
         this.setState({layers});
         return layerEntity;
@@ -72,19 +76,11 @@ export default class LayerManager extends Component<any, State> {
      */
     update(layerEntity: LayerEntity, data: {} = {}) {
         let layers: Array<LayerEntity> = this.state.layers;
-        let hitEntity: LayerEntity = layers.find((item) => {
-            return item === layerEntity;
-        });
-        if (hitEntity && hitEntity.ref) {
-            try {
-                // noinspection JSUnresolvedFunction
-                hitEntity.ref.update(data);
-            } catch (e) {
-                //ignore
-            }
+        let isHit = layers.indexOf(layerEntity) > -1;
+        if (isHit) {
+            layerEntity._onUpdate(data);
         }
     }
-
 
     /**
      * 移出弹出层组件
@@ -95,10 +91,10 @@ export default class LayerManager extends Component<any, State> {
         for (let i = layers.length - 1; i >= 0; --i) {
             if (layers[i] === layerEntity) {
                 layers.splice(i, 1);
+                this.setState({layers});
                 break;
             }
         }
-        this.setState({layers});
     }
 
     render() {
@@ -108,51 +104,20 @@ export default class LayerManager extends Component<any, State> {
                 <RealDom>
                     {this.props.children}
                 </RealDom>
-                {layers.map((item: LayerEntity, index: number) => {
-                    return (
-                        <LayerRoot key={'layerManager' + index} style={styles.layer} pointerEvents='box-none'>
-                            {item.view}
-                        </LayerRoot>
-                    );
-                })}
+                {layers.map((item: LayerEntity, index: number) => item.createLayer(index))}
             </View>
         );
     }
 
 }
 
-const styles = StyleSheet.create({
-    layer: {
-        backgroundColor: 'rgba(0, 0, 0, 0)',
-        position: 'absolute',
-        top: 0,
-        left: 0,
-        right: 0,
-        bottom: 0,
-    },
-});
-
 /**
- * 渲染真实的dom,由于是动态hook的,所有必须不能更改真实dom的状态,故pure
+ * 渲染真实的dom,弹出层弹出不能让真实的dom刷新,故pure
  */
 class RealDom extends PureComponent {
     render() {
         return (
             <View style={{flex: 1}}>
-                {this.props.children}
-            </View>
-        );
-    }
-}
-
-/**
- * 用户Layer和Layer之间刷新隔离
- * 例如添加某个Layer的情况下,其他的Layer不会刷新
- */
-class LayerRoot extends PureComponent {
-    render() {
-        return (
-            <View {...this.props}>
                 {this.props.children}
             </View>
         );

@@ -20,57 +20,6 @@ type Options = {
     //一行放不下时右边距
     marginRight?: number,
 };
-/**
- * Toast操作类
- */
-export default class Toast {
-    //layer
-    static layerEntity: LayerEntity = null;
-    //toast消失的任务
-    static dismissTask;
-
-    /**
-     * 外部不可调用
-     * @param options
-     */
-    static _show(options: Options) {
-        let {duration, ...others} = options;
-
-        //如果当前已经有一个toast在显示,那么关闭它
-        if (this.layerEntity) {
-            this.layerEntity.update({...others});
-            this.startTimer(duration);
-        } else {
-            //显示toast
-            this.layerEntity = LayerEntity.show(<ToastView enableBack={false} {...others}/>);
-            this.startTimer(duration);
-        }
-    }
-
-    /**
-     * 外部不可调用
-     * @param duration 时长
-     */
-    static startTimer(duration: number) {
-        //清除上一个取消任务
-        if (this.dismissTask) {
-            clearTimeout(this.dismissTask);
-        }
-        if (!duration)
-            duration = 2000;
-        //开始消失计时器
-        this.dismissTask = setTimeout(() => {
-            this.layerEntity.dismiss();
-            this.layerEntity = null;
-            this.dismissTask = null;
-        }, duration);
-    }
-
-    static message(message, options: Options = {}) {
-        options.message = message;
-        this._show(options);
-    }
-}
 
 type Position = | 'top' | 'bottom' | 'center';
 
@@ -90,9 +39,9 @@ type Props = {
 };
 
 /**
- * toast的实际view,此view不可单独使用
+ * Toast操作类
  */
-class ToastView extends LayerView<Props> {
+export default class Toast extends LayerView<Props> {
 
     static defaultProps: Props = {
         message: 'Im a toast',
@@ -106,6 +55,53 @@ class ToastView extends LayerView<Props> {
         //不阻止返回键
         enableBack: false,
     };
+
+    //layer
+    static layerEntity: LayerEntity = null;
+    //toast消失的任务
+    static dismissTask;
+
+    /**
+     * 外部不可调用
+     * @param options
+     */
+    static _show(options: Options) {
+        let {duration, ...others} = options;
+
+        //如果当前已经有一个toast在显示,那么关闭它
+        if (this.layerEntity) {
+            this.layerEntity.update({...others});
+            this._startTimer(duration);
+        } else {
+            //显示toast
+            this.layerEntity = LayerEntity.show(<Toast {...others}/>);
+            this._startTimer(duration);
+        }
+    }
+
+    /**
+     * 外部不可调用
+     * @param duration 时长
+     */
+    static _startTimer(duration: number) {
+        //清除上一个取消任务
+        if (this.dismissTask) {
+            clearTimeout(this.dismissTask);
+        }
+        if (!duration)
+            duration = 2000;
+        //开始消失计时器
+        this.dismissTask = setTimeout(() => {
+            this.layerEntity.dismiss();
+            this.layerEntity = null;
+            this.dismissTask = null;
+        }, duration);
+    }
+
+    static message(message, options: Options = {}) {
+        options.message = message;
+        this._show(options);
+    }
 
     constructor(props) {
         super(props);
