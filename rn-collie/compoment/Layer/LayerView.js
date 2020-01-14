@@ -1,13 +1,13 @@
 /**
  * @format
  */
-import React, {Component} from "react";
+import React, {PureComponent} from "react";
 import ReactNative, {Platform, StyleSheet, View} from 'react-native';
 
 /**
  * 通用的弹窗view基类,此View可不用
  */
-export default class LayerView extends Component {
+export default class LayerView extends PureComponent {
 
     static defaultProps = {
         enableBack: true,
