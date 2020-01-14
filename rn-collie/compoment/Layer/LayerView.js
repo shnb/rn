@@ -5,8 +5,7 @@ import React, {Component} from "react";
 import ReactNative, {Platform, StyleSheet, View} from 'react-native';
 
 /**
- * 通用的弹窗基类
- * 此view为所有LayerView的基类
+ * 通用的弹窗view基类,此View可不用
  */
 export default class LayerView extends Component {
 
@@ -22,8 +21,7 @@ export default class LayerView extends Component {
 
     componentWillMount(): void {
         if (Platform.OS === 'android' && this.props.enableBack) {
-            let BackHandler = ReactNative.BackHandler ? ReactNative.BackHandler : ReactNative.BackAndroid;
-            this.backListener = BackHandler.addEventListener("hardwareBackPress", this.onBackClicked);
+            this.backListener = ReactNative.BackHandler.addEventListener("hardwareBackPress", this.onBackClicked);
         }
     }
 
@@ -41,11 +39,13 @@ export default class LayerView extends Component {
 
     //通知需要关闭
     close() {
-        this.props.onClose && this.props.onClose();
+        let {layer} = this.props;
+        layer && layer.dismiss();
     }
 
     //更新当前组件的状态
-    update(data: {}) {
+    // noinspection JSUnusedGlobalSymbols
+    onUpdate(data: {}) {
         let state = this.state;
         this.setState({
             ...state,

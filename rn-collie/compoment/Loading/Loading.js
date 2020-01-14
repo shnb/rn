@@ -3,11 +3,21 @@ import LayerView from "../Layer/LayerView";
 import {ActivityIndicator, StyleSheet, Text, View} from "react-native";
 import LayerEntity from "../Layer/LayerEntity";
 
+type Props = {
+    //提示的消息
+    title?: string,
+};
+
 /**
  * 加载窗
  */
-export default class Loading {
+export default class Loading extends LayerView<Props>{
     static layer: LayerEntity = null;
+
+    static defaultProps = {
+        ...super.defaultProps,
+        title: '加载中',
+    };
 
     /**
      * 显示一个加载窗
@@ -17,7 +27,7 @@ export default class Loading {
         if (this.layer) {
             this.layer.update({title});
         } else {
-            this.layer = LayerEntity.show(<LoadingView title={title}/>);
+            this.layer = LayerEntity.show(<Loading title={title}/>);
         }
     }
 
@@ -30,21 +40,6 @@ export default class Loading {
             this.layer = null;
         }
     }
-}
-
-type Props = {
-    //提示的消息
-    title?: string,
-};
-
-/**
- * Loading的实际view,此view不可单独使用
- */
-class LoadingView extends LayerView<Props> {
-    static defaultProps = {
-        title: '加载中',
-        ...super.defaultProps,
-    };
 
     constructor(props) {
         super(props);
