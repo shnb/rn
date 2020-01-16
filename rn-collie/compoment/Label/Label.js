@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {Text} from 'react-native';
-import {Colors} from "../../config/Colors";
+import Colors from "rn-collie/config/Colors";
 import type {ViewStyle} from "react-native/Libraries/StyleSheet/StyleSheet";
 
 type Props = {

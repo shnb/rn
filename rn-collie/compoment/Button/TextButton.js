@@ -1,7 +1,7 @@
 import {Button} from "rn-collie";
 import React from "react";
 import {RegisteredStyle, ViewStyle} from "react-native";
-import {Colors} from "../../config/Colors";
+import Colors from "rn-collie/config/Colors";
 
 type Props = {
     style?: ViewStyle | RegisteredStyle<ViewStyle>,

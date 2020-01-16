@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {View} from 'react-native';
-import {Colors} from "../../config/Colors";
+import Colors from "rn-collie/config/Colors";
 
 
 type Props = {
