@@ -35,7 +35,7 @@ export default class Loading extends LayerView<Props>{
      * 隐藏加载窗
      */
     static hide() {
-        if (this.layer !== -1) {
+        if (this.layer) {
             this.layer.dismiss();
             this.layer = null;
         }
