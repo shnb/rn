@@ -53,6 +53,10 @@ import TitleAction from "./compoment/Input/TitleAction";
 import RowCell from "./compoment/Cell/RowCell";
 import SelectCell from "./compoment/Cell/SelectCell";
 import InputCell from "./compoment/Cell/InputCell";
+import bind from "./decorator/bind"
+import debounce from "./decorator/debounce"
+import lazy from "./decorator/lazy"
+import mixin from "./decorator/mixin"
 
 let Collie = {
     Button,
@@ -110,6 +114,10 @@ let Collie = {
     InputCell,
     RowCell,
     SelectCell,
+    bind,
+    debounce,
+    lazy,
+    mixin,
 };
 
 module.exports = Collie;

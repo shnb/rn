@@ -6,8 +6,8 @@ import {
     ViewStyle
 } from "react-native";
 import Utils from '../../utils'
-import {Colors} from "../../config/Colors";
-import {Variable} from "../../config/Variable";
+import Colors from "rn-collie/config/Colors";
+import Variable from "../../config/Variable";
 
 export class Action {
     context: Input;

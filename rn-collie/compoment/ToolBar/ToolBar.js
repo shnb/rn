@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {Image, Text, TouchableOpacity, View, ViewStyle} from 'react-native';
 import Utils from "../../utils";
 import Divider from "../Divider/Divider";
-import {Colors} from "../../config/Colors";
+import Colors from "rn-collie/config/Colors";
 
 type Props = {
     mode?: 'light' | 'dark',

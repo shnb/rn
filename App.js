@@ -31,7 +31,7 @@ import {
 } from "rn-collie";
 import utils from "rn-collie/utils";
 import SearchBar from "rn-collie/compoment/SearchBar/SearchBar";
-import {Colors} from "rn-collie/config/Colors";
+import Colors from "rn-collie/config/Colors";
 import {Switch} from "./rn-collie/compoment/Switch";
 
 const dismissKeyboard = require('dismissKeyboard');

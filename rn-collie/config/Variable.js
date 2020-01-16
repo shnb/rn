@@ -1,6 +1,8 @@
 import {PixelRatio} from "react-native";
 
-export const Variable = {
+const Variable = {
+    //防止重复点击时间 毫秒数
+    click_filter_time: 500,
     //一像素
     onePixel: (function () {
         let pixelRatio = PixelRatio.get();
@@ -10,3 +12,4 @@ export const Variable = {
         else return 1;
     })(),
 };
+export default Variable;
