@@ -1,4 +1,4 @@
-package com.nativebase;
+package com.collie;
 
 import android.app.Application;
 

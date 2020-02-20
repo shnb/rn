@@ -116,7 +116,7 @@ export default class App extends BasePage<Props, State> {
         return (
             <View style={{flex: 1}}>
                 <Space height={utils.statusHeight} spaceColor='#fff'/>
-                <ToolBar title='RNBase演示' isBack={false}/>
+                <ToolBar title='Collie演示' isBack={false}/>
                 <ScrollView style={{flex: 1}}>
                     <View style={styles.container}>
                         {/*Divider*/}

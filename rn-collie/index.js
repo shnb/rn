@@ -57,6 +57,10 @@ import bind from "./decorator/bind"
 import debounce from "./decorator/debounce"
 import lazy from "./decorator/lazy"
 import mixin from "./decorator/mixin"
+import Proxy from "./proxy/Proxy";
+import BaseInterceptor from "./proxy/BaseInterceptor";
+import Interceptor from "./proxy/Interceptor";
+import MethodEntity from "./proxy/MethodEntity";
 
 let Collie = {
     Button,
@@ -118,6 +122,10 @@ let Collie = {
     debounce,
     lazy,
     mixin,
+    Proxy,
+    BaseInterceptor,
+    Interceptor,
+    MethodEntity,
 };
 
 module.exports = Collie;

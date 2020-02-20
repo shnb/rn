@@ -12,7 +12,8 @@
  * @param interceptors 可传入多个拦截器
  * @returns {function(...[*]=)}
  */
-import {BaseInterceptor} from "./index";
+
+import BaseInterceptor from "./BaseInterceptor";
 
 export default (...interceptors: Array<BaseInterceptor>) => {
 

@@ -35,7 +35,6 @@ export default class SelectCell extends Component<Props> {
         let {title, titleStyle, style, value, placeholder, onPress} = this.props;
         return (<View style={[{
                 height: 52,
-                backgroundColor: '#fff',
                 flexDirection: 'row',
                 alignItems: 'center'
             }, style]}>

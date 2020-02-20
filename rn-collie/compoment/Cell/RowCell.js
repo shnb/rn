@@ -18,7 +18,7 @@ export default class RowCell extends Component<Props> {
         let {style, title, titleWidth, titleStyle, contentStyle, content, children} = this.props;
         let commonStyle = {color: '#333', width: titleWidth, fontSize: 16};
         return <View style={[{
-            flexDirection: 'row', height: 52, backgroundColor: '#fff', alignItems: 'center'
+            flexDirection: 'row', height: 52, alignItems: 'center'
         }, style]}>
             <Text style={[commonStyle, titleStyle]}>{title}</Text>
             {!children && <Text style={[commonStyle, {flex: 1}, contentStyle]}>{content}</Text>}
