@@ -43,8 +43,7 @@ export default class ImageButton extends Component<Props> {
     render() {
         let {children, active, onPress, activeColor, inactiveColor, activeImage, onLayout, inactiveImage, style, text, textStyle, ...other} = this.props;
         let defaultButton = {
-            width: '100%',
-            height: 47,
+            height: 45,
             overflow: 'hidden',
             borderRadius: 6,
         };

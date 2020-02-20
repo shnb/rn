@@ -31,7 +31,7 @@ export default (props: Props) => {
     }
 
     return (<Input value={value}
-                   style={[{backgroundColor: '#fff'}, style]}
+                   style={[{}, style]}
                    keyboardType={keyboardType}
                    enableUnderLine={false}
                    secureTextEntry={secureTextEntry}

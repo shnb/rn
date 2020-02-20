@@ -1,6 +1,6 @@
 const Colors = {
     colorAgent: '#039d00',
-    backgroundColor: '#ececec',
+    backgroundColor: '#ffffff',
 
     white: "#fff",
     red: '#ff0000',

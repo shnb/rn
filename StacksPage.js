@@ -9,10 +9,23 @@ import LoadingPage from "./page/LoadingPage";
 import NumberPayKeyboardPage from "./page/NumberPayKeyboardPage";
 import App from "./App";
 import CellPage from "./page/CellPage";
+import IndexPage from "./page/IndexPage";
+import ButtonPage from "./page/ButtonPage";
 
 
 const StacksPage = createStackNavigator({
-
+    IndexPage: {
+        screen: IndexPage,
+        navigationOptions: {
+            header: null
+        }
+    },
+    ButtonPage: {
+        screen: ButtonPage,
+        navigationOptions: {
+            header: null
+        }
+    },
     App: {
         screen: App,
         navigationOptions: {
