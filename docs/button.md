@@ -5,7 +5,7 @@
 
 ### 引入
 
-```jsx harmony
+```jsx
 import {Button} from 'rn-collie'
 ```
 ### Example
@@ -15,7 +15,7 @@ import {Button} from 'rn-collie'
 ### Code
 [示例代码链接](../page/ButtonPage.js)
 
-```jsx harmony
+```jsx
 <Button
     style={{
         width: '50%',
